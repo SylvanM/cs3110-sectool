@@ -1,0 +1,6 @@
+description = ""
+requires = "zarith"
+archive(byte) = "ecc.cma"
+archive(native) = "ecc.cmxa"
+plugin(byte) = "ecc.cma"
+plugin(native) = "ecc.cmxs"

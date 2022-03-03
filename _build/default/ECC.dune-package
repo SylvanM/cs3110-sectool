@@ -1,0 +1,13 @@
+(lang dune 2.9)
+(name ECC)
+(library
+ (name ECC)
+ (kind normal)
+ (archives (byte ecc.cma) (native ecc.cmxa))
+ (plugins (byte ecc.cma) (native ecc.cmxs))
+ (native_archives ecc.a)
+ (requires zarith)
+ (main_module_name Ecc)
+ (modes byte native)
+ (modules
+  (singleton (name Ecc) (obj_name ecc) (visibility public) (impl) (intf))))
