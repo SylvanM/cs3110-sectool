@@ -13,13 +13,7 @@ type point = {
   y : Z.t ;
 }
 
-exception InvalidCurveFile of string 
 exception InvalidPoint of point
-
-let from_file f =
-  raise (Failure "Unimplemented: from_file")
-(** [from_file f] is the field that [f] represents. Requires: [f] is
-    a valid JSON field representation. *)
 
 let add_points f p1 p2 =
   raise (Failure "Unimplemented: from_file")
