@@ -1,11 +1,11 @@
-# dune build
+# dune exec test/main.exe
 # OCAMLPARAM: unset
 # Workspace root: "/Users/sylvanm/Documents/School/Freshman Year/Spring/CS
 # 3110/Final Project/cs3110-sectool"
-$ /usr/bin/getconf _NPROCESSORS_ONLN > /var/folders/07/v6k_zhd55lvcvrqr6qz39lsw0000gn/T/duneff186f.output 2> /dev/null
+$ /usr/bin/getconf _NPROCESSORS_ONLN > /var/folders/07/v6k_zhd55lvcvrqr6qz39lsw0000gn/T/dune5d672e.output 2> /dev/null
 # Auto-detected concurrency: 10
 # disable binary cache
-$ /Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/07/v6k_zhd55lvcvrqr6qz39lsw0000gn/T/dunec95163.output
+$ /Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/07/v6k_zhd55lvcvrqr6qz39lsw0000gn/T/dune030b60.output
 # Dune context:
 #  { name = "default"
 #  ; kind = "default"
@@ -114,25 +114,8 @@ $ /Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/07/v6
 #      ; windows_unicode = false
 #      }
 #  }
-$ (cd _build/default && /Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I src/.ecc.objs/byte -I /Users/sylvanm/.opam/cs3110-2021fa/lib/zarith -intf-suffix .ml -no-alias-deps -opaque -o src/.ecc.objs/byte/ecc.cmo -c -impl src/ecc.ml)
-> File "src/ecc.ml", line 1, characters 0-6:
-> 1 | open Z
->     ^^^^^^
-> Error (warning 33 [unused-open]): unused open Z.
-> File "src/ecc.ml", lines 6-8, characters 2-3:
-> 6 | ..type curve = {
-> 7 |     a: float
-> 8 |   }
-> Error (warning 34 [unused-type-declaration]): unused type curve.
-[2]
-$ (cd _build/default && /Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/.ecc.objs/byte -I src/.ecc.objs/native -I /Users/sylvanm/.opam/cs3110-2021fa/lib/zarith -intf-suffix .ml -no-alias-deps -opaque -o src/.ecc.objs/native/ecc.cmx -c -impl src/ecc.ml)
-> File "src/ecc.ml", line 1, characters 0-6:
-> 1 | open Z
->     ^^^^^^
-> Error (warning 33 [unused-open]): unused open Z.
-> File "src/ecc.ml", lines 6-8, characters 2-3:
-> 6 | ..type curve = {
-> 7 |     a: float
-> 8 |   }
-> Error (warning 34 [unused-type-declaration]): unused type curve.
-[2]
+# Workspace root: "/Users/sylvanm/Documents/School/Freshman Year/Spring/CS
+# 3110/Final Project/cs3110-sectool"
+$ (cd _build/default && /Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlc.opt -w +a-4-6-7-9-27-29-30-32..42-44-45-48-50-60-66-67 -warn-error -a+31 -g -bin-annot -I test/.main.eobjs/byte -I /Users/sylvanm/.opam/cs3110-2021fa/lib/bytes -I /Users/sylvanm/.opam/cs3110-2021fa/lib/ounit2 -I /Users/sylvanm/.opam/cs3110-2021fa/lib/ounit2/advanced -I /Users/sylvanm/.opam/cs3110-2021fa/lib/seq -I /Users/sylvanm/.opam/cs3110-2021fa/lib/stdlib-shims -I /Users/sylvanm/.opam/cs3110-2021fa/lib/zarith -I src/.ecc.objs/byte -no-alias-deps -opaque -o test/.main.eobjs/byte/dune__exe__Main.cmo -c -impl test/main.ml)
+$ (cd _build/default && /Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlopt.opt -w +a-4-6-7-9-27-29-30-32..42-44-45-48-50-60-66-67 -warn-error -a+31 -g -I test/.main.eobjs/byte -I test/.main.eobjs/native -I /Users/sylvanm/.opam/cs3110-2021fa/lib/bytes -I /Users/sylvanm/.opam/cs3110-2021fa/lib/ounit2 -I /Users/sylvanm/.opam/cs3110-2021fa/lib/ounit2/advanced -I /Users/sylvanm/.opam/cs3110-2021fa/lib/seq -I /Users/sylvanm/.opam/cs3110-2021fa/lib/stdlib-shims -I /Users/sylvanm/.opam/cs3110-2021fa/lib/zarith -I src/.ecc.objs/byte -I src/.ecc.objs/native -intf-suffix .ml -no-alias-deps -opaque -o test/.main.eobjs/native/dune__exe__Main.cmx -c -impl test/main.ml)
+$ (cd _build/default && /Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlopt.opt -w +a-4-6-7-9-27-29-30-32..42-44-45-48-50-60-66-67 -warn-error -a+31 -g -o test/main.exe /Users/sylvanm/.opam/cs3110-2021fa/lib/ocaml/unix.cmxa -I /Users/sylvanm/.opam/cs3110-2021fa/lib/ocaml /Users/sylvanm/.opam/cs3110-2021fa/lib/stdlib-shims/stdlib_shims.cmxa /Users/sylvanm/.opam/cs3110-2021fa/lib/ounit2/advanced/oUnitAdvanced.cmxa /Users/sylvanm/.opam/cs3110-2021fa/lib/ounit2/oUnit.cmxa /Users/sylvanm/.opam/cs3110-2021fa/lib/zarith/zarith.cmxa -I /Users/sylvanm/.opam/cs3110-2021fa/lib/zarith src/ecc.cmxa test/.main.eobjs/native/dune__exe__Main.cmx)
