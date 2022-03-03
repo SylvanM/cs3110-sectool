@@ -1,5 +1,6 @@
 open OUnit2
-open Ecc
+open Sectool
+open Sectool.Elliptic_curve
 open Z
 
 (********************************************************************
@@ -10,9 +11,9 @@ open Z
 n times *)
 let multiply_add_test name f n p =
   let rec repeated_add (n : Z.t) p1 =
-    if n = Z.zero then p1 else Ecc.add_points f p1 (repeated_add (n - Z.one) p1)
+    if n = Z.zero then p1 else add_points f p1 (repeated_add (n - Z.one) p1)
   in
-  name >:: fun _ -> assert_equal (repeated_add n p) (Ecc.multiply_point f n p)
+  name >:: fun _ -> assert_equal (repeated_add n p) (multiply_point f n p)
 
 let fio_tests = [
 

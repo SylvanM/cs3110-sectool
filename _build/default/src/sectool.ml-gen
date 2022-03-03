@@ -1,0 +1,6 @@
+(** @canonical Sectool.Elliptic_curve *)
+module Elliptic_curve = Sectool__Elliptic_curve
+
+
+(** @canonical Sectool.File_wizard *)
+module File_wizard = Sectool__File_wizard

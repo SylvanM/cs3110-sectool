@@ -1,4 +1,4 @@
 (library
- (name ecc)
- (public_name ECC)
- (libraries zarith))
+ (name sectool)
+ (public_name SecTool)
+ (libraries yojson zarith))

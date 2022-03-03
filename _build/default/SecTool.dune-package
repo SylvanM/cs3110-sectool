@@ -1,0 +1,32 @@
+(lang dune 2.9)
+(name SecTool)
+(library
+ (name SecTool)
+ (kind normal)
+ (archives (byte sectool.cma) (native sectool.cmxa))
+ (plugins (byte sectool.cma) (native sectool.cmxs))
+ (native_archives sectool.a)
+ (requires yojson zarith)
+ (main_module_name Sectool)
+ (modes byte native)
+ (modules
+  (wrapped
+   (main_module_name Sectool)
+   (modules
+    ((name Elliptic_curve)
+     (obj_name sectool__Elliptic_curve)
+     (visibility public)
+     (impl)
+     (intf))
+    ((name File_wizard)
+     (obj_name sectool__File_wizard)
+     (visibility public)
+     (impl)
+     (intf)))
+   (alias_module
+    (name Sectool)
+    (obj_name sectool)
+    (visibility public)
+    (kind alias)
+    (impl))
+   (wrapped true))))
