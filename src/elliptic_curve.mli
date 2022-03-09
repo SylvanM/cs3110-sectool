@@ -18,3 +18,7 @@ val multiply_point : field -> Z.t -> point -> point
 val create_field : Z.t * Z.t * Z.t * Z.t * Z.t * Z.t * Z.t * Z.t -> field
 (** [create_point (p, a, b, c, d, g, n, h)] creates an finite field for the elliptic 
 curve defined by y^2 = ax^3 + bx^2 + cx + d *)
+
+val deconstruct_field : field -> Z.t * Z.t * Z.t * Z.t * Z.t * Z.t * Z.t * Z.t
+(** [deconstruct_field f] returns the tuple of integers used 
+to create the field f *)

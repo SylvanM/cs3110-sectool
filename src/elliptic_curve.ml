@@ -78,3 +78,6 @@ let create_field parameters : field =
   {
     p = p; a = a; b = b; c = c; d = d; g = g; n = n; h = h;
   }
+
+let deconstruct_field f =
+  (f.p, f.a, f.b, f.c, f.d, f.g, f.n, f.h)
