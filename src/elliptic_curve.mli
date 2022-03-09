@@ -15,6 +15,6 @@ val add_points : field -> point -> point -> point
 val multiply_point : field -> Z.t -> point -> point
 (** [multiply_point] adds a point with itself n times *)
 
-val create_field : Z.t -> Z.t -> Z.t -> Z.t -> Z.t -> Z.t -> Z.t -> Z.t -> field
-(** [create_point p a b c d g n h] creates an finite field for the elliptic 
+val create_field : Z.t * Z.t * Z.t * Z.t * Z.t * Z.t * Z.t * Z.t -> field
+(** [create_point (p, a, b, c, d, g, n, h)] creates an finite field for the elliptic 
 curve defined by y^2 = ax^3 + bx^2 + cx + d *)

@@ -72,8 +72,9 @@ let multiply_point f n p =
   tail_multiply n p Z.zero
 
 
-let create_field (p : Z.t) (a : Z.t) (b : Z.t) (c : Z.t) 
-  (d : Z.t) (g : Z.t) (n : Z.t) (h : Z.t) : field =
+let create_field parameters : field =
+  match parameters with 
+  | (p, a, b, c, d, g, n, h) ->
   {
     p = p; a = a; b = b; c = c; d = d; g = g; n = n; h = h;
   }
