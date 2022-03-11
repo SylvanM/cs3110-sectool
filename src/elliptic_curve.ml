@@ -21,6 +21,7 @@ type point = {
 }
 
 exception InvalidPoint of point
+exception InvalidParameters
 
 (** HIDDEN **)
 
@@ -65,7 +66,8 @@ let multiply_point f n p =
   let rec tail_multiply (n : Z.t) (acc : point) (place : Z.t) : point = 
     if n = Z.zero then acc else
     if n = Z.one then p else if n = (2 |> Z.of_int) then double f p else
-      if Z.is_odd n then tail_multiply (Z.shift_left n 1) (add_points f acc p) (place + Z.one) else 
+      if Z.is_odd n then tail_multiply (Z.shift_left n 1) (add_points f acc p) 
+        (place + Z.one) else 
         tail_multiply (Z.shift_left n 1) (acc) (place +  Z.one)
     in
     
@@ -74,10 +76,9 @@ let multiply_point f n p =
 
 let create_field parameters : field =
   match parameters with 
-  | (p, a, b, c, d, g, n, h) ->
-  {
-    p = p; a = a; b = b; c = c; d = d; g = g; n = n; h = h;
-  }
+  | [p ; a ; b ; c ; d ; g ; n ; h] ->
+  { p = p; a = a; b = b; c = c; d = d; g = g; n = n; h = h; }
+  | _ -> raise InvalidParameters
 
 let deconstruct_field f =
-  (f.p, f.a, f.b, f.c, f.d, f.g, f.n, f.h)
+  [f.p ; f.a ; f.b ; f.c ; f.d ; f.g ; f.n ; f.h]

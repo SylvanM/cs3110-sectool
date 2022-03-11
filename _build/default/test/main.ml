@@ -2,6 +2,7 @@ open OUnit2
 open Sectool
 open Sectool.Elliptic_curve
 open Z
+open Testing_constants
 
 (********************************************************************
    Here are some helper functions for your testing of set-like lists.
@@ -16,7 +17,7 @@ let multiply_add_test name f n p =
   name >:: fun _ -> assert_equal (repeated_add n p) (multiply_point f n p)
 
 let fio_tests = [
-
+  
 ]
 
 let ecc_tests = [
