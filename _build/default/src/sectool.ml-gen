@@ -1,3 +1,7 @@
+(** @canonical Sectool.Cryptography *)
+module Cryptography = Sectool__Cryptography
+
+
 (** @canonical Sectool.Elliptic_curve *)
 module Elliptic_curve = Sectool__Elliptic_curve
 

@@ -1,11 +1,12 @@
 (** A collection of functions helping with file I/O *)
 
 open Elliptic_curve
+open Core.Std
 
 exception FileDoesNotExist of string
 
 let read_private_key (f : string) : Z.t =
-  raise (Failure "Unimplemented: read_private_key")
+  In_channel.read_lines f
 
 let read_public_key (f : string) : Elliptic_curve.point =
   raise (Failure "Unimplemented: read_public_key")
