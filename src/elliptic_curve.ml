@@ -4,20 +4,21 @@ open Z
 An elliptic curve is a curve of the form
 y^2 = ax^3 + bx^2 + cx + d
 *)
+
+type point = {
+  x : Z.t ;
+  y : Z.t ;
+}
+
 type field = {
   p : Z.t ; (* The size of the field *)
   a : Z.t ; (* The constant a *)
   b : Z.t ; (* The constant b *)
   c : Z.t ; (* The curve constant c *)
   d : Z.t ; (* The curve constant d *)
-  g : Z.t ; (* The starting point *)
+  g : point ; (* The starting point *)
   n : Z.t ; (* The order of G *)
   h : Z.t ; (* The co-factor *)
-}
-
-type point = {
-  x : Z.t ;
-  y : Z.t ;
 }
 
 exception InvalidPoint of point
@@ -60,7 +61,8 @@ let negate p =
 (** EXPOSED **)
 
 let add_points f p1 p2 =
-  raise (Failure "Unimplemented: add_points")
+  (* raise (Failure "Unimplemented: add_points" *)
+  simple_add p1 p2
 
 let multiply_point f n p = 
   let rec tail_multiply (n : Z.t) (acc : point) (place : Z.t) : point = 
@@ -73,12 +75,40 @@ let multiply_point f n p =
     
   tail_multiply n p Z.zero
 
+let get_point_at f x = 
+  { y = (f.a * (Z.pow x 3)) + (f.b * (Z.pow x 2)) + (f.c * x) + f.d |> Z.sqrt ;
+  x = x }
 
-let create_field parameters : field =
+let create_field (parameters : Z.t list) : field =
   match parameters with 
-  | [p ; a ; b ; c ; d ; g ; n ; h] ->
-  { p = p; a = a; b = b; c = c; d = d; g = g; n = n; h = h; }
+  | [p ; a ; b ; c ; d ; gx ; n ; h] ->
+    let temp_f = { 
+      p = p; 
+      a = a; 
+      b = b; 
+      c = c;
+      d = d; 
+      g = 
+      {
+        x = gx ;
+        y = Z.zero ;
+      }; 
+      n = n; 
+      h = h; 
+    } 
+
+    in 
+
+    { temp_f with g = get_point_at temp_f temp_f.g.x }
+    
   | _ -> raise InvalidParameters
 
 let deconstruct_field f =
-  [f.p ; f.a ; f.b ; f.c ; f.d ; f.g ; f.n ; f.h]
+  [f.p ; f.a ; f.b ; f.c ; f.d ; f.g.x ; f.n ; f.h]
+
+let get_modulus f = f.p
+
+let get_starting_point f = f.g
+
+let get_x_coord p = p.x
+

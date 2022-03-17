@@ -13,6 +13,7 @@
   (wrapped
    (main_module_name Sectool)
    (modules
+    ((name Ecdh) (obj_name sectool__Ecdh) (visibility public) (impl) (intf))
     ((name Elliptic_curve)
      (obj_name sectool__Elliptic_curve)
      (visibility public)

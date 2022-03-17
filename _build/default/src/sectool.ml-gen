@@ -1,3 +1,7 @@
+(** @canonical Sectool.Ecdh *)
+module Ecdh = Sectool__Ecdh
+
+
 (** @canonical Sectool.Elliptic_curve *)
 module Elliptic_curve = Sectool__Elliptic_curve
 

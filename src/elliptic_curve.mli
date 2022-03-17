@@ -19,9 +19,21 @@ val multiply_point : field -> Z.t -> point -> point
 (** [multiply_point] adds a point with itself n times *)
 
 val create_field : Z.t list -> field
-(** [create_point [[p; a; b; c; d; g; n; h]] creates an finite field for the elliptic 
-curve defined by y^2 = ax^3 + bx^2 + cx + d *)
+(** [create_point [[p; a; b; c; d; g; n; h]]] creates an finite field for the 
+	elliptic curve defined by y^2 = ax^3 + bx^2 + cx + d *)
 
 val deconstruct_field : field -> Z.t list
 (** [deconstruct_field f] returns the list of integers used 
 to create the field f *)
+
+val get_modulus : field -> Z.t
+(** Returns the modulus of a field *)
+
+val get_starting_point : field -> point
+(** Returns the starting point G of a field *)
+
+val get_x_coord : point -> Z.t
+(** Returns the x coordinate of a point *)
+
+val get_point_at : field -> Z.t -> point
+(** Returns a point on f with x coordinate x *)
