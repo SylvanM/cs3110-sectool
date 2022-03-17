@@ -1,4 +1,5 @@
 open Elliptic_curve
 
-let generate_secret (f : Elliptic_curve.field) (n : int) (p : Elliptic_curve.point) : Elliptic_curve.point =
-    multiply_point f n p
+let generate_secret f n p =
+    let point = multiply_point f n p in
+        {x=point.x mod f.p ; y=point.x mod f.p}
