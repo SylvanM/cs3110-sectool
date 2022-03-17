@@ -1,4 +1,4 @@
 (library
  (name sectool)
  (public_name SecTool)
- (libraries yojson zarith))
+ (libraries yojson stdio))

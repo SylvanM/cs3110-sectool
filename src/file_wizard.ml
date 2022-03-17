@@ -1,24 +1,56 @@
 (** A collection of functions helping with file I/O *)
 
 open Elliptic_curve
-open Core.Std
+open Stdio
+
+let dir_prefix = "data" ^ Filename.dir_sep
 
 exception FileDoesNotExist of string
+exception Malformed of string
 
-let read_private_key (f : string) : Z.t =
-  In_channel.read_lines f
+(** HELPERS *)
+
+let rec to_int (l : string list) : int list =
+  match l with
+  | h::t -> (int_of_string h)::(to_int t)
+  | [] -> []
+
+(** *)
+
+let read_private_key (f : string) : int =
+  let list = Stdio.In_channel.read_lines (dir_prefix ^ f) in
+    match list with
+    | h::t -> int_of_string h
+    | _ -> raise (Malformed "Error")
 
 let read_public_key (f : string) : Elliptic_curve.point =
-  raise (Failure "Unimplemented: read_public_key")
+  let list = Stdio.In_channel.read_lines (dir_prefix ^ f) in
+    match list with
+    | [] -> raise (Malformed "Error")
+    | h::t ->
+      let str_list = String.split_on_char ' ' h in
+        let int_list = to_int str_list in
+          match int_list with
+          | x::y::t -> { x=x; y=y}
+          | _::[] | [] -> raise (Malformed "Error")
 
 let read_domain_params (f : string) : Elliptic_curve.field =
-  raise (Failure "Unimplemented: read_domain_params")
+  let list = Stdio.In_channel.read_lines (dir_prefix ^ f) in
+    match list with
+    | [] -> raise (Malformed "Error")
+    | h::t ->
+      let str_list = String.split_on_char ' ' h in
+        let int_list = to_int str_list in
+          match int_list with
+          | p::a::b::c::d::g::n::h::t -> create_field (p,a,b,c,d,g,n,h)
+          | _::[] | [] -> raise (Malformed "Error")
+          | h::t -> raise (Malformed "Error")
 
-let write_private_key (d : Z.t) (f : string) =
-  raise (Failure "Unimplemented: write_private_key")
+let write_private_key (d : int) (f : string) =
+  Stdio.Out_channel.write_lines (dir_prefix ^ f) [string_of_int d]
 
 let write_public_key (p : point) (f : string) =
-  raise (Failure "Unimplemented: write_public_key")
+  Stdio.Out_channel.write_lines (dir_prefix ^ f) [string_of_point p]
 
 let write_domain_params (dom : field) (f : string)  =
-  raise (Failure "Unimplemented: write_domain_params")
+  Stdio.Out_channel.write_lines (dir_prefix ^ f) [string_of_field dom]

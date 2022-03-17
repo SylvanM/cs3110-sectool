@@ -1,1 +1,1 @@
-src/file_wizard.ml: Core Elliptic_curve In_channel Z
+src/file_wizard.ml: Elliptic_curve Filename Stdio String

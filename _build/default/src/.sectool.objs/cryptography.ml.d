@@ -1,1 +1,1 @@
-src/cryptography.ml: Elliptic_curve Z
+src/cryptography.ml: Elliptic_curve
