@@ -6,13 +6,18 @@
  (archives (byte sectool.cma) (native sectool.cmxa))
  (plugins (byte sectool.cma) (native sectool.cmxs))
  (native_archives sectool.a)
- (requires yojson zarith)
+ (requires yojson stdio zarith)
  (main_module_name Sectool)
  (modes byte native)
  (modules
   (wrapped
    (main_module_name Sectool)
    (modules
+    ((name Authors)
+     (obj_name sectool__Authors)
+     (visibility public)
+     (impl)
+     (intf))
     ((name Ecdh) (obj_name sectool__Ecdh) (visibility public) (impl) (intf))
     ((name Elliptic_curve)
      (obj_name sectool__Elliptic_curve)

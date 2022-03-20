@@ -1,8 +1,8 @@
 (** Module for the actual algorithms of the Elliptic Curve Diffie-Helman key 
 exchange *)
 
-val generate_private_key : Elliptic_curve.field -> Z.t 
-(** Generates a random integer for use as a private key *)
+val generate_private_key : int -> Z.t 
+(** Generates a random integer for use as a private key, with a certain bit size *)
 
 val compute_public_key : Elliptic_curve.field -> Z.t -> Z.t
 (** [compute_public_key f d] computes the public key from a private key d *)

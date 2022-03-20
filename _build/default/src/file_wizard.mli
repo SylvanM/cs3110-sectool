@@ -3,8 +3,8 @@
 exception FileDoesNotExist of string
 (** Raised when a curve is loaded form a file but the file is invalid *)
 
-val read_private_key : string -> Z.t 
-  (** [read_private_key f] reads a file and returns an integer which is the 
+val read_private_key : string -> Z.t
+  (** [read_private_key f] reads a file and returns an integer which is the
     private key *)
 
 val read_public_key : string -> Elliptic_curve.point

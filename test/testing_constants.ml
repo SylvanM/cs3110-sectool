@@ -1,5 +1,5 @@
 (*************
-* A list of constants to be used in tests, so we don't clutter up the 
+* A list of constants to be used in tests, so we don't clutter up the
 other file
 *)
 open Sectool.Elliptic_curve
@@ -39,4 +39,16 @@ let example_curve = create_field [
   Z.zero ;
   17 |> Z.of_int ; (* dummy *)
   5 |> Z.of_int ; (* dummy *)
+]
+
+let heewon_field = create_field [
+  100 |> Z.of_int ;
+  2 |> Z.of_int ;
+  5 |> Z.of_int ;
+  2 |> Z.of_int ;
+  4 |> Z.of_int ;
+  9 |> Z.of_int ;
+  0 |> Z.of_int ;
+  252 |> Z.of_int ;
+  8 |> Z.of_int
 ]

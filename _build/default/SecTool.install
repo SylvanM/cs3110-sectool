@@ -1,5 +1,7 @@
 lib: [
   "_build/install/default/lib/SecTool/META"
+  "_build/install/default/lib/SecTool/authors.ml"
+  "_build/install/default/lib/SecTool/authors.mli"
   "_build/install/default/lib/SecTool/dune-package"
   "_build/install/default/lib/SecTool/ecdh.ml"
   "_build/install/default/lib/SecTool/ecdh.mli"
@@ -15,6 +17,10 @@ lib: [
   "_build/install/default/lib/SecTool/sectool.cmx"
   "_build/install/default/lib/SecTool/sectool.cmxa"
   "_build/install/default/lib/SecTool/sectool.ml"
+  "_build/install/default/lib/SecTool/sectool__Authors.cmi"
+  "_build/install/default/lib/SecTool/sectool__Authors.cmt"
+  "_build/install/default/lib/SecTool/sectool__Authors.cmti"
+  "_build/install/default/lib/SecTool/sectool__Authors.cmx"
   "_build/install/default/lib/SecTool/sectool__Ecdh.cmi"
   "_build/install/default/lib/SecTool/sectool__Ecdh.cmt"
   "_build/install/default/lib/SecTool/sectool__Ecdh.cmti"

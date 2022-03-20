@@ -119,6 +119,22 @@ let get_modulus f = f.p
 
 let get_starting_point f = f.g
 
-let make_point x y = {x = Z.of_int x ; y = Z.of_int y}
+let make_point (p : Z.t * Z.t) =
+  match p with 
+  | (x, y) -> {x = x ; y = y}
 
-let string_of_point p = "(" ^ (p.x |> Z.to_string) ^ ", " ^ (p.y |> Z.to_string) ^ ")"
+let make_int_point (p : int * int) = 
+  match p with 
+  | (x, y) -> make_point (Z.of_int x, Z.of_int y)
+
+
+
+let string_of_point p = (p.x |> Z.to_string) ^ " " ^ (p.y |> Z.to_string)
+
+let string_of_field f =
+  let rec construct_str params =
+    match params with
+    | [] -> ""
+    | h :: t -> (h |> Z.to_string) ^ (construct_str t)
+  in 
+  f |> deconstruct_field |> construct_str
