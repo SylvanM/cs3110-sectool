@@ -6,9 +6,6 @@ type field
 type point
 (** A point in a finite field *)
 
-exception InvalidPoint of point
-(** Raised when a point is not in the correct field *)
-
 exception InvalidParameters
 (** Raised when an invalid list of parameters is given for field construction *)
 
@@ -33,7 +30,10 @@ val get_starting_point : field -> point
 (** Returns the starting point G of a field *)
 
 val get_x_coord : point -> Z.t
-(** Returns the x coordinate of a point *)
+val get_y_coord : point -> Z.t
 
-val get_point_at : field -> Z.t -> point
-(** Returns a point on f with x coordinate x *)
+val make_point : int * int -> point
+
+val make_point : Z.t * Z.t -> point
+
+val string_of_point : point -> string
