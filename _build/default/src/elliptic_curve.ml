@@ -49,7 +49,7 @@ let power_of_two f p n =
     if k = 0 then acc else 
       let thing = ((k |> Z.of_int) - Z.one) |> Z.to_int in 
       (* I know this looks super wacky, but I couldn't get it to compile
-      otherwise... *)
+      otherwise because of how OCaml was doing its type inference *)
       tail_pow_two thing (double f acc)
     in
   tail_pow_two n p
@@ -62,6 +62,7 @@ let negate p =
 
 let add_points f p1 p2 =
   (* raise (Failure "Unimplemented: add_points" *)
+  if p1 = p2 then double f p1 else
   simple_add p1 p2
 
 let multiply_point f n p = 

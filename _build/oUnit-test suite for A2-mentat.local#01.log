@@ -1,0 +1,7 @@
+2022-03-20T15:46:40+00:00 mentat.local#01 I: Start test test suite for A2:0:25519 1 and 2.
+2022-03-20T15:46:40+00:00 mentat.local#01 E: Test test suite for A2:0:25519 1 and 2 has failed.
+2022-03-20T15:46:40+00:00 mentat.local#01 E: not equal in test test suite for A2:0:25519 1 and 2.
+2022-03-20T15:46:40+00:00 mentat.local#01 E: Raised at OUnitAssert.assert_failure in file "src/lib/ounit2/advanced/oUnitAssert.ml", line 45, characters 2-27
+2022-03-20T15:46:40+00:00 mentat.local#01 E: Called from OUnitRunner.run_one_test.(fun) in file "src/lib/ounit2/advanced/oUnitRunner.ml", line 83, characters 13-26
+2022-03-20T15:46:40+00:00 mentat.local#01 E: 
+2022-03-20T15:46:40+00:00 mentat.local#01 I: End test test suite for A2:0:25519 1 and 2.

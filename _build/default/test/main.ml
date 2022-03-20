@@ -30,8 +30,8 @@ let fio_tests = [
 
 let ecc_tests = [
   same_secret_test "25519 1 and 2" curve25519 Z.one (2 |> Z.of_int) ;
-  same_secret_test "25519 p and q" curve25519 (Z.of_string_base 16 "afe172371") 
-    (Z.of_string_base 16 "12432ff") ;
+  (* same_secret_test "25519 p and q" curve25519 (Z.of_string_base 16 "afe172371") 
+    (Z.of_string_base 16 "12432ff") ; *)
 ]
 
 let aes_tests = [
