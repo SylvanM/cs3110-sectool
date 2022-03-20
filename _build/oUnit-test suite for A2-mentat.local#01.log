@@ -1,6 +1,17 @@
-2022-03-20T20:12:13+00:00 mentat.local#01 I: Start test test suite for A2:0:(1, 6) + (4, 6).
-2022-03-20T20:12:13+00:00 mentat.local#01 I: Test test suite for A2:0:(1, 6) + (4, 6) is successful.
-2022-03-20T20:12:13+00:00 mentat.local#01 I: End test test suite for A2:0:(1, 6) + (4, 6).
-2022-03-20T20:12:13+00:00 mentat.local#01 I: Start test test suite for A2:3:test.
-2022-03-20T20:12:13+00:00 mentat.local#01 I: Test test suite for A2:3:test is successful.
-2022-03-20T20:12:13+00:00 mentat.local#01 I: End test test suite for A2:3:test.
+2022-03-20T21:32:01+00:00 mentat.local#01 I: Start test test suite for A2:0:(1, 6) + (4, 6).
+2022-03-20T21:32:01+00:00 mentat.local#01 I: Test test suite for A2:0:(1, 6) + (4, 6) is successful.
+2022-03-20T21:32:01+00:00 mentat.local#01 I: End test test suite for A2:0:(1, 6) + (4, 6).
+2022-03-20T21:32:01+00:00 mentat.local#01 I: Start test test suite for A2:2:P + Q = R On P-192.
+2022-03-20T21:32:01+00:00 mentat.local#01 I: Test test suite for A2:2:P + Q = R On P-192 is successful.
+2022-03-20T21:32:01+00:00 mentat.local#01 I: End test test suite for A2:2:P + Q = R On P-192.
+2022-03-20T21:32:01+00:00 mentat.local#01 I: Start test test suite for A2:3:Q + Q = 2Q on P-192.
+2022-03-20T21:32:01+00:00 mentat.local#01 E: Test test suite for A2:3:Q + Q = 2Q on P-192 has failed.
+2022-03-20T21:32:01+00:00 mentat.local#01 E: expected: 5369744403678710563432458361254544170966096384586764429448 5429234379789071039750654906915254128254326554272718558123
+2022-03-20T21:32:01+00:00 mentat.local#01 E: but got: 4909807190352133096128827093949580535552045626548831323817 1017794773296847991254250794251236715101785272486465518448 in test test suite for A2:3:Q + Q = 2Q on P-192.
+2022-03-20T21:32:01+00:00 mentat.local#01 E: Raised at OUnitAssert.assert_failure in file "src/lib/ounit2/advanced/oUnitAssert.ml", line 45, characters 2-27
+2022-03-20T21:32:01+00:00 mentat.local#01 E: Called from OUnitRunner.run_one_test.(fun) in file "src/lib/ounit2/advanced/oUnitRunner.ml", line 83, characters 13-26
+2022-03-20T21:32:01+00:00 mentat.local#01 E: 
+2022-03-20T21:32:01+00:00 mentat.local#01 I: End test test suite for A2:3:Q + Q = 2Q on P-192.
+2022-03-20T21:32:01+00:00 mentat.local#01 I: Start test test suite for A2:4:test.
+2022-03-20T21:32:01+00:00 mentat.local#01 I: Test test suite for A2:4:test is successful.
+2022-03-20T21:32:01+00:00 mentat.local#01 I: End test test suite for A2:4:test.

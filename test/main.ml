@@ -84,11 +84,14 @@ let fio_tests = [
 ]
 
 let ecc_tests = [
-  (* same_secret_test "Simple Curve 1 and 2" simple_curve Z.one (2 |> Z.of_int) ; *)
-  (* same_secret_test "25519 1 and 2" curve25519 Z.one (2 |> Z.of_int) ; *)
 
   add_test "(1, 6) + (4, 6)" example_curve (make_int_point (1, 6)) (make_int_point (4, 6)) (make_int_point (8, 7));
   double_test "2 * (1, 6)" example_curve (make_int_point (1, 6)) (make_int_point (10, 1));
+
+  add_test "P + Q = R On P-192" p192 p192_P p192_Q p192_R ;
+
+  add_test "Q + Q = 2Q on P-192" p192 p192_Q p192_Q p192_2Q ;
+
 ]
 
 let aes_tests = [

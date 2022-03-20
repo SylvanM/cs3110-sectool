@@ -31,22 +31,68 @@ let rec ( % ) x y =
 		else
 			m
 
+let add m a b =
+  (a + b) % m
+
+let sub m a b = 
+  (a - b) % m
+
+(** Define multiplication over a modulus m *)
+let mul m a b =
+  (a * b) % m
+
+(* Computes the modular multiplicative inverse of a *)
+let mul_inv m a =
+  Z.invert a m
+
+let div m a b =
+  mul m a (mul_inv m b)
+
+let pow m b p =
+  Z.powm b (p |> Z.of_int) m
+
 (** HIDDEN **)
+
+
 
 (* Adds two points using standard calculation, no tricks used *)
 let simple_add f p1 p2 = 
-  let lambda = (p2.y - p1.y) / (p2.x - p1.x) in 
-  let x3 = (((Z.pow lambda 2)) - p1.x - p2.x) % f.p in 
-  let y3 = (lambda * (p1.x - x3) - p1.y) % f.p in 
+  let lambda = div f.p (sub f.p p2.y p1.y) (sub f.p p2.x p1.x) in 
+  let x3 = 
+    let l2 = pow f.p lambda 2 in 
+    let partial = sub f.p l2 p1.x in 
+    sub f.p partial p2.x
+  in 
+  let y3 = 
+    let diff = sub f.p p1.x x3 in 
+    let prod = mul f.p lambda diff in 
+    sub f.p prod p1.y
+  in 
   {x = x3; y = y3}
 
 (* Doubles a point by adding it to itself, 
   using the tangent line to the curve *)
 let double f p =
   if p.y = Z.zero then p else
-  let lambda = ( ( (3 |> Z.of_int) * f.a * (Z.pow p.x 2) ) + ((2 |> Z.of_int) * f.b * p.x) + f.c ) / ((2 |> Z.of_int) * p.y) in 
-  let x2 = (Z.pow lambda 2) - (2 |> Z.of_int) * p.x in 
-  let y2 = lambda * (p.x - x2) - p.y in 
+  let lambda = 
+    let numerator =
+      let t1 = 
+        let scalar = mul f.p (3 |> Z.of_int) f.a in 
+        let x_sqrd = pow f.p p.x 2 in 
+        mul f.p x_sqrd scalar in
+      let t2 = 
+        let scalar = mul f.p (2 |> Z.of_int) f.b in 
+        mul f.p scalar p.x in 
+      let partial = add f.p t1 t2 in 
+      add f.p partial f.c in 
+    div f.p numerator (mul f.p p.y (2 |> Z.of_int))
+  in 
+  let x2 = sub f.p (pow f.p lambda 2) (mul f.p (2 |> Z.of_int) p.x) in 
+  let y2 = 
+    let diff = sub f.p p.x x2 in 
+    let prod = mul f.p lambda diff in 
+    sub f.p prod p.y
+  in 
   {x = x2 ; y = y2}
 
 (* Doubles a point p on f n times *)

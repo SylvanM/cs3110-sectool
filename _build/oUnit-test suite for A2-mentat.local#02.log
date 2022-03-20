@@ -1,13 +1,9 @@
-2022-03-20T20:12:13+00:00 mentat.local#02 I: Start test test suite for A2:1:2 * (1, 6).
-2022-03-20T20:12:13+00:00 mentat.local#02 E: Test test suite for A2:1:2 * (1, 6) has failed.
-2022-03-20T20:12:13+00:00 mentat.local#02 E: expected: 10 1 but got: -2 -6 in test test suite for A2:1:2 * (1, 6).
-2022-03-20T20:12:13+00:00 mentat.local#02 E: Raised at OUnitAssert.assert_failure in file "src/lib/ounit2/advanced/oUnitAssert.ml", line 45, characters 2-27
-2022-03-20T20:12:13+00:00 mentat.local#02 E: Called from OUnitRunner.run_one_test.(fun) in file "src/lib/ounit2/advanced/oUnitRunner.ml", line 83, characters 13-26
-2022-03-20T20:12:13+00:00 mentat.local#02 E: 
-2022-03-20T20:12:13+00:00 mentat.local#02 I: End test test suite for A2:1:2 * (1, 6).
-2022-03-20T20:12:13+00:00 mentat.local#02 I: Start test test suite for A2:2:test.
-2022-03-20T20:12:13+00:00 mentat.local#02 I: Test test suite for A2:2:test is successful.
-2022-03-20T20:12:13+00:00 mentat.local#02 I: End test test suite for A2:2:test.
-2022-03-20T20:12:13+00:00 mentat.local#02 I: Start test test suite for A2:4:test.
-2022-03-20T20:12:13+00:00 mentat.local#02 I: Test test suite for A2:4:test is successful.
-2022-03-20T20:12:13+00:00 mentat.local#02 I: End test test suite for A2:4:test.
+2022-03-20T21:32:01+00:00 mentat.local#02 I: Start test test suite for A2:1:2 * (1, 6).
+2022-03-20T21:32:01+00:00 mentat.local#02 I: Test test suite for A2:1:2 * (1, 6) is successful.
+2022-03-20T21:32:01+00:00 mentat.local#02 I: End test test suite for A2:1:2 * (1, 6).
+2022-03-20T21:32:01+00:00 mentat.local#02 I: Start test test suite for A2:5:test.
+2022-03-20T21:32:01+00:00 mentat.local#02 I: Test test suite for A2:5:test is successful.
+2022-03-20T21:32:01+00:00 mentat.local#02 I: End test test suite for A2:5:test.
+2022-03-20T21:32:01+00:00 mentat.local#02 I: Start test test suite for A2:6:test.
+2022-03-20T21:32:01+00:00 mentat.local#02 I: Test test suite for A2:6:test is successful.
+2022-03-20T21:32:01+00:00 mentat.local#02 I: End test test suite for A2:6:test.
