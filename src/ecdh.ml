@@ -10,8 +10,7 @@ let generate_private_key bit_size =
   bit_size |> Z.of_int |> Z.(mod) (construct_random_integer 0 bit_size Z.zero)
 
 let compute_public_key (f : field) (d : Z.t) =
-  (f |> get_starting_point |> multiply_point f d |> get_x_coord)
+  f |> get_starting_point |> multiply_point f d
 
 let compute_shared_secret f d p =
-  raise (Failure "Unimplemented")
-  (* (p |> multiply_point f d |> get_x_coord) *)
+  p |> multiply_point f d

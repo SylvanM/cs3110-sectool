@@ -23,21 +23,47 @@ type field = {
 
 exception InvalidParameters
 
+(* This is the definition of in infix mod operator that will always produce a positive integer *)
+let rec ( % ) x y = 
+	let m = x mod y in
+		if m < Z.zero then 
+			((x + y) % y) 
+		else
+			m
+
+let add m a b =
+  (a + b) % m
+
+let sub m a b = 
+  (a - b) % m
+
+(** Define multiplication over a modulus m *)
+let mul m a b =
+  (a * b) % m
+
+(* Computes the modular multiplicative inverse of a *)
+let mul_inv m a =
+  Z.invert a m
+
+let div m a b =
+  mul m a (mul_inv m b)
+
 (** HIDDEN **)
+
+
 
 (* Adds two points using standard calculation, no tricks used *)
 let simple_add f p1 p2 = 
   let lambda = (p2.y - p1.y) / (p2.x - p1.x) in 
-  let x3 = (((Z.pow lambda 2)) - p1.x - p2.x) mod f.p in 
-  let y3 = (lambda * (p1.x - x3) - p1.y) mod f.p in 
+  let x3 = (((Z.pow lambda 2)) - p1.x - p2.x) % f.p in 
+  let y3 = (lambda * (p1.x - x3) - p1.y) % f.p in 
   {x = x3; y = y3}
 
 (* Doubles a point by adding it to itself, 
   using the tangent line to the curve *)
 let double f p =
   if p.y = Z.zero then p else
-  let lambda = ((3 |> Z.of_int) * (Z.pow p.x 2) + f.c) 
-    / ((2 |> Z.of_int) * p.y) in 
+  let lambda = ( ( (3 |> Z.of_int) * f.a * (Z.pow p.x 2) ) + ((2 |> Z.of_int) * f.b * p.x) + f.c ) / ((2 |> Z.of_int) * p.y) in 
   let x2 = (Z.pow lambda 2) - (2 |> Z.of_int) * p.x in 
   let y2 = lambda * (p.x - x2) - p.y in 
   {x = x2 ; y = y2}
@@ -57,7 +83,7 @@ let power_of_two f p n =
 let points_on f =
   let rec tail_points_find (points : point list) (x : Z.t) : (point list * Z.t) =
     if x >= f.p then (points, x) else
-      let w = Z.(mod) ((f.a * (Z.pow x 3)) + (f.b * (Z.pow x 2)) + (f.c * x) + f.d ) f.p in 
+      let w = ((f.a * (Z.pow x 3)) + (f.b * (Z.pow x 2)) + (f.c * x) + f.d ) % f.p in 
       (** Check if w is perfect square *)
       if Z.perfect_square w then 
         let y = w |> Z.sqrt in 
@@ -126,8 +152,6 @@ let make_point (p : Z.t * Z.t) =
 let make_int_point (p : int * int) = 
   match p with 
   | (x, y) -> make_point (Z.of_int x, Z.of_int y)
-
-
 
 let string_of_point p = (p.x |> Z.to_string) ^ " " ^ (p.y |> Z.to_string)
 
