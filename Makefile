@@ -17,3 +17,7 @@ clean:
 
 doc:
 	dune build @docx
+
+zip:
+	rm -f sectool.zip
+	zip -r sectool.zip . -x@exclude.lst
