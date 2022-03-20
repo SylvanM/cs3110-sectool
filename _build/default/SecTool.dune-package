@@ -1,18 +1,56 @@
-(lang dune 2.9)
+(lang dune 3.0)
 (name SecTool)
+(sections (lib .) (libexec .) (doc ../../doc/SecTool))
+(files
+ (lib
+  (META
+   cryptography.ml
+   cryptography.mli
+   dune-package
+   elliptic_curve.ml
+   elliptic_curve.mli
+   file_wizard.ml
+   file_wizard.mli
+   opam
+   sectool.a
+   sectool.cma
+   sectool.cmi
+   sectool.cmt
+   sectool.cmx
+   sectool.cmxa
+   sectool.ml
+   sectool__Cryptography.cmi
+   sectool__Cryptography.cmt
+   sectool__Cryptography.cmti
+   sectool__Cryptography.cmx
+   sectool__Elliptic_curve.cmi
+   sectool__Elliptic_curve.cmt
+   sectool__Elliptic_curve.cmti
+   sectool__Elliptic_curve.cmx
+   sectool__File_wizard.cmi
+   sectool__File_wizard.cmt
+   sectool__File_wizard.cmti
+   sectool__File_wizard.cmx))
+ (libexec (sectool.cmxs))
+ (doc (LICENSE README.md)))
 (library
  (name SecTool)
  (kind normal)
  (archives (byte sectool.cma) (native sectool.cmxa))
  (plugins (byte sectool.cma) (native sectool.cmxs))
  (native_archives sectool.a)
- (requires yojson zarith)
+ (requires yojson stdio)
  (main_module_name Sectool)
  (modes byte native)
  (modules
   (wrapped
    (main_module_name Sectool)
    (modules
+    ((name Cryptography)
+     (obj_name sectool__Cryptography)
+     (visibility public)
+     (impl)
+     (intf))
     ((name Elliptic_curve)
      (obj_name sectool__Elliptic_curve)
      (visibility public)

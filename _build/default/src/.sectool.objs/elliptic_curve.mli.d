@@ -1,1 +1,1 @@
-src/elliptic_curve.mli: Z
+src/elliptic_curve.mli:

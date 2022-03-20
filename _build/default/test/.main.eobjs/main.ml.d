@@ -1,1 +1,1 @@
-test/main.ml: List OUnit2 Sectool Z
+test/main.ml: Elliptic_curve List OUnit2 Sectool

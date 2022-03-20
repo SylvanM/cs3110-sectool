@@ -1,1 +1,1 @@
-src/file_wizard.mli: Elliptic_curve Z
+src/file_wizard.mli: Elliptic_curve

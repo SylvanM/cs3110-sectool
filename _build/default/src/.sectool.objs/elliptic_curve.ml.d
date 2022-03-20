@@ -1,1 +1,1 @@
-src/elliptic_curve.ml: Z
+src/elliptic_curve.ml: Int

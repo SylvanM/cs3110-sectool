@@ -1,5 +1,5 @@
 description = ""
-requires = "yojson zarith"
+requires = "stdio yojson"
 archive(byte) = "sectool.cma"
 archive(native) = "sectool.cmxa"
 plugin(byte) = "sectool.cma"

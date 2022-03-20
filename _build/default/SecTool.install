@@ -1,5 +1,7 @@
 lib: [
   "_build/install/default/lib/SecTool/META"
+  "_build/install/default/lib/SecTool/cryptography.ml"
+  "_build/install/default/lib/SecTool/cryptography.mli"
   "_build/install/default/lib/SecTool/dune-package"
   "_build/install/default/lib/SecTool/elliptic_curve.ml"
   "_build/install/default/lib/SecTool/elliptic_curve.mli"
@@ -13,6 +15,10 @@ lib: [
   "_build/install/default/lib/SecTool/sectool.cmx"
   "_build/install/default/lib/SecTool/sectool.cmxa"
   "_build/install/default/lib/SecTool/sectool.ml"
+  "_build/install/default/lib/SecTool/sectool__Cryptography.cmi"
+  "_build/install/default/lib/SecTool/sectool__Cryptography.cmt"
+  "_build/install/default/lib/SecTool/sectool__Cryptography.cmti"
+  "_build/install/default/lib/SecTool/sectool__Cryptography.cmx"
   "_build/install/default/lib/SecTool/sectool__Elliptic_curve.cmi"
   "_build/install/default/lib/SecTool/sectool__Elliptic_curve.cmt"
   "_build/install/default/lib/SecTool/sectool__Elliptic_curve.cmti"
