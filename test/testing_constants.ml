@@ -35,8 +35,8 @@ let example_curve = create_field [
   Z.zero ;
   5 |> Z.of_int ;
   4 |> Z.of_int ;
-  Z.zero ; (* dummy *)
-  Z.zero ;
+  Z.one ; (* dummy *)
+  6 |> Z.of_int ;
   17 |> Z.of_int ; (* dummy *)
   5 |> Z.of_int ; (* dummy *)
 ]
@@ -61,8 +61,8 @@ let p192 = create_field [
   "64210519e59c80e70fa7e9ab72243049feb8deecc146b9b1" |> Z.of_string_base 16 ;
 
   (* Dummy numbers *)
-  Z.zero ;
-  Z.zero ;
+  Z.one ;
+  6 |> Z.of_int ;
   Z.zero ;
   Z.zero ;
 ]

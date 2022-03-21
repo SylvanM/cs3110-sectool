@@ -134,16 +134,10 @@ let add_points f p1 p2 =
   if p1 = p2 then double f p1 else
     simple_add f p1 p2
   
-let multiply_point f n p = 
-  let rec tail_multiply (n : Z.t) (acc : point) (place : Z.t) : point = 
-    if n = Z.zero then acc else
-    if n = Z.one then p else if n = (2 |> Z.of_int) then double f p else
-      if Z.is_odd n then tail_multiply (Z.shift_left n 1) (add_points f acc p) 
-        (place + Z.one) else 
-        tail_multiply (Z.shift_left n 1) (acc) (place +  Z.one)
-    in
-    
-  tail_multiply n p Z.zero
+let rec multiply_point f n p = 
+  if n = Z.one then p else 
+    if n = (2 |> Z.of_int) then double f p else
+      p |> multiply_point f (n - Z.one) |> add_points f p 
 
 let create_field (parameters : Z.t list) : field =
   match parameters with 
@@ -162,11 +156,10 @@ let create_field (parameters : Z.t list) : field =
       n = n; 
       h = h; 
     } 
-    
   | _ -> raise InvalidParameters
 
 let deconstruct_field f =
-  [f.p ; f.a ; f.b ; f.c ; f.d ; f.g.x ; f.g.y ; f.n ; f.h]
+  [ f.p ; f.a ; f.b ; f.c ; f.d ; f.g.x ; f.g.y ; f.n ; f.h ]
 
 let get_modulus f = f.p
 

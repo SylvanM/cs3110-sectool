@@ -1,9 +1,18 @@
-2022-03-20T21:32:01+00:00 mentat.local#02 I: Start test test suite for A2:1:2 * (1, 6).
-2022-03-20T21:32:01+00:00 mentat.local#02 I: Test test suite for A2:1:2 * (1, 6) is successful.
-2022-03-20T21:32:01+00:00 mentat.local#02 I: End test test suite for A2:1:2 * (1, 6).
-2022-03-20T21:32:01+00:00 mentat.local#02 I: Start test test suite for A2:5:test.
-2022-03-20T21:32:01+00:00 mentat.local#02 I: Test test suite for A2:5:test is successful.
-2022-03-20T21:32:01+00:00 mentat.local#02 I: End test test suite for A2:5:test.
-2022-03-20T21:32:01+00:00 mentat.local#02 I: Start test test suite for A2:6:test.
-2022-03-20T21:32:01+00:00 mentat.local#02 I: Test test suite for A2:6:test is successful.
-2022-03-20T21:32:01+00:00 mentat.local#02 I: End test test suite for A2:6:test.
+2022-03-21T05:03:03+00:00 mentat.local#02 I: Start test test suite for A2:1:(1, 6) + (4, 6).
+2022-03-21T05:03:03+00:00 mentat.local#02 I: Test test suite for A2:1:(1, 6) + (4, 6) is successful.
+2022-03-21T05:03:03+00:00 mentat.local#02 I: End test test suite for A2:1:(1, 6) + (4, 6).
+2022-03-21T05:03:03+00:00 mentat.local#02 I: Start test test suite for A2:3:P + Q = R On P-192.
+2022-03-21T05:03:03+00:00 mentat.local#02 I: Test test suite for A2:3:P + Q = R On P-192 is successful.
+2022-03-21T05:03:03+00:00 mentat.local#02 I: End test test suite for A2:3:P + Q = R On P-192.
+2022-03-21T05:03:03+00:00 mentat.local#02 I: Start test test suite for A2:6:Simple Curve 1 and 2.
+2022-03-21T05:03:03+00:00 mentat.local#02 I: Test test suite for A2:6:Simple Curve 1 and 2 is successful.
+2022-03-21T05:03:03+00:00 mentat.local#02 I: End test test suite for A2:6:Simple Curve 1 and 2.
+2022-03-21T05:03:03+00:00 mentat.local#02 I: Start test test suite for A2:8:(1, 6) + (4, 6).
+2022-03-21T05:03:03+00:00 mentat.local#02 I: Test test suite for A2:8:(1, 6) + (4, 6) is successful.
+2022-03-21T05:03:03+00:00 mentat.local#02 I: End test test suite for A2:8:(1, 6) + (4, 6).
+2022-03-21T05:03:03+00:00 mentat.local#02 I: Start test test suite for A2:10:test.
+2022-03-21T05:03:03+00:00 mentat.local#02 I: Test test suite for A2:10:test is successful.
+2022-03-21T05:03:03+00:00 mentat.local#02 I: End test test suite for A2:10:test.
+2022-03-21T05:03:03+00:00 mentat.local#02 I: Start test test suite for A2:11:test.
+2022-03-21T05:03:03+00:00 mentat.local#02 I: Test test suite for A2:11:test is successful.
+2022-03-21T05:03:03+00:00 mentat.local#02 I: End test test suite for A2:11:test.
