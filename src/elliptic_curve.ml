@@ -1,6 +1,6 @@
 open Z
 
-(* 
+(*
 An elliptic curve is a curve of the form
 y^2 = ax^3 + bx^2 + cx + d
 *)
@@ -21,17 +21,17 @@ type field = {
 exception InvalidParameters
 
 (* This is the definition of in infix mod operator that will always produce a positive integer *)
-let rec ( % ) x y = 
+let rec ( % ) x y =
 	let m = x mod y in
-		if m < Z.zero then 
-			((x + y) % y) 
+		if m < Z.zero then
+			((x + y) % y)
 		else
 			m
 
 let add m a b =
   (a + b) % m
 
-let sub m a b = 
+let sub m a b =
   (a - b) % m
 
 (** Define multiplication over a modulus m *)
@@ -50,59 +50,57 @@ let pow m b p =
 
 (** HIDDEN **)
 
-
-
 (* Adds two points using standard calculation, no tricks used *)
 let simple_add f p1 p2 =
-  match p1 with 
+  match p1 with
   | PointAtInfinty -> p2
-  | Point p1 -> 
+  | Point p1 ->
     match p2 with
     | PointAtInfinty -> Point p1
     | Point p2 ->
-  let lambda = div f.p (sub f.p p2.y p1.y) (sub f.p p2.x p1.x) in 
-  let x3 = 
-    let l2 = pow f.p lambda 2 in 
-    let partial = sub f.p l2 p1.x in 
+  let lambda = div f.p (sub f.p p2.y p1.y) (sub f.p p2.x p1.x) in
+  let x3 =
+    let l2 = pow f.p lambda 2 in
+    let partial = sub f.p l2 p1.x in
     sub f.p partial p2.x
-  in 
-  let y3 = 
-    let diff = sub f.p p1.x x3 in 
-    let prod = mul f.p lambda diff in 
+  in
+  let y3 =
+    let diff = sub f.p p1.x x3 in
+    let prod = mul f.p lambda diff in
     sub f.p prod p1.y
-  in 
+  in
   Point {x = x3; y = y3}
 
-(* Doubles a point by adding it to itself, 
+(* Doubles a point by adding it to itself,
   using the tangent line to the curve *)
 let double f p =
-  match p with 
+  match p with
   | PointAtInfinty -> PointAtInfinty
   | Point p ->
-  let lambda = 
+  let lambda =
     let numerator =
-      let t1 = 
-        let scalar = mul f.p (3 |> Z.of_int) f.a in 
-        let x_sqrd = pow f.p p.x 2 in 
+      let t1 =
+        let scalar = mul f.p (3 |> Z.of_int) f.a in
+        let x_sqrd = pow f.p p.x 2 in
         mul f.p x_sqrd scalar in
-      let t2 = 
-        let scalar = mul f.p (2 |> Z.of_int) f.b in 
-        mul f.p scalar p.x in 
-      let partial = add f.p t1 t2 in 
-      add f.p partial f.c in 
+      let t2 =
+        let scalar = mul f.p (2 |> Z.of_int) f.b in
+        mul f.p scalar p.x in
+      let partial = add f.p t1 t2 in
+      add f.p partial f.c in
     div f.p numerator (mul f.p p.y (2 |> Z.of_int))
-  in 
-  let x2 = sub f.p (pow f.p lambda 2) (mul f.p (2 |> Z.of_int) p.x) in 
-  let y2 = 
-    let diff = sub f.p p.x x2 in 
-    let prod = mul f.p lambda diff in 
+  in
+  let x2 = sub f.p (pow f.p lambda 2) (mul f.p (2 |> Z.of_int) p.x) in
+  let y2 =
+    let diff = sub f.p p.x x2 in
+    let prod = mul f.p lambda diff in
     sub f.p prod p.y
-  in 
+  in
   Point {x = x2 ; y = y2}
 
 (* Doubles a point p on f n times, aka multiplies p by 2^n *)
 let power_of_two f p n =
-  let rec tail_pow_two (k : int) (acc : point) : point = 
+  let rec tail_pow_two (k : int) (acc : point) : point =
     if k = 0 then acc else
       tail_pow_two (Int.sub k 1) (double f acc)
     in
@@ -112,22 +110,22 @@ let power_of_two f p n =
 let points_on f =
   let rec tail_points_find (points : point list) (x : Z.t) : (point list * Z.t) =
     if x >= f.p then (points, x) else
-      let w = ((f.a * (Z.pow x 3)) + (f.b * (Z.pow x 2)) + (f.c * x) + f.d ) % f.p in 
+      let w = ((f.a * (Z.pow x 3)) + (f.b * (Z.pow x 2)) + (f.c * x) + f.d ) % f.p in
       (** Check if w is perfect square *)
-      if Z.perfect_square w then 
-        let y = w |> Z.sqrt in 
+      if Z.perfect_square w then
+        let y = w |> Z.sqrt in
           tail_points_find ( Point { x = x ; y = y } :: Point { x = x ; y = -y } :: points ) (x + Z.one)
-      else tail_points_find points (x + Z.one) 
+      else tail_points_find points (x + Z.one)
     in
   tail_points_find [] Z.zero
 
-let get_x_coord p = 
-  match p with 
+let get_x_coord p =
+  match p with
   | PointAtInfinty -> Z.minus_one
   | Point po -> po.x
 
-let get_y_coord p = 
-  match p with 
+let get_y_coord p =
+  match p with
   | PointAtInfinty -> Z.minus_one
   | Point po -> po.y
 
@@ -136,18 +134,18 @@ let get_y_coord p =
 let add_points f p1 p2 =
   if p1 = p2 then double f p1 else
     simple_add f p1 p2
-  
-(* let rec multiply_point f n p = 
-  if n = Z.one then p else 
+
+(* let rec multiply_point f n p =
+  if n = Z.one then p else
     if n = (2 |> Z.of_int) then double f p else
       p |> multiply_point f (n - Z.one) |> add_points f p  *)
 
 let better_multiply_point f n p =
   let rec tail_mul n place acc =
     if n = Z.zero then PointAtInfinty else
-    if Z.is_odd n then tail_mul (Z.shift_right n 1) (Int.add place 1) 
+    if Z.is_odd n then tail_mul (Z.shift_right n 1) (Int.add place 1)
       (add_points f acc (power_of_two f p place))
-    else 
+    else
       tail_mul (Z.shift_right n 1) (Int.add place 1) (acc)
     in
   tail_mul n 0 PointAtInfinty
@@ -155,26 +153,26 @@ let better_multiply_point f n p =
 let multiply_point = better_multiply_point
 
 let create_field (parameters : Z.t list) : field =
-  match parameters with 
+  match parameters with
   | [p ; a ; b ; c ; d ; gx ; gy ; n ; h] ->
-    { 
-      p = p; 
-      a = a; 
-      b = b; 
+    {
+      p = p;
+      a = a;
+      b = b;
       c = c;
-      d = d; 
-      g = 
+      d = d;
+      g =
       Point {
         x = gx ;
         y = gy;
-      }; 
-      n = n; 
-      h = h; 
-    } 
+      };
+      n = n;
+      h = h;
+    }
   | _ -> raise InvalidParameters
 
 let deconstruct_field f =
-  let (x, y) = match f.g with 
+  let (x, y) = match f.g with
   | PointAtInfinty -> (Z.minus_one, Z.minus_one)
   | Point p -> (p.x, p.y) in
   [ f.p ; f.a ; f.b ; f.c ; f.d ; x ; y ; f.n ; f.h ]
@@ -184,15 +182,15 @@ let get_modulus f = f.p
 let get_starting_point f = f.g
 
 let make_point (p : Z.t * Z.t) =
-  match p with 
+  match p with
   | (x, y) -> Point {x = x ; y = y}
 
-let make_int_point (p : int * int) = 
-  match p with 
+let make_int_point (p : int * int) =
+  match p with
   | (x, y) -> make_point (Z.of_int x, Z.of_int y)
 
-let string_of_point p = 
-  match p with 
+let string_of_point p =
+  match p with
   | PointAtInfinty -> "Inf"
   | Point p -> (p.x |> Z.to_string) ^ " " ^ (p.y |> Z.to_string)
 
@@ -201,5 +199,5 @@ let string_of_field f =
     match params with
     | [] -> ""
     | h :: t -> (h |> Z.to_string) ^ (construct_str t)
-  in 
+  in
   f |> deconstruct_field |> construct_str
