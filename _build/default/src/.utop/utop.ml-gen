@@ -34,6 +34,7 @@ Clflags.include_dirs :=
   ; "/Users/heewonahn/.opam/cs3110-2021fa/lib/trie"
   ; "/Users/heewonahn/.opam/cs3110-2021fa/lib/utop"
   ; "/Users/heewonahn/.opam/cs3110-2021fa/lib/yojson"
+  ; "/Users/heewonahn/.opam/cs3110-2021fa/lib/zarith"
   ; "/Users/heewonahn/.opam/cs3110-2021fa/lib/zed"
   ; "/Users/heewonahn/Documents/GitHub/cs3110-sectool/_build/default/src/.sectool.objs/byte"
   ];

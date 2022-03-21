@@ -89,7 +89,8 @@ let ecc_tests = [
 
   same_secret_test "Simple Curve 1 and 2" simple_curve Z.one (2 |> Z.of_int) ;
   same_secret_test "25519 1 and 2" curve25519 Z.one (2 |> Z.of_int) ;
-
+  same_secret_test "25519 0xfe22332 and 0xeefa9" curve25519 ("fe22332" |> Z.of_string_base 16) ("eefa9" |> Z.of_string_base 16) ;
+  
   add_test "(1, 6) + (4, 6)" example_curve (make_int_point (1, 6)) (make_int_point (4, 6)) (make_int_point (8, 7));
   double_test "2 * (1, 6)" example_curve (make_int_point (1, 6)) (make_int_point (10, 1));
 

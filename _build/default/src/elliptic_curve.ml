@@ -5,10 +5,7 @@ An elliptic curve is a curve of the form
 y^2 = ax^3 + bx^2 + cx + d
 *)
 
-type point = {
-  x : Z.t ;
-  y : Z.t ;
-}
+type point = Point of { x : Z.t ; y : Z.t } | PointAtInfinty
 
 type field = {
   p : Z.t ; (* The size of the field *)
@@ -56,7 +53,13 @@ let pow m b p =
 
 
 (* Adds two points using standard calculation, no tricks used *)
-let simple_add f p1 p2 = 
+let simple_add f p1 p2 =
+  match p1 with 
+  | PointAtInfinty -> p2
+  | Point p1 -> 
+    match p2 with
+    | PointAtInfinty -> Point p1
+    | Point p2 ->
   let lambda = div f.p (sub f.p p2.y p1.y) (sub f.p p2.x p1.x) in 
   let x3 = 
     let l2 = pow f.p lambda 2 in 
@@ -68,12 +71,14 @@ let simple_add f p1 p2 =
     let prod = mul f.p lambda diff in 
     sub f.p prod p1.y
   in 
-  {x = x3; y = y3}
+  Point {x = x3; y = y3}
 
 (* Doubles a point by adding it to itself, 
   using the tangent line to the curve *)
 let double f p =
-  if p.y = Z.zero then p else
+  match p with 
+  | PointAtInfinty -> PointAtInfinty
+  | Point p ->
   let lambda = 
     let numerator =
       let t1 = 
@@ -93,16 +98,13 @@ let double f p =
     let prod = mul f.p lambda diff in 
     sub f.p prod p.y
   in 
-  {x = x2 ; y = y2}
+  Point {x = x2 ; y = y2}
 
-(* Doubles a point p on f n times *)
+(* Doubles a point p on f n times, aka multiplies p by 2^n *)
 let power_of_two f p n =
   let rec tail_pow_two (k : int) (acc : point) : point = 
-    if k = 0 then acc else 
-      let thing = ((k |> Z.of_int) - Z.one) |> Z.to_int in 
-      (* I know this looks super wacky, but I couldn't get it to compile
-      otherwise because of how OCaml was doing its type inference *)
-      tail_pow_two thing (double f acc)
+    if k = 0 then acc else
+      tail_pow_two (Int.sub k 1) (double f acc)
     in
   tail_pow_two n p
 
@@ -114,19 +116,20 @@ let points_on f =
       (** Check if w is perfect square *)
       if Z.perfect_square w then 
         let y = w |> Z.sqrt in 
-          tail_points_find ( { x = x ; y = y } :: { x = x ; y = -y } :: points ) (x + Z.one)
+          tail_points_find ( Point { x = x ; y = y } :: Point { x = x ; y = -y } :: points ) (x + Z.one)
       else tail_points_find points (x + Z.one) 
     in
   tail_points_find [] Z.zero
 
-(* Negates a point *)
-let negate p = 
-  { p with y = -p.y }
+let get_x_coord p = 
+  match p with 
+  | PointAtInfinty -> Z.minus_one
+  | Point po -> po.x
 
-let inverse p = { p with y = -p.y }
-
-let get_x_coord p = p.x
-let get_y_coord p = p.y
+let get_y_coord p = 
+  match p with 
+  | PointAtInfinty -> Z.minus_one
+  | Point po -> po.y
 
 (** EXPOSED **)
 
@@ -139,6 +142,18 @@ let rec multiply_point f n p =
     if n = (2 |> Z.of_int) then double f p else
       p |> multiply_point f (n - Z.one) |> add_points f p 
 
+(* let better_multiply_point f n p =
+  let rec tail_mul n place acc =
+    if n = Z.one then acc else
+    if Z.is_odd n then tail_mul (Z.shift_right n 1) (Int.add place 1) 
+      (add_points f acc (power_of_two f p place))
+    else 
+      tail_mul (Z.shift_right n 1) (Int.add place 1) (acc)
+    in
+  tail_mul n 0 PointAtInfinty *)
+
+(* let multiply_point = better_multiply_point *)
+
 let create_field (parameters : Z.t list) : field =
   match parameters with 
   | [p ; a ; b ; c ; d ; gx ; gy ; n ; h] ->
@@ -149,7 +164,7 @@ let create_field (parameters : Z.t list) : field =
       c = c;
       d = d; 
       g = 
-      {
+      Point {
         x = gx ;
         y = gy;
       }; 
@@ -159,7 +174,10 @@ let create_field (parameters : Z.t list) : field =
   | _ -> raise InvalidParameters
 
 let deconstruct_field f =
-  [ f.p ; f.a ; f.b ; f.c ; f.d ; f.g.x ; f.g.y ; f.n ; f.h ]
+  let (x, y) = match f.g with 
+  | PointAtInfinty -> (Z.minus_one, Z.minus_one)
+  | Point p -> (p.x, p.y) in
+  [ f.p ; f.a ; f.b ; f.c ; f.d ; x ; y ; f.n ; f.h ]
 
 let get_modulus f = f.p
 
@@ -167,13 +185,16 @@ let get_starting_point f = f.g
 
 let make_point (p : Z.t * Z.t) =
   match p with 
-  | (x, y) -> {x = x ; y = y}
+  | (x, y) -> Point {x = x ; y = y}
 
 let make_int_point (p : int * int) = 
   match p with 
   | (x, y) -> make_point (Z.of_int x, Z.of_int y)
 
-let string_of_point p = (p.x |> Z.to_string) ^ " " ^ (p.y |> Z.to_string)
+let string_of_point p = 
+  match p with 
+  | PointAtInfinty -> "Inf"
+  | Point p -> (p.x |> Z.to_string) ^ " " ^ (p.y |> Z.to_string)
 
 let string_of_field f =
   let rec construct_str params =
