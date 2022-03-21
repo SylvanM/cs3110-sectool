@@ -1,6 +1,6 @@
 open Z
 
-(* 
+(*
 An elliptic curve is a curve of the form
 y^2 = ax^3 + bx^2 + cx + d
 *)
@@ -26,27 +26,27 @@ exception InvalidParameters
 (** HIDDEN **)
 
 (* Adds two points using standard calculation, no tricks used *)
-let simple_add f p1 p2 = 
-  let lambda = (p2.y - p1.y) / (p2.x - p1.x) in 
-  let x3 = (((Z.pow lambda 2)) - p1.x - p2.x) mod f.p in 
-  let y3 = (lambda * (p1.x - x3) - p1.y) mod f.p in 
+let simple_add f p1 p2 =
+  let lambda = (p2.y - p1.y) / (p2.x - p1.x) in
+  let x3 = (((Z.pow lambda 2)) - p1.x - p2.x) mod f.p in
+  let y3 = (lambda * (p1.x - x3) - p1.y) mod f.p in
   {x = x3; y = y3}
 
-(* Doubles a point by adding it to itself, 
+(* Doubles a point by adding it to itself,
   using the tangent line to the curve *)
 let double f p =
   if p.y = Z.zero then p else
-  let lambda = ((3 |> Z.of_int) * (Z.pow p.x 2) + f.c) 
-    / ((2 |> Z.of_int) * p.y) in 
-  let x2 = (Z.pow lambda 2) - (2 |> Z.of_int) * p.x in 
-  let y2 = lambda * (p.x - x2) - p.y in 
+  let lambda = ((3 |> Z.of_int) * (Z.pow p.x 2) + f.c)
+    / ((2 |> Z.of_int) * p.y) in
+  let x2 = (Z.pow lambda 2) - (2 |> Z.of_int) * p.x in
+  let y2 = lambda * (p.x - x2) - p.y in
   {x = x2 ; y = y2}
 
 (* Doubles a point p on f n times *)
 let power_of_two f p n =
-  let rec tail_pow_two (k : int) (acc : point) : point = 
-    if k = 0 then acc else 
-      let thing = ((k |> Z.of_int) - Z.one) |> Z.to_int in 
+  let rec tail_pow_two (k : int) (acc : point) : point =
+    if k = 0 then acc else
+      let thing = ((k |> Z.of_int) - Z.one) |> Z.to_int in
       (* I know this looks super wacky, but I couldn't get it to compile
       otherwise because of how OCaml was doing its type inference *)
       tail_pow_two thing (double f acc)
@@ -57,17 +57,17 @@ let power_of_two f p n =
 let points_on f =
   let rec tail_points_find (points : point list) (x : Z.t) : (point list * Z.t) =
     if x >= f.p then (points, x) else
-      let w = Z.(mod) ((f.a * (Z.pow x 3)) + (f.b * (Z.pow x 2)) + (f.c * x) + f.d ) f.p in 
+      let w = Z.(mod) ((f.a * (Z.pow x 3)) + (f.b * (Z.pow x 2)) + (f.c * x) + f.d ) f.p in
       (** Check if w is perfect square *)
-      if Z.perfect_square w then 
-        let y = w |> Z.sqrt in 
+      if Z.perfect_square w then
+        let y = w |> Z.sqrt in
           tail_points_find ( { x = x ; y = y } :: { x = x ; y = -y } :: points ) (x + Z.one)
-      else tail_points_find points (x + Z.one) 
+      else tail_points_find points (x + Z.one)
     in
   tail_points_find [] Z.zero
 
 (* Negates a point *)
-let negate p = 
+let negate p =
   { p with y = -p.y }
 
 let inverse p = { p with y = -p.y }
@@ -80,36 +80,36 @@ let get_y_coord p = p.y
 let add_points f p1 p2 =
   if p1 = p2 then double f p1 else
     simple_add f p1 p2
-  
-let multiply_point f n p = 
-  let rec tail_multiply (n : Z.t) (acc : point) (place : Z.t) : point = 
+
+let multiply_point f n p =
+  let rec tail_multiply (n : Z.t) (acc : point) (place : Z.t) : point =
     if n = Z.zero then acc else
     if n = Z.one then p else if n = (2 |> Z.of_int) then double f p else
-      if Z.is_odd n then tail_multiply (Z.shift_left n 1) (add_points f acc p) 
-        (place + Z.one) else 
+      if Z.is_odd n then tail_multiply (Z.shift_left n 1) (add_points f acc p)
+        (place + Z.one) else
         tail_multiply (Z.shift_left n 1) (acc) (place +  Z.one)
     in
-    
+
   tail_multiply n p Z.zero
 
 let create_field (parameters : Z.t list) : field =
-  match parameters with 
+  match parameters with
   | [p ; a ; b ; c ; d ; gx ; gy ; n ; h] ->
-    { 
-      p = p; 
-      a = a; 
-      b = b; 
+    {
+      p = p;
+      a = a;
+      b = b;
       c = c;
-      d = d; 
-      g = 
+      d = d;
+      g =
       {
         x = gx ;
         y = gy;
-      }; 
-      n = n; 
-      h = h; 
-    } 
-    
+      };
+      n = n;
+      h = h;
+    }
+
   | _ -> raise InvalidParameters
 
 let deconstruct_field f =
@@ -120,14 +120,12 @@ let get_modulus f = f.p
 let get_starting_point f = f.g
 
 let make_point (p : Z.t * Z.t) =
-  match p with 
+  match p with
   | (x, y) -> {x = x ; y = y}
 
-let make_int_point (p : int * int) = 
-  match p with 
+let make_int_point (p : int * int) =
+  match p with
   | (x, y) -> make_point (Z.of_int x, Z.of_int y)
-
-
 
 let string_of_point p = (p.x |> Z.to_string) ^ " " ^ (p.y |> Z.to_string)
 
@@ -136,5 +134,5 @@ let string_of_field f =
     match params with
     | [] -> ""
     | h :: t -> (h |> Z.to_string) ^ (construct_str t)
-  in 
+  in
   f |> deconstruct_field |> construct_str

@@ -9,18 +9,18 @@ type point
 exception InvalidParameters
 (** Raised when an invalid list of parameters is given for field construction *)
 
-(** [add_points] adds p1 and p2 in field f. Requires: [f] *)
 val add_points : field -> point -> point -> point
+(** [add_points] adds p1 and p2 in field f. Requires: [f] *)
 
-(** [multiply_point] adds a point with itself n times *)
 val multiply_point : field -> Z.t -> point -> point
+(** [multiply_point] adds a point with itself n times *)
 
 val create_field : Z.t list -> field
-(** [create_point [[p; a; b; c; d; g; n; h]]] creates an finite field for the 
+(** [create_point [[p; a; b; c; d; g; n; h]]] creates an finite field for the
 	elliptic curve defined by y^2 = ax^3 + bx^2 + cx + d *)
 
 val deconstruct_field : field -> Z.t list
-(** [deconstruct_field f] returns the list of integers used 
+(** [deconstruct_field f] returns the list of integers used
 to create the field f *)
 
 val get_modulus : field -> Z.t
