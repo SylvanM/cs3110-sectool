@@ -50,8 +50,6 @@ let pow m b p =
 
 (** HIDDEN **)
 
-
-
 (* Adds two points using standard calculation, no tricks used *)
 let simple_add f p1 p2 =
   match p1 with 
@@ -98,7 +96,7 @@ let double f p =
     let prod = mul f.p lambda diff in 
     sub f.p prod p.y
   in 
-  Point {x = x2 ; y = y2}
+  Point { x = x2 ; y = y2 }
 
 (* Doubles a point p on f n times, aka multiplies p by 2^n *)
 let power_of_two f p n =
@@ -144,7 +142,7 @@ let rec multiply_point f n p =
 
 (* let better_multiply_point f n p =
   let rec tail_mul n place acc =
-    if n = Z.one then acc else
+    if n = Z.zero then acc else
     if Z.is_odd n then tail_mul (Z.shift_right n 1) (Int.add place 1) 
       (add_points f acc (power_of_two f p place))
     else 
@@ -200,6 +198,6 @@ let string_of_field f =
   let rec construct_str params =
     match params with
     | [] -> ""
-    | h :: t -> (h |> Z.to_string) ^ (construct_str t)
+    | h :: t -> (h |> Z.to_string) ^ " " ^ (construct_str t)
   in 
   f |> deconstruct_field |> construct_str
