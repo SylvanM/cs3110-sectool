@@ -198,6 +198,6 @@ let string_of_field f =
   let rec construct_str params =
     match params with
     | [] -> ""
-    | h :: t -> (h |> Z.to_string) ^ (construct_str t)
+    | h :: t -> (h |> Z.to_string) ^ " " ^ (construct_str t)
   in
   f |> deconstruct_field |> construct_str
