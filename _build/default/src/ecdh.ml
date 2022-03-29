@@ -7,7 +7,7 @@ let generate_private_key bit_size =
       ( Z.add acc ((Z.shift_left (Random.bits () |> Z.of_int) (Int.mul i 30))) )
     in
 
-  bit_size |> Z.of_int |> Z.(mod) (construct_random_integer 0 bit_size Z.zero)
+  construct_random_integer 0 bit_size Z.zero
 
 let compute_public_key (d : Z.t) =
   d * base
