@@ -1,56 +1,55 @@
-# dune utop src
+# dune exec bin/main.exe
 # OCAMLPARAM: unset
-# Workspace root: "/Users/sylvanm/Documents/School/Freshman Year/Spring/CS
-# 3110/Final Project/cs3110-sectool"
-$ /usr/bin/getconf _NPROCESSORS_ONLN > /var/folders/07/v6k_zhd55lvcvrqr6qz39lsw0000gn/T/dune47a925.output 2> /dev/null
-# Auto-detected concurrency: 10
-# disable binary cache
-$ /Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/07/v6k_zhd55lvcvrqr6qz39lsw0000gn/T/dunef2d4ed.output
+# Shared cache: disabled
+# Workspace root: /Users/heewonahn/Documents/GitHub/cs3110-sectool
+# Auto-detected concurrency: 8
+$ /Users/heewonahn/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/r0/v3n9h_kn1zzfy112f53bk5qw0000gn/T/dune_d36ff6_output
 # Dune context:
 #  { name = "default"
 #  ; kind = "default"
-#  ; profile = Dyn
+#  ; profile = Dev
 #  ; merlin = true
 #  ; for_host = None
 #  ; fdo_target_exe = None
 #  ; build_dir = "default"
 #  ; toplevel_path =
-#      Some External "/Users/sylvanm/.opam/cs3110-2021fa/lib/toplevel"
-#  ; ocaml_bin = External "/Users/sylvanm/.opam/cs3110-2021fa/bin"
-#  ; ocaml = Ok External "/Users/sylvanm/.opam/cs3110-2021fa/bin/ocaml"
-#  ; ocamlc = External "/Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlc.opt"
+#      Some External "/Users/heewonahn/.opam/cs3110-2021fa/lib/toplevel"
+#  ; ocaml_bin = External "/Users/heewonahn/.opam/cs3110-2021fa/bin"
+#  ; ocaml = Ok External "/Users/heewonahn/.opam/cs3110-2021fa/bin/ocaml"
+#  ; ocamlc = External "/Users/heewonahn/.opam/cs3110-2021fa/bin/ocamlc.opt"
 #  ; ocamlopt =
-#      Ok External "/Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlopt.opt"
+#      Ok External "/Users/heewonahn/.opam/cs3110-2021fa/bin/ocamlopt.opt"
 #  ; ocamldep =
-#      Ok External "/Users/sylvanm/.opam/cs3110-2021fa/bin/ocamldep.opt"
+#      Ok External "/Users/heewonahn/.opam/cs3110-2021fa/bin/ocamldep.opt"
 #  ; ocamlmklib =
-#      Ok External "/Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlmklib.opt"
+#      Ok External "/Users/heewonahn/.opam/cs3110-2021fa/bin/ocamlmklib.opt"
 #  ; env =
 #      map
-#        { "DUNE_OCAML_HARDCODED" : "/Users/sylvanm/.opam/cs3110-2021fa/lib"
-#        ; "DUNE_OCAML_STDLIB" : "/Users/sylvanm/.opam/cs3110-2021fa/lib/ocaml"
+#        { "DUNE_OCAML_HARDCODED" : "/Users/heewonahn/.opam/cs3110-2021fa/lib"
+#        ; "DUNE_OCAML_STDLIB" :
+#            "/Users/heewonahn/.opam/cs3110-2021fa/lib/ocaml"
 #        ; "DUNE_SOURCEROOT" :
-#            "/Users/sylvanm/Documents/School/Freshman Year/Spring/CS 3110/Final Project/cs3110-sectool"
+#            "/Users/heewonahn/Documents/GitHub/cs3110-sectool"
 #        ; "INSIDE_DUNE" :
-#            "/Users/sylvanm/Documents/School/Freshman Year/Spring/CS 3110/Final Project/cs3110-sectool/_build/default"
+#            "/Users/heewonahn/Documents/GitHub/cs3110-sectool/_build/default"
 #        ; "OCAMLFIND_IGNORE_DUPS_IN" :
-#            "/Users/sylvanm/Documents/School/Freshman Year/Spring/CS 3110/Final Project/cs3110-sectool/_build/install/default/lib"
+#            "/Users/heewonahn/Documents/GitHub/cs3110-sectool/_build/install/default/lib"
 #        ; "OCAMLPATH" :
-#            "/Users/sylvanm/Documents/School/Freshman Year/Spring/CS 3110/Final Project/cs3110-sectool/_build/install/default/lib"
+#            "/Users/heewonahn/Documents/GitHub/cs3110-sectool/_build/install/default/lib"
 #        ; "OCAMLTOP_INCLUDE_PATH" :
-#            "/Users/sylvanm/Documents/School/Freshman Year/Spring/CS 3110/Final Project/cs3110-sectool/_build/install/default/lib/toplevel"
+#            "/Users/heewonahn/Documents/GitHub/cs3110-sectool/_build/install/default/lib/toplevel"
 #        ; "OCAML_COLOR" : "always"
 #        ; "OPAMCOLOR" : "always"
 #        }
-#  ; findlib_path = [ External "/Users/sylvanm/.opam/cs3110-2021fa/lib" ]
+#  ; findlib_path = [ External "/Users/heewonahn/.opam/cs3110-2021fa/lib" ]
 #  ; arch_sixtyfour = true
 #  ; natdynlink_supported = true
 #  ; supports_shared_libraries = true
 #  ; ocaml_config =
 #      { version = "4.12.0"
 #      ; standard_library_default =
-#          "/Users/sylvanm/.opam/cs3110-2021fa/lib/ocaml"
-#      ; standard_library = "/Users/sylvanm/.opam/cs3110-2021fa/lib/ocaml"
+#          "/Users/heewonahn/.opam/cs3110-2021fa/lib/ocaml"
+#      ; standard_library = "/Users/heewonahn/.opam/cs3110-2021fa/lib/ocaml"
 #      ; standard_runtime = "the_standard_runtime_variable_was_deleted"
 #      ; ccomp_type = "cc"
 #      ; c_compiler = "cc"
@@ -76,6 +75,7 @@ $ /Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/07/v6
 #          ; "-D_REENTRANT"
 #          ]
 #      ; native_c_libraries = [ "-lm" ]
+#      ; native_pack_linker = [ "ld"; "-r"; "-o" ]
 #      ; cc_profile = []
 #      ; architecture = "arm64"
 #      ; model = "default"
@@ -93,8 +93,8 @@ $ /Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/07/v6
 #      ; os_type = "Unix"
 #      ; default_executable_name = "a.out"
 #      ; systhread_supported = true
-#      ; host = "aarch64-apple-darwin21.2.0"
-#      ; target = "aarch64-apple-darwin21.2.0"
+#      ; host = "aarch64-apple-darwin20.5.0"
+#      ; target = "aarch64-apple-darwin20.5.0"
 #      ; profiling = false
 #      ; flambda = false
 #      ; spacetime = false
@@ -114,5 +114,3 @@ $ /Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/07/v6
 #      ; windows_unicode = false
 #      }
 #  }
-$ (cd _build/default && /Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -w -24 -g -bin-annot -I src/.utop/.utop.eobjs/byte -I /Users/sylvanm/.opam/cs3110-2021fa/lib/base -I /Users/sylvanm/.opam/cs3110-2021fa/lib/base/base_internalhash_types -I /Users/sylvanm/.opam/cs3110-2021fa/lib/base/caml -I /Users/sylvanm/.opam/cs3110-2021fa/lib/base/shadow_stdlib -I /Users/sylvanm/.opam/cs3110-2021fa/lib/biniou -I /Users/sylvanm/.opam/cs3110-2021fa/lib/bytes -I /Users/sylvanm/.opam/cs3110-2021fa/lib/camomile -I /Users/sylvanm/.opam/cs3110-2021fa/lib/camomile/default_config -I /Users/sylvanm/.opam/cs3110-2021fa/lib/camomile/dyn -I /Users/sylvanm/.opam/cs3110-2021fa/lib/camomile/lib_default -I /Users/sylvanm/.opam/cs3110-2021fa/lib/camomile/library -I /Users/sylvanm/.opam/cs3110-2021fa/lib/charInfo_width -I /Users/sylvanm/.opam/cs3110-2021fa/lib/easy-format -I /Users/sylvanm/.opam/cs3110-2021fa/lib/findlib -I /Users/sylvanm/.opam/cs3110-2021fa/lib/lambda-term -I /Users/sylvanm/.opam/cs3110-2021fa/lib/lwt -I /Users/sylvanm/.opam/cs3110-2021fa/lib/lwt/unix -I /Users/sylvanm/.opam/cs3110-2021fa/lib/lwt_log -I /Users/sylvanm/.opam/cs3110-2021fa/lib/lwt_log/core -I /Users/sylvanm/.opam/cs3110-2021fa/lib/lwt_react -I /Users/sylvanm/.opam/cs3110-2021fa/lib/mew -I /Users/sylvanm/.opam/cs3110-2021fa/lib/mew_vi -I /Users/sylvanm/.opam/cs3110-2021fa/lib/mmap -I /Users/sylvanm/.opam/cs3110-2021fa/lib/ocaml/compiler-libs -I /Users/sylvanm/.opam/cs3110-2021fa/lib/ocaml/threads -I /Users/sylvanm/.opam/cs3110-2021fa/lib/ocplib-endian -I /Users/sylvanm/.opam/cs3110-2021fa/lib/ocplib-endian/bigstring -I /Users/sylvanm/.opam/cs3110-2021fa/lib/react -I /Users/sylvanm/.opam/cs3110-2021fa/lib/result -I /Users/sylvanm/.opam/cs3110-2021fa/lib/seq -I /Users/sylvanm/.opam/cs3110-2021fa/lib/sexplib0 -I /Users/sylvanm/.opam/cs3110-2021fa/lib/stdio -I /Users/sylvanm/.opam/cs3110-2021fa/lib/trie -I /Users/sylvanm/.opam/cs3110-2021fa/lib/utop -I /Users/sylvanm/.opam/cs3110-2021fa/lib/yojson -I /Users/sylvanm/.opam/cs3110-2021fa/lib/zarith -I /Users/sylvanm/.opam/cs3110-2021fa/lib/zed -I src/.sectool.objs/byte -no-alias-deps -o src/.utop/.utop.eobjs/byte/dune__exe__Utop.cmo -c -impl src/.utop/utop.ml-gen)
-$ (cd _build/default && /Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -w -24 -g -o src/.utop/utop.exe -output-complete-exe /Users/sylvanm/.opam/cs3110-2021fa/lib/ocaml/compiler-libs/ocamlcommon.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/ocaml/compiler-libs/ocamlbytecomp.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/ocaml/compiler-libs/ocamltoplevel.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/findlib/findlib.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/findlib/findlib_top.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/result/result.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/lwt/lwt.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/ocaml/unix.cma -I /Users/sylvanm/.opam/cs3110-2021fa/lib/ocaml /Users/sylvanm/.opam/cs3110-2021fa/lib/ocaml/bigarray.cma -I /Users/sylvanm/.opam/cs3110-2021fa/lib/ocaml /Users/sylvanm/.opam/cs3110-2021fa/lib/mmap/mmap.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/ocplib-endian/ocplib_endian.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/ocplib-endian/bigstring/ocplib_endian_bigstring.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/ocaml/threads/threads.cma -I /Users/sylvanm/.opam/cs3110-2021fa/lib/ocaml /Users/sylvanm/.opam/cs3110-2021fa/lib/lwt/unix/lwt_unix.cma -I /Users/sylvanm/.opam/cs3110-2021fa/lib/lwt/unix /Users/sylvanm/.opam/cs3110-2021fa/lib/react/react.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/lwt_react/lwt_react.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/camomile/default_config/camomileDefaultConfig.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/camomile/library/camomileLibrary.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/camomile/lib_default/camomileLibraryDefault.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/camomile/dyn/camomileLibraryDyn.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/camomile/camomile_yuge.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/charInfo_width/charInfo_width.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/zed/zed.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/lwt_log/core/lwt_log_core.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/lwt_log/lwt_log.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/trie/trie.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/mew/mew.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/mew_vi/mew_vi.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/lambda-term/lambda_term.cma -I /Users/sylvanm/.opam/cs3110-2021fa/lib/lambda-term /Users/sylvanm/.opam/cs3110-2021fa/lib/utop/uTop.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/easy-format/easy_format.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/biniou/biniou.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/yojson/yojson.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/base/base_internalhash_types/base_internalhash_types.cma -I /Users/sylvanm/.opam/cs3110-2021fa/lib/base/base_internalhash_types /Users/sylvanm/.opam/cs3110-2021fa/lib/base/caml/caml.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/sexplib0/sexplib0.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/base/shadow_stdlib/shadow_stdlib.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/base/base.cma -I /Users/sylvanm/.opam/cs3110-2021fa/lib/base /Users/sylvanm/.opam/cs3110-2021fa/lib/stdio/stdio.cma /Users/sylvanm/.opam/cs3110-2021fa/lib/zarith/zarith.cma -I /Users/sylvanm/.opam/cs3110-2021fa/lib/zarith src/sectool.cma src/.utop/.utop.eobjs/byte/dune__exe__Utop.cmo -linkall -warn-error -31)
