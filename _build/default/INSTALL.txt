@@ -1,5 +1,0 @@
-Install Instructions
-
-1. Check that you have the required libraries <Zarith> and <Stdio> installed.
-
-2.

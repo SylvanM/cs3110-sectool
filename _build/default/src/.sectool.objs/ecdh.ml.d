@@ -1,1 +1,1 @@
-src/ecdh.ml: Elliptic_curve Random Z
+src/ecdh.ml: ED25519 Int Random Z
