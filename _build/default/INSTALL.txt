@@ -1,5 +1,18 @@
 Install Instructions
 
-1. Check that you have the required libraries <Zarith> and <Stdio> installed.
+1. Check that you have the libraries [Zarith] and [Stdio] installed.
+    If absent, these libraries can be installed using
+    [opam install zarith] and [opam install stdio] respectively.
 
-2.
+2. Since this sprint was focused on the underlying mathematics of Elliptic
+    Curve Cryptography rather than the command line interface, we will use
+    utop to demonstrate our work. First, run [make utop].
+
+3. Then, open the necessary modules in order to tidy up namespace usage:
+
+    open Sectool;;
+    open Elliptic_curve;;
+    open Ecdh;;
+    open File_wizard;;
+
+4. You should now be able to access all the functionality of MS1.

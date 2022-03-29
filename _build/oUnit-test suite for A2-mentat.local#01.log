@@ -1,46 +1,18 @@
-2022-03-21T05:39:01+00:00 mentat.local#01 I: Start test test suite for A2:0:Simple Secrets.
-2022-03-21T05:39:01+00:00 mentat.local#01 I: Test test suite for A2:0:Simple Secrets is successful.
-2022-03-21T05:39:01+00:00 mentat.local#01 I: End test test suite for A2:0:Simple Secrets.
-2022-03-21T05:39:01+00:00 mentat.local#01 I: Start test test suite for A2:2:2 * (1, 6).
-2022-03-21T05:39:01+00:00 mentat.local#01 E: Test test suite for A2:2:2 * (1, 6) has failed.
-2022-03-21T05:39:01+00:00 mentat.local#01 E: expected: 10 1 but got: Inf in test test suite for A2:2:2 * (1, 6).
-2022-03-21T05:39:01+00:00 mentat.local#01 E: Raised at OUnitAssert.assert_failure in file "src/lib/ounit2/advanced/oUnitAssert.ml", line 45, characters 2-27
-2022-03-21T05:39:01+00:00 mentat.local#01 E: Called from OUnitRunner.run_one_test.(fun) in file "src/lib/ounit2/advanced/oUnitRunner.ml", line 83, characters 13-26
-2022-03-21T05:39:01+00:00 mentat.local#01 E: 
-2022-03-21T05:39:01+00:00 mentat.local#01 I: End test test suite for A2:2:2 * (1, 6).
-2022-03-21T05:39:02+00:00 mentat.local#01 I: Start test test suite for A2:4:Q + Q = 2Q on P-192.
-2022-03-21T05:39:02+00:00 mentat.local#01 E: Test test suite for A2:4:Q + Q = 2Q on P-192 has failed.
-2022-03-21T05:39:02+00:00 mentat.local#01 E: expected: 5369744403678710563432458361254544170966096384586764429448 5429234379789071039750654906915254128254326554272718558123
-2022-03-21T05:39:02+00:00 mentat.local#01 E: but got: Inf in test test suite for A2:4:Q + Q = 2Q on P-192.
-2022-03-21T05:39:02+00:00 mentat.local#01 E: Raised at OUnitAssert.assert_failure in file "src/lib/ounit2/advanced/oUnitAssert.ml", line 45, characters 2-27
-2022-03-21T05:39:02+00:00 mentat.local#01 E: Called from OUnitRunner.run_one_test.(fun) in file "src/lib/ounit2/advanced/oUnitRunner.ml", line 83, characters 13-26
-2022-03-21T05:39:02+00:00 mentat.local#01 E: 
-2022-03-21T05:39:02+00:00 mentat.local#01 I: End test test suite for A2:4:Q + Q = 2Q on P-192.
-2022-03-21T05:39:02+00:00 mentat.local#01 I: Start test test suite for A2:5:4P = P + P + P + P.
-2022-03-21T05:39:02+00:00 mentat.local#01 E: Test test suite for A2:5:4P = P + P + P + P has failed.
-2022-03-21T05:39:02+00:00 mentat.local#01 E: expected: 3898383958830990906753431052032088309024589625904663016765 5816785174924149929357957075041733543977896944858136660852
-2022-03-21T05:39:02+00:00 mentat.local#01 E: but got: Inf in test test suite for A2:5:4P = P + P + P + P.
-2022-03-21T05:39:02+00:00 mentat.local#01 E: Raised at OUnitAssert.assert_failure in file "src/lib/ounit2/advanced/oUnitAssert.ml", line 45, characters 2-27
-2022-03-21T05:39:02+00:00 mentat.local#01 E: Called from OUnitRunner.run_one_test.(fun) in file "src/lib/ounit2/advanced/oUnitRunner.ml", line 83, characters 13-26
-2022-03-21T05:39:02+00:00 mentat.local#01 E: 
-2022-03-21T05:39:02+00:00 mentat.local#01 I: End test test suite for A2:5:4P = P + P + P + P.
-2022-03-21T05:39:02+00:00 mentat.local#01 I: Start test test suite for A2:6:Simple Curve 1 and 2.
-2022-03-21T05:39:02+00:00 mentat.local#01 I: Test test suite for A2:6:Simple Curve 1 and 2 is successful.
-2022-03-21T05:39:02+00:00 mentat.local#01 I: End test test suite for A2:6:Simple Curve 1 and 2.
-2022-03-21T05:39:02+00:00 mentat.local#01 I: Start test test suite for A2:8:25519 0xfe22332 and 0xeefa9.
-2022-03-21T05:39:02+00:00 mentat.local#01 E: Test test suite for A2:8:25519 0xfe22332 and 0xeefa9 has failed.
-2022-03-21T05:39:02+00:00 mentat.local#01 E: expected: 29531028858439176381359680456673802633786872834794048205522444855028765417527 14760871956975586576438525548672501480574276687084920916363681981117364008996
-2022-03-21T05:39:02+00:00 mentat.local#01 E: but got: 53649564660873818188416287713724062449157446210344923678770524851058902401445 4743481261113012150947944062720269915941064077729881904385070456188235246209 in test test suite for A2:8:25519 0xfe22332 and 0xeefa9.
-2022-03-21T05:39:02+00:00 mentat.local#01 E: Raised at OUnitAssert.assert_failure in file "src/lib/ounit2/advanced/oUnitAssert.ml", line 45, characters 2-27
-2022-03-21T05:39:02+00:00 mentat.local#01 E: Called from OUnitRunner.run_one_test.(fun) in file "src/lib/ounit2/advanced/oUnitRunner.ml", line 83, characters 13-26
-2022-03-21T05:39:02+00:00 mentat.local#01 E: 
-2022-03-21T05:39:02+00:00 mentat.local#01 I: End test test suite for A2:8:25519 0xfe22332 and 0xeefa9.
-2022-03-21T05:39:02+00:00 mentat.local#01 I: Start test test suite for A2:9:(1, 6) + (4, 6).
-2022-03-21T05:39:02+00:00 mentat.local#01 I: Test test suite for A2:9:(1, 6) + (4, 6) is successful.
-2022-03-21T05:39:02+00:00 mentat.local#01 I: End test test suite for A2:9:(1, 6) + (4, 6).
-2022-03-21T05:39:02+00:00 mentat.local#01 I: Start test test suite for A2:12:test.
-2022-03-21T05:39:02+00:00 mentat.local#01 I: Test test suite for A2:12:test is successful.
-2022-03-21T05:39:02+00:00 mentat.local#01 I: End test test suite for A2:12:test.
-2022-03-21T05:39:02+00:00 mentat.local#01 I: Start test test suite for A2:13:test.
-2022-03-21T05:39:02+00:00 mentat.local#01 I: Test test suite for A2:13:test is successful.
-2022-03-21T05:39:02+00:00 mentat.local#01 I: End test test suite for A2:13:test.
+2022-03-27T15:45:52+00:00 mentat.local#01 I: Start test test suite for A2:0:Simple Secrets.
+2022-03-27T15:45:52+00:00 mentat.local#01 I: Test test suite for A2:0:Simple Secrets is successful.
+2022-03-27T15:45:52+00:00 mentat.local#01 I: End test test suite for A2:0:Simple Secrets.
+2022-03-27T15:45:52+00:00 mentat.local#01 I: Start test test suite for A2:2:2 * (1, 6).
+2022-03-27T15:45:52+00:00 mentat.local#01 I: Test test suite for A2:2:2 * (1, 6) is successful.
+2022-03-27T15:45:52+00:00 mentat.local#01 I: End test test suite for A2:2:2 * (1, 6).
+2022-03-27T15:45:52+00:00 mentat.local#01 I: Start test test suite for A2:6:Simple Curve 1 and 2.
+2022-03-27T15:45:52+00:00 mentat.local#01 I: Test test suite for A2:6:Simple Curve 1 and 2 is successful.
+2022-03-27T15:45:52+00:00 mentat.local#01 I: End test test suite for A2:6:Simple Curve 1 and 2.
+2022-03-27T15:45:52+00:00 mentat.local#01 I: Start test test suite for A2:7:25519 1 and 2.
+2022-03-27T15:45:52+00:00 mentat.local#01 I: Test test suite for A2:7:25519 1 and 2 is successful.
+2022-03-27T15:45:52+00:00 mentat.local#01 I: End test test suite for A2:7:25519 1 and 2.
+2022-03-27T15:45:52+00:00 mentat.local#01 I: Start test test suite for A2:10:2 * (1, 6).
+2022-03-27T15:45:52+00:00 mentat.local#01 I: Test test suite for A2:10:2 * (1, 6) is successful.
+2022-03-27T15:45:52+00:00 mentat.local#01 I: End test test suite for A2:10:2 * (1, 6).
+2022-03-27T15:45:52+00:00 mentat.local#01 I: Start test test suite for A2:12:test.
+2022-03-27T15:45:52+00:00 mentat.local#01 I: Test test suite for A2:12:test is successful.
+2022-03-27T15:45:52+00:00 mentat.local#01 I: End test test suite for A2:12:test.
