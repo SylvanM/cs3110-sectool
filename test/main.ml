@@ -31,7 +31,8 @@ let same_secret_test name d1 d2 =
 
 let ecc_tests = [
 
-  same_secret_test "Basic key test" (234 |> Z.of_int) (75463 |> Z.of_int)
+  same_secret_test "Basic key test" (234 |> Z.of_int) (75463 |> Z.of_int) ;
+  same_secret_test "Bigger key test" (324624323462 |> Z.of_int) (54775457 |> Z.of_int)
 
 ]
 

@@ -9,7 +9,7 @@ val ( + ) : point -> point -> point
 (** [k * p] *)
 val ( * ) : Z.t -> point -> point
 
-val mul_base : Z.t -> point
+val base : point
 
 val get_x_coord : point -> Z.t
 

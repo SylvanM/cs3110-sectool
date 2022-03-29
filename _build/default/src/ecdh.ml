@@ -10,7 +10,7 @@ let generate_private_key bit_size =
   bit_size |> Z.of_int |> Z.(mod) (construct_random_integer 0 bit_size Z.zero)
 
 let compute_public_key (d : Z.t) =
-  ED25519.mul_base d
+  d * base
 
 let compute_shared_secret d p =
   d * p
