@@ -2,6 +2,10 @@
 module Authors = Sectool__Authors
 
 
+(** @canonical Sectool.Command *)
+module Command = Sectool__Command
+
+
 (** @canonical Sectool.Ecdh *)
 module Ecdh = Sectool__Ecdh
 

@@ -3,6 +3,8 @@
 exception FileDoesNotExist of string
 (** Raised when a curve is loaded form a file but the file is invalid *)
 
+val read_file : string -> string list
+
 val read_private_key : string -> Z.t
 (** [read_private_key f] reads a file [f] and returns an integer which is the
     private key.
@@ -29,3 +31,4 @@ val write_public_key : Elliptic_curve.point -> string -> unit
 
 val write_domain_params : Elliptic_curve.field -> string -> unit
 (** [write_domain_params dom f] writes information about field [dom] to file [f]. *)
+

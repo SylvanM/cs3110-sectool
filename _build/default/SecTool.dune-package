@@ -1,5 +1,44 @@
-(lang dune 2.9)
+(lang dune 3.0)
 (name SecTool)
+(sections (lib .) (libexec .) (doc ../../doc/SecTool))
+(files
+ (lib
+  (META
+   authors.ml
+   authors.mli
+   dune-package
+   ecdh.ml
+   ecdh.mli
+   elliptic_curve.ml
+   elliptic_curve.mli
+   file_wizard.ml
+   file_wizard.mli
+   opam
+   sectool.a
+   sectool.cma
+   sectool.cmi
+   sectool.cmt
+   sectool.cmx
+   sectool.cmxa
+   sectool.ml
+   sectool__Authors.cmi
+   sectool__Authors.cmt
+   sectool__Authors.cmti
+   sectool__Authors.cmx
+   sectool__Ecdh.cmi
+   sectool__Ecdh.cmt
+   sectool__Ecdh.cmti
+   sectool__Ecdh.cmx
+   sectool__Elliptic_curve.cmi
+   sectool__Elliptic_curve.cmt
+   sectool__Elliptic_curve.cmti
+   sectool__Elliptic_curve.cmx
+   sectool__File_wizard.cmi
+   sectool__File_wizard.cmt
+   sectool__File_wizard.cmti
+   sectool__File_wizard.cmx))
+ (libexec (sectool.cmxs))
+ (doc (LICENSE README.md)))
 (library
  (name SecTool)
  (kind normal)
