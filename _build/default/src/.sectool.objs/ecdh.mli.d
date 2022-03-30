@@ -1,1 +1,1 @@
-src/ecdh.mli: ED25519 Z
+src/ECDH.mli: ED25519 Z
