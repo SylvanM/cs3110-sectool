@@ -6,12 +6,12 @@ module Authors = Sectool__Authors
 module Command = Sectool__Command
 
 
-(** @canonical Sectool.ECDH *)
-module ECDH = Sectool__ECDH
-
-
 (** @canonical Sectool.ED25519 *)
 module ED25519 = Sectool__ED25519
+
+
+(** @canonical Sectool.Ecdh *)
+module Ecdh = Sectool__Ecdh
 
 
 (** @canonical Sectool.File_wizard *)

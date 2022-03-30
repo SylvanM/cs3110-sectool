@@ -1,10 +1,11 @@
 open ED25519
 
-(** Module for the actual algorithms of the Elliptic Curve Diffie-Helman key 
+(** Module for the actual algorithms of the Elliptic Curve Diffie-Helman key
 exchange *)
 
-val generate_private_key : int -> Z.t 
-(** Generates a random integer for use as a private key, with a certain bit size *)
+val generate_private_key : int -> Z.t
+(** [generate_private_key n] is a random integer for use as a private key
+	with maximum value [n]. *)
 
 val compute_public_key : Z.t -> point
 (** [compute_public_key f d] computes the public key from a private key d *)
