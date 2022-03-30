@@ -94,7 +94,7 @@ let rec command input =
             in
             let size = List.hd list |> int_of_string in
             let name = List.nth list 1 in
-            let result = Sectool.Ecdh.generate_private_key size in
+            let result = Sectool.ECDH.generate_private_key size in
             let result_string = result |> Z.to_string in
             Sectool.File_wizard.write_private_key result name;
             print_endline (
@@ -109,7 +109,7 @@ let rec command input =
             in
             let private_key = List.hd list |> Sectool.File_wizard.read_private_key in
             let name = List.nth list 1 in
-            let result = Sectool.Ecdh.compute_public_key private_key in
+            let result = Sectool.ECDH.compute_public_key private_key in
             let result_string = Sectool.ED25519.string_of_point result in
             Sectool.File_wizard.write_public_key result name;
             print_endline (
@@ -126,7 +126,7 @@ let rec command input =
             let private_key = List.hd list |> Sectool.File_wizard.read_private_key in
             let public_key = List.nth list 1 |> Sectool.File_wizard.read_public_key in
             let name = List.nth list 2 in
-            let result = Sectool.Ecdh.compute_shared_secret private_key public_key in
+            let result = Sectool.ECDH.compute_shared_secret private_key public_key in
             let result_string = Sectool.ED25519.string_of_point result in
             Sectool.File_wizard.write_public_key result name;
             print_endline (
