@@ -1,1 +1,1 @@
-src/ecdh.mli: Elliptic_curve Z
+src/ECDH.mli: ED25519 Z

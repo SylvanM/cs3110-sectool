@@ -2,12 +2,16 @@
 module Authors = Sectool__Authors
 
 
-(** @canonical Sectool.Ecdh *)
-module Ecdh = Sectool__Ecdh
+(** @canonical Sectool.Command *)
+module Command = Sectool__Command
 
 
-(** @canonical Sectool.Elliptic_curve *)
-module Elliptic_curve = Sectool__Elliptic_curve
+(** @canonical Sectool.ECDH *)
+module ECDH = Sectool__ECDH
+
+
+(** @canonical Sectool.ED25519 *)
+module ED25519 = Sectool__ED25519
 
 
 (** @canonical Sectool.File_wizard *)

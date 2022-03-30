@@ -2,70 +2,9 @@
 * A list of constants to be used in tests, so we don't clutter up the
 other file
 *)
-open Sectool.Elliptic_curve
+open Sectool.ED25519
 open Z
 
-let curve25519 = create_field [
-  ( (Z.pow (2 |> Z.of_int) (255)) - (19 |> Z.of_int) ) ; (* prime field number *)
-  ( 1 |> Z.of_int ) ;
-  ( 486662 |> Z.of_int ) ;
-  ( 1 |> Z.of_int ) ;
-  ( 0 |> Z.of_int ) ;
-  ( 9 |> Z.of_int ) ; (* Base point x = 9 *)
-  ( 199 |> Z.of_int ) ; (* TODO actually find this point *)
-  ( (Z.pow (2 |> Z.of_int) (252) ) + ( "27742317777372353535851937790883648493" |> Z.of_string) ) ; (* Order of base point x = 9 *)
-  ( 8 |> Z.of_int ) (* Co-factor *)
-]
-
-let simple_curve = create_field [
-  ( 7 |> Z.of_int ) ;
-  Z.one ;
-  Z.one ;
-  Z.minus_one ;
-  Z.one ;
-  Z.one ;
-  Z.one ;
-  Z.one ;
-  Z.one ;
-]
-
-let example_curve = create_field [
-  13 |> Z.of_int ;
-  Z.one ;
-  Z.zero ;
-  5 |> Z.of_int ;
-  4 |> Z.of_int ;
-  Z.one ; (* dummy *)
-  6 |> Z.of_int ;
-  17 |> Z.of_int ; (* dummy *)
-  5 |> Z.of_int ; (* dummy *)
-]
-
-let heewon_field = create_field [
-  100 |> Z.of_int ;
-  2 |> Z.of_int ;
-  5 |> Z.of_int ;
-  2 |> Z.of_int ;
-  4 |> Z.of_int ;
-  9 |> Z.of_int ;
-  0 |> Z.of_int ;
-  252 |> Z.of_int ;
-  8 |> Z.of_int
-]
-
-let p192 = create_field [
-  "6277101735386680763835789423207666416083908700390324961279" |> Z.of_string ;
-  Z.zero ;
-  Z.one ;
-  -3 |> Z.of_int ;
-  "64210519e59c80e70fa7e9ab72243049feb8deecc146b9b1" |> Z.of_string_base 16 ;
-
-  (* Dummy numbers *)
-  Z.one ;
-  6 |> Z.of_int ;
-  Z.zero ;
-  Z.zero ;
-]
 
 let p192_P = make_point (
   "188da80eb03090f67cbf20eb43a18800f4ff0afd82ff1012" |> Z.of_string_base 16,
