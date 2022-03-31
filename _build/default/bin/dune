@@ -1,3 +1,0 @@
-(executable
- (name main)
- (libraries SecTool zarith ANSITerminal))

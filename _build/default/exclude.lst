@@ -1,4 +1,6 @@
 _build/*
+.git/*
 tutorial/*
+sectool/*
 .DS_Store
 *.zip

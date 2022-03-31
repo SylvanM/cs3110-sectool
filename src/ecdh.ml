@@ -10,7 +10,7 @@ let generate_private_key bit_size =
   construct_random_integer 0 bit_size Z.zero
 
 let compute_public_key (d : Z.t) =
-  d * base
+  d * base |> get_x_coord
 
 let compute_shared_secret d p =
-  d * p
+  d * p |> get_x_coord
