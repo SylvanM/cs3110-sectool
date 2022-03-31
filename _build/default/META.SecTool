@@ -1,6 +1,0 @@
-description = ""
-requires = "stdio yojson zarith"
-archive(byte) = "sectool.cma"
-archive(native) = "sectool.cmxa"
-plugin(byte) = "sectool.cma"
-plugin(native) = "sectool.cmxs"
