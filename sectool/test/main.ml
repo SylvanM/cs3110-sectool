@@ -20,13 +20,13 @@ let multiply_add_test name f n p =
   name >:: fun _ -> assert_equal (repeated_add n p) (multiply_point f n p)
 *)
 
-let same_secret_test name d1 d2 =
-  let p1 = compute_public_key d1 in
-  let p2 = compute_public_key d2 in
-  let s1 = compute_shared_secret d1 p2 in
-  let s2 = compute_shared_secret d2 p1 in
+let same_secret_test name d1 d2 = 
+  let p1 = compute_public_key d1 in 
+  let p2 = compute_public_key d2 in 
+  let s1 = compute_shared_secret d1 p2 in 
+  let s2 = compute_shared_secret d2 p1 in 
   name >:: fun _ -> assert_equal s1 s2 ~printer:string_of_point
-
+  
 (** TESTS  *)
 
 let ecc_tests = [
