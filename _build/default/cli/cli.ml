@@ -1,114 +1,9 @@
-open Sectool
-open Cmdliner
-open File_wizard
-
-(* Implementation of the command, we just print the args. *)
-
-(**
-type prompt = Public | Private | Secret
-
-let prompt_str = function
-| Public -> "public" | Private -> "private" | Secret -> "secret"
-
-
-let rm prompt lines files =
-  let n = files |> List.length in
-  (match prompt with
-  | Private ->
-    if n = 2 then
-      let bitsize = List.hd files in
-      let name = List.nth files 1 in
-      (match int_of_string bitsize with
-      | bitsize ->
-        let result = Sectool.Ecdh.generate_private_key bitsize in
-        let result_string = result |> Z.to_string in
-        Sectool.File_wizard.write_private_key result name;
-        Printf.printf "done!";
-      | exception e -> failwith "Invalid bitsize."
-      )
-    else failwith "Invalid format."
-  | Public -> Printf.printf "public"
-  | Secret -> Printf.printf "secret");
-  Printf.printf " prompt = %s\n files = %s\n lines = %s\n length = %s\n"
-    (prompt_str prompt) (String.concat ", " files) (string_of_int lines) (files |> List.length |> string_of_int)
-
-(* Command line interface *)
-
-let files = Arg.(non_empty & pos_all file [] & info [] ~docv:"FILE")
-
-let lines =
-  let doc = "Output the last $(docv) lines or use $(i,+)$(docv) to start \
-             output after the $(i,N)-1th line."
-  in
-  Arg.(value & & info ["n"; "lines"] ~docv:"N" ~doc)
-
-
-let prompt =
-  let always =
-    let doc = "generate public key" in
-    Public, Arg.info ["i"; "pub"; "public"] ~doc
-  in
-  let never =
-    let doc = "generate private key" in
-    Private, Arg.info ["f"; "priv"; "private"] ~doc
-  in
-  Arg.(last & vflag_all [Public] [always; never])
-
-let cmd =
-  let doc = "Remove files or directories" in
-  let man = [
-    `S Manpage.s_description;
-    `P "$(tname) removes each specified $(i,FILE). By default it does not
-        remove directories, to also remove them and their contents, use the
-        option $(b,--recursive) ($(b,-r) or $(b,-R)).";
-    `P "To remove a file whose name starts with a $(b,-), for example
-        $(b,-foo), use one of these commands:";
-    `Pre "$(mname) $(b,-- -foo)"; `Noblank;
-    `Pre "$(mname) $(b,./-foo)";
-    `P "$(tname) removes symbolic links, not the files referenced by the
-        links.";
-    `S Manpage.s_bugs; `P "Report bugs to <bugs@example.org>.";
-    `S Manpage.s_see_also; `P "$(b,rmdir)(1), $(b,unlink)(2)" ]
-  in
-  let info = Cmd.info "rm" ~version:"%%VERSION%%" ~doc ~man in
-  Cmd.v info Term.(const rm $ prompt $ lines $ files)
-
-let main () = exit (Cmd.eval cmd)
-let () = main ()
-*)
-
-(**
-let revolt () = print_endline "Revolt!"
-
-open Cmdliner
-
-let revolt_t = Term.(const revolt $ const ())
-
-let cmd = Cmd.v (Cmd.info "revolt") revolt_t
-
-let () = exit (Cmd.eval cmd)
-*)
-
-
-
-(*
-   Source code for the cmdliner-cheatsheet executable.
-   This can serve as a template for new programs.
-   This sample program exercises various features of cmdliner. It
-   can be compiled and run to check how the various options work.
-   See also 'Demo_subcmd_main.ml' for how to implement subcommands.
-*)
-
 open Printf
-
-(* Provide the 'Arg', 'Term', and 'Manpage' modules. *)
 open Cmdliner
+open Sectool
+open Z
 
-(*
-   We store the result of parsing the command line into a single 'conf'
-   record of the following type.
-*)
-
+(** Record types *)
 
 type private_conf = {
   bitsize: int;
@@ -131,52 +26,72 @@ type cmd_conf =
   | Public of public_conf
   | Secret of secret_conf
 
-(*
-   The core of the application.
-*)
+(** Run *)
 
 let opt_string opt =
   match opt with
   | None -> "none"
-  | Some s -> sprintf "%S" s
+  | Some s -> s
 
 let run cmd_conf =
   match cmd_conf with
   | Private conf ->
+      let result = Sectool.Ecdh.generate_private_key conf.bitsize in
+      let result_string = Z.to_string result in
+      let name = opt_string conf.name in
+      Sectool.File_wizard.write_private_key result name;
       printf
       "\
-        Private configuration:
-        bitsize: %i
-        name: %s
+
+Private configuration:
+|  bitsize: %i
+|  name: %s
+|  result: %s
+
 "
       conf.bitsize
-      (opt_string conf.name)
+      name
+      result_string
   | Public conf ->
+      let private_key = Sectool.File_wizard.read_private_key (opt_string conf.private_input) in
+      let result = Sectool.Ecdh.compute_public_key private_key in
+      let result_string = Sectool.ED25519.string_of_point result in
+      let name = opt_string conf.name in
+      Sectool.File_wizard.write_public_key result name;
       printf
       "\
-        Public configuration:
-        private input: %s
-        name: %s
+
+Public configuration:
+|  private input: %s
+|  name: %s
+|  result: %s
+
 "
       (opt_string conf.private_input)
-      (opt_string conf.name)
+      name
+      result_string
   | Secret conf ->
+      let private_key = Sectool.File_wizard.read_private_key (opt_string conf.private_input) in
+      let public_key = Sectool.File_wizard.read_public_key (opt_string conf.public_input) in
+      let result = Sectool.Ecdh.compute_shared_secret private_key public_key in
+      let result_string = Sectool.ED25519.string_of_point result in
+      let name = opt_string conf.name in
+      Sectool.File_wizard.write_public_key result name;
       printf
       "\
-        Public configuration:
-        private input: %s
-        public input: %s
-        name: %s
-"
+
+Secret configuration:
+|  private input: %s
+|  public input: %s
+|  name: %s
+|  result: %s
+ "
       (opt_string conf.private_input)
       (opt_string conf.public_input)
-      (opt_string conf.name)
+      name
+      result_string
 
-(************************* Command-line management *************************)
-
-(*
-   For each kind of command-line argument, we define a "term" object.
-*)
+(** Terms *)
 
 let filename_term =
   let info =
@@ -188,7 +103,7 @@ let filename_term =
 
 let private_input_term =
   let info =
-    Arg.info ["p";"priv";"private"]  (* list must be empty for anonymous arguments *)
+    Arg.info ["p";"priv";"private"]
       ~docv:"FILE"
       ~doc:"Example of an anonymous argument at a fixed position."
   in
@@ -196,7 +111,7 @@ let private_input_term =
 
 let public_input_term =
   let info =
-    Arg.info ["P";"pub";"public"]  (* list must be empty for anonymous arguments *)
+    Arg.info ["P";"pub";"public"]
       ~docv:"FILE"
       ~doc:"Example of an anonymous argument at a fixed position."
   in
@@ -205,19 +120,15 @@ let public_input_term =
 let bitsize_term =
   let default = 1 in
   let info =
-    Arg.info ["n"; "bitsize"]  (* '-j' and '--num-cores' will be synonyms *)
+    Arg.info ["n"; "bitsize"]
       ~docv:"NUM"
       ~doc:"Example of an optional argument with a default.
             The value of \\$\\(docv\\) is $(docv)."
   in
   Arg.value (Arg.opt Arg.int default info)
 
-(*
-   Combine the values collected for each kind of argument into a single
-   'conf' object, which is then passed to our main 'run' function.
-   Some merging and tweaking can be useful here but most often
-   we just map each argument to its own record field.
-*)
+(** PRIVATE *)
+
 let private_term run =
   let combine name bitsize =
     let conf = Private {
@@ -246,7 +157,7 @@ let private_cmd run =
   in
   Cmd.v info (private_term run)
 
-(*** Putting together subcommand 'subcmd2' ***)
+(** PUBLIC *)
 
 let public_term run =
   let combine name private_input =
@@ -276,7 +187,7 @@ let public_cmd run =
   in
   Cmd.v info (public_term run)
 
-(*** Putting together subcommand 'subcmd2' ***)
+(** SECRET *)
 
 let secret_term run =
   let combine name private_input public_input =
@@ -308,7 +219,7 @@ let secret_cmd run =
   in
   Cmd.v info (secret_term run)
 
-(*** Putting together the main command ***)
+(** Root *)
 
 let root_doc = "[some headline for the main command]"
 
@@ -317,9 +228,6 @@ let root_man = [
   `P "[multiline overview of the main command]";
 ]
 
-(*
-   Use the built-in action consisting in displaying the help page.
-*)
 let root_term =
   Term.ret (Term.const (`Help (`Pager, None)))
 
@@ -328,18 +236,13 @@ let root_info =
     ~doc:root_doc
     ~man:root_man
 
-(*** Parse the command line and do something with it ***)
-
 let subcommands run = [
   private_cmd run;
   public_cmd run;
   secret_cmd run;
 ]
 
-(*
-   Parse the command line into a 'conf' record and pass it to the
-   main function 'run'.
-*)
+(** Parse *)
 
 let parse_command_line_and_run (run : cmd_conf -> unit) =
   Cmd.group root_info (subcommands run) |> Cmd.eval |> exit

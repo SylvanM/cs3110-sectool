@@ -1,5 +1,7 @@
 open Printf
 open Cmdliner
+open Sectool
+open Z
 
 (** Record types *)
 
@@ -29,39 +31,66 @@ type cmd_conf =
 let opt_string opt =
   match opt with
   | None -> "none"
-  | Some s -> sprintf "%S" s
+  | Some s -> s
 
 let run cmd_conf =
   match cmd_conf with
   | Private conf ->
+      let result = Sectool.Ecdh.generate_private_key conf.bitsize in
+      let result_string = Z.to_string result in
+      let name = opt_string conf.name in
+      Sectool.File_wizard.write_private_key result name;
       printf
       "\
-        Private configuration:
-        bitsize: %i
-        name: %s
+
+Private configuration:
+|  bitsize: %i
+|  name: %s
+|  result: %s
+
 "
       conf.bitsize
-      (opt_string conf.name)
+      name
+      result_string
   | Public conf ->
+      let private_key = Sectool.File_wizard.read_private_key (opt_string conf.private_input) in
+      let result = Sectool.Ecdh.compute_public_key private_key in
+      let result_string = Sectool.ED25519.string_of_point result in
+      let name = opt_string conf.name in
+      Sectool.File_wizard.write_public_key result name;
       printf
       "\
-        Public configuration:
-        private input: %s
-        name: %s
+
+Public configuration:
+|  private input: %s
+|  name: %s
+|  result: %s
+
 "
       (opt_string conf.private_input)
-      (opt_string conf.name)
+      name
+      result_string
   | Secret conf ->
+      let private_key = Sectool.File_wizard.read_private_key (opt_string conf.private_input) in
+      let public_key = Sectool.File_wizard.read_public_key (opt_string conf.public_input) in
+      let result = Sectool.Ecdh.compute_shared_secret private_key public_key in
+      let result_string = Sectool.ED25519.string_of_point result in
+      let name = opt_string conf.name in
+      Sectool.File_wizard.write_public_key result name;
       printf
       "\
-        Public configuration:
-        private input: %s
-        public input: %s
-        name: %s
-"
+
+Secret configuration:
+|  private input: %s
+|  public input: %s
+|  name: %s
+|  result: %s
+
+ "
       (opt_string conf.private_input)
       (opt_string conf.public_input)
-      (opt_string conf.name)
+      name
+      result_string
 
 (** Terms *)
 
