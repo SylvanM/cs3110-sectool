@@ -94,7 +94,7 @@ let p_double p =
         let t2 = p.x ** 2 in 
         let t3 = ed25519.a * p.x * p.z in 
         let t4 = p.z ** 2 in 
-        t1 * (t2 + t3 + t3) in 
+        t1 * (t2 + t3 + t4) in 
       Point {
         x = x_2i ;
         z = z_2i ;
@@ -120,18 +120,21 @@ let p_add pi pi1 =
         z = z_2i1 ;
       }
 
-
-let p_add (p : p_point) (q : p_point) =
-  raise (Failure "Unimplemented")
+(** Make this tail recursive *)
+let rec ladder p i = 
+  if i = zero then 
+    (PointAtInfinty, p)
+  else if is_even i then
+    let (pi, _) = ladder p (Z.div i (Z.of_int 2)) in 
+    pi
+  else 
+    
 
 let p_mul (k : Z.t) (p : point) =
   raise (Failure "Unimplemented")
 
 let ( + ) (p : point) (q : point) =
   p_add p q
-
-let montgomery_ladder (p : point) (i : Z.t) =
-  let ml_tail 
 
 let make_point (p : Z.t * Z.t) : p_point =
   match p with
