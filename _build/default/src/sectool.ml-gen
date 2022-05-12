@@ -1,0 +1,18 @@
+(** @canonical Sectool.Authors *)
+module Authors = Sectool__Authors
+
+
+(** @canonical Sectool.Command *)
+module Command = Sectool__Command
+
+
+(** @canonical Sectool.ECDH *)
+module ECDH = Sectool__ECDH
+
+
+(** @canonical Sectool.ED25519 *)
+module ED25519 = Sectool__ED25519
+
+
+(** @canonical Sectool.File_wizard *)
+module File_wizard = Sectool__File_wizard
