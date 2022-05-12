@@ -23,6 +23,7 @@ type m_curve = {
   a : Z.t ; (* coefficient a of the curve *)
   order : Z.t ;
   base_point_x : Z.t ;
+  base_point_z : Z.t ;
 }
 
 let ed25519 : m_curve = {
@@ -30,7 +31,14 @@ let ed25519 : m_curve = {
   a = 486662 |> Z.of_int ; (* The constant a *)
   order = (Z.pow (2 |> Z.of_int) (252) ) + ( "27742317777372353535851937790883648493" |> Z.of_string) ;
   base_point_x = "15112221349535400772501151409588531511454012693041857206046113283949847762202" |> Z.of_string_base 10 ;
+  base_point_z = Z.one ;
 }
+
+let make_point (p : Z.t * Z.t) : p_point =
+  match p with
+  | (x, z) -> Point {x = x ; z = z}
+
+let base = make_point (ed25519.base_point_x, ed25519.base_point_z)
 
 (* This is the definition of in infix mod operator that will always produce a positive integer *)
 let rec ( % ) x y =
@@ -75,6 +83,8 @@ let ( / ) a b =
 let ( ** ) b p =
   pow ed25519.modulus b p
 
+
+
 (** General Arithmetic Functions *)
 
 (** Returns the affine x coordinate of a projective point p *)
@@ -88,7 +98,7 @@ let p_double p =
   | PointAtInfinty -> PointAtInfinty
   | Point p ->
     if p.z = zero then PointAtInfinty else 
-      let x_2i = ((p.x **2) - (p.z ** 2)) ** 2 in 
+      let x_2i = ((p.x ** 2) - (p.z ** 2)) ** 2 in 
       let z_2i = 
         let t1 = (Z.of_int 4) * p.x * p.z in 
         let t2 = p.x ** 2 in 
@@ -101,6 +111,7 @@ let p_double p =
       }
 
 let p_add pi pi1 =
+  if pi = pi1 then p_double pi else
   match pi with 
   | PointAtInfinty -> pi1 
   | Point pi -> 
@@ -131,17 +142,50 @@ let rec ladder p k =
   else 
     (p_add pi pi1, p_double pi1)
 
-let p_mul (k : Z.t) (p : point) =
-  let (pk, _) = ladder p k in pk
+let ( + ) = p_add 
 
-let ( + ) (p : point) (q : point) =
-  p_add p q
+let power_of_two p i =
+  let rec p_tail acc k =
+    if k = zero then acc
+    else 
+      p_tail (p_double acc) (Z.sub k one)
+    in 
+  p_tail p i
 
-let make_point (p : Z.t * Z.t) : p_point =
-  match p with
-  | (x, z) -> Point {x = x ; z = z}
+let slow_mul (k : Z.t) (p : point) =
+  let rec mul_tail acc i =
+    if i = zero then acc else 
+      mul_tail (acc + p) (Z.sub i one) in 
+  mul_tail PointAtInfinty k
+
+let standard_mul (k : Z.t) (p : point) =
+
+  let rec mul_tail (acc : point) (current_index : Z.t) (scalar : Z.t) =
+
+    if scalar = zero then acc else
+
+    let new_scalar = Z.shift_right_trunc scalar 1 in 
+    let new_index = Z.add current_index one in 
+    let new_acc = acc +
+      if is_odd scalar then
+        power_of_two p current_index
+      else PointAtInfinty in
+      
+    mul_tail new_acc new_index new_scalar
+
+    in 
+
+  mul_tail PointAtInfinty zero k
+
+let ladder_mul k p =
+  (* let (pk, _) = ladder p k in pk *)
+  standard_mul k p
+
+let p_scale = slow_mul
+
+let ( * ) = p_scale
 
 let string_of_point (p : point) =
   match p with
   | PointAtInfinty -> "Inf"
-  | Point p -> (p.x |> Z.to_string)
+  | Point p -> p.x |> Z.to_string

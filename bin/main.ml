@@ -54,7 +54,7 @@ let rec take_private_key (acc:args) : args =
 let rec take_public_key (acc:args) : args =
     let f s =
     Sectool.File_wizard.read_public_key s
-    |> Sectool.ED25519.string_of_point
+    |> Z.to_string
     in
     take_file acc f "Please enter a public key file:"
 
@@ -76,7 +76,7 @@ let rec command input =
                     | 2 -> print_endline (
                         "\n" ^
                         (Sectool.File_wizard.read_public_key file
-                        |> Sectool.ED25519.string_of_point))
+                        |> Z.to_string))
                     | _ ->
                         print_endline "\n Incorrectly formatted file! \n";
                     )
@@ -110,7 +110,7 @@ let rec command input =
             let private_key = List.hd list |> Sectool.File_wizard.read_private_key in
             let name = List.nth list 1 in
             let result = Sectool.ECDH.compute_public_key private_key in
-            let result_string = Sectool.ED25519.string_of_point result in
+            let result_string = Z.to_string result in
             Sectool.File_wizard.write_public_key result name;
             print_endline (
                 "\n ----- \n \n Successfully stored secret: \n\n "
@@ -127,7 +127,7 @@ let rec command input =
             let public_key = List.nth list 1 |> Sectool.File_wizard.read_public_key in
             let name = List.nth list 2 in
             let result = Sectool.ECDH.compute_shared_secret private_key public_key in
-            let result_string = Sectool.ED25519.string_of_point result in
+            let result_string = Z.to_string result in
             Sectool.File_wizard.write_public_key result name;
             print_endline (
                 "\n ----- \n \n Successfully stored secret: \n\n "
