@@ -7,17 +7,19 @@ val get_x_coord : point -> Z.t
 
 val make_point : Z.t * Z.t -> point
 
+val raw_rep : point -> (Z.t * Z.t)
+(** The raw representation of a point *)
+
 val base : point
 
-val ( * ) : Z.t -> point -> point
+val ( + ) : point -> point -> point
 (** The group operation of point arithmetic *)
+
+val ( * ) : Z.t -> point -> point
+(** The group operation repeated on a point *)
 
 val string_of_point : point -> string
 
-(** Only temporarily visibile for testing *)
-
-(* val slow_mul : Z.t -> point -> point *)
-
-(* val ladder_mul : Z.t -> point -> point *)
+val order : Z.t
 
 val equals : point -> point -> bool

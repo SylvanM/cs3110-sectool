@@ -1,10 +1,12 @@
 open Z
+open ModArith
 
 (* The type representing a montgomery curve *)
 type m_curve = {
   modulus : Z.t ; (* Size of the field (prime in this case) *)
   a : Z.t ; (* coefficient a of the curve *)
   order : Z.t ;
+  cofactor : Z.t ;
   base_point_x : Z.t ;
   base_point_z : Z.t ; 
   base_point_y : Z.t ;
@@ -15,52 +17,18 @@ let ed25519 : m_curve = {
   a = 486662 |> Z.of_int ; (* The constant a *)
   order = (Z.pow (2 |> Z.of_int) (252) ) + ( "27742317777372353535851937790883648493" |> Z.of_string) ;
   base_point_x = "15112221349535400772501151409588531511454012693041857206046113283949847762202" |> Z.of_string_base 10 ;
+  cofactor = Z.of_int 8 ;
   base_point_z = one ;
   base_point_y = "46316835694926478169428394003475163141307993866256225615783033603165251855960" |> Z.of_string ;
 }
 
-(* This is the definition of in infix mod operator that will always produce a positive integer *)
-let rec ( % ) x y =
-	let m = x mod y in
-		if m < zero then
-			((x + y) % y)
-		else
-			m
+module C : ModArith.ModulusContainer = struct
+  let modulus = ed25519.modulus
+end
 
-let add m a b =
-  ((a % m) + (b % m)) % m
+module Ops = ModArith.Make (C)
 
-let sub m a b =
-  ((a % m) - (b % m)) % m
-
-(** Define multiplication over a modulus m *)
-let mul m a b =
-  ((a % m) * (b % m)) % m
-
-let pow m b p =
-  Z.powm b (p |> Z.of_int) m
-
-let mul_inv m a =
-  Z.invert a m
-
-let div m a b =
-  mul m a (mul_inv m b)
-
-
-let ( + ) =
-  add ed25519.modulus
-
-let ( - ) =
-  sub ed25519.modulus 
-
-let ( * )  =
-  mul ed25519.modulus 
-
-let ( / )  =
-  div ed25519.modulus 
-
-let ( ** )  =
-  pow ed25519.modulus 
+open Ops
 
 module type PointRepresentation = sig
 
@@ -87,11 +55,15 @@ module type PointRepresentation = sig
   val equals : t -> t -> bool 
   (** Returns true if the two points ought to be considered equal *)
 
+  val raw_rep : t -> (Z.t * Z.t)
+
 end
 
 module type FiniteFieldOperations = sig
 
   type point
+
+  val add : point -> point -> point
   
   val mul : Z.t -> point -> point
 
@@ -102,6 +74,8 @@ module type FiniteFieldOperations = sig
   val equals : point -> point -> bool
 
   val get_x_coord : point -> Z.t
+
+  val raw_rep : point -> (Z.t * Z.t)
 
 end
 
@@ -137,13 +111,17 @@ module ED25519Operations (P : PointRepresentation) : FiniteFieldOperations = str
 
   let make = P.make
 
-
+  let raw_rep = P.raw_rep
 
 end
 
 module AffinePoint : PointRepresentation = struct
 
   type t = Point of { x : Z.t ; y : Z.t } | PointAtInfinty
+
+  let raw_rep = function 
+    | PointAtInfinty -> (minus_one, minus_one)
+    | Point { x = x ; y = y } -> (x, y)
 
     (** Computes the slope for the points *)
   let lambda x1 y1 x2 y2 =
@@ -219,6 +197,10 @@ module ProjectivePoint : PointRepresentation = struct
 
   type t = Point of { x : Z.t ; z : Z.t } | PointAtInfinty
 
+  let raw_rep = function 
+    | PointAtInfinty -> (minus_one, minus_one)
+    | Point { x = x ; z = z } -> (x, z)
+
   let inf = PointAtInfinty
 
   let get_x_coord p =
@@ -274,7 +256,9 @@ module ProjectivePoint : PointRepresentation = struct
 
 end
 
-module M = ED25519Operations (AffinePoint)
+module Point = AffinePoint
+
+module M = ED25519Operations (Point)
 
 type point = M.point
 
@@ -286,6 +270,11 @@ let string_of_point p = p |> M.get_x_coord |> Z.to_string
 
 let ( * ) = M.mul
 
+let ( + ) = M.add
+
 let base = M.base
 
 let equals = M.equals
+let order = ed25519.order
+
+let raw_rep = M.raw_rep

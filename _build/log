@@ -2,10 +2,10 @@
 # OCAMLPARAM: unset
 # Workspace root: "/Users/sylvanm/Documents/School/Freshman Year/Spring/CS
 # 3110/Final Project/cs3110-sectool"
-$ /usr/bin/getconf _NPROCESSORS_ONLN > /var/folders/07/v6k_zhd55lvcvrqr6qz39lsw0000gn/T/dunec7d528.output 2> /dev/null
+$ /usr/bin/getconf _NPROCESSORS_ONLN > /var/folders/07/v6k_zhd55lvcvrqr6qz39lsw0000gn/T/duneafd4c6.output 2> /dev/null
 # Auto-detected concurrency: 10
 # disable binary cache
-$ /Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/07/v6k_zhd55lvcvrqr6qz39lsw0000gn/T/dune9df4d3.output
+$ /Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/07/v6k_zhd55lvcvrqr6qz39lsw0000gn/T/duned76367.output
 # Dune context:
 #  { name = "default"
 #  ; kind = "default"
@@ -116,7 +116,3 @@ $ /Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/07/v6
 #  }
 # Workspace root: "/Users/sylvanm/Documents/School/Freshman Year/Spring/CS
 # 3110/Final Project/cs3110-sectool"
-$ (cd _build/default && /Users/sylvanm/.opam/cs3110-2021fa/bin/ocamldep.opt -modules -impl src/ED25519.ml) > _build/default/src/.sectool.objs/ED25519.ml.d
-$ (cd _build/default && /Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlopt.opt -w +a-4-6-7-9-27-29-30-32..42-44-45-48-50-60-66-67 -warn-error -a+31 -g -I src/.sectool.objs/byte -I src/.sectool.objs/native -I /Users/sylvanm/.opam/cs3110-2021fa/lib/base -I /Users/sylvanm/.opam/cs3110-2021fa/lib/base/base_internalhash_types -I /Users/sylvanm/.opam/cs3110-2021fa/lib/base/caml -I /Users/sylvanm/.opam/cs3110-2021fa/lib/base/shadow_stdlib -I /Users/sylvanm/.opam/cs3110-2021fa/lib/biniou -I /Users/sylvanm/.opam/cs3110-2021fa/lib/easy-format -I /Users/sylvanm/.opam/cs3110-2021fa/lib/sexplib0 -I /Users/sylvanm/.opam/cs3110-2021fa/lib/stdio -I /Users/sylvanm/.opam/cs3110-2021fa/lib/yojson -I /Users/sylvanm/.opam/cs3110-2021fa/lib/zarith -intf-suffix .ml -no-alias-deps -opaque -open Sectool -o src/.sectool.objs/native/sectool__ED25519.cmx -c -impl src/ED25519.ml)
-$ (cd _build/default && /Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlopt.opt -w +a-4-6-7-9-27-29-30-32..42-44-45-48-50-60-66-67 -warn-error -a+31 -g -a -o src/sectool.cmxa src/.sectool.objs/native/sectool.cmx src/.sectool.objs/native/sectool__ED25519.cmx src/.sectool.objs/native/sectool__File_wizard.cmx src/.sectool.objs/native/sectool__ECDH.cmx src/.sectool.objs/native/sectool__Command.cmx src/.sectool.objs/native/sectool__Authors.cmx)
-$ (cd _build/default && /Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlopt.opt -w +a-4-6-7-9-27-29-30-32..42-44-45-48-50-60-66-67 -warn-error -a+31 -g -o test/main.exe /Users/sylvanm/.opam/cs3110-2021fa/lib/ocaml/unix.cmxa -I /Users/sylvanm/.opam/cs3110-2021fa/lib/ocaml /Users/sylvanm/.opam/cs3110-2021fa/lib/stdlib-shims/stdlib_shims.cmxa /Users/sylvanm/.opam/cs3110-2021fa/lib/ounit2/advanced/oUnitAdvanced.cmxa /Users/sylvanm/.opam/cs3110-2021fa/lib/ounit2/oUnit.cmxa /Users/sylvanm/.opam/cs3110-2021fa/lib/easy-format/easy_format.cmxa /Users/sylvanm/.opam/cs3110-2021fa/lib/biniou/biniou.cmxa /Users/sylvanm/.opam/cs3110-2021fa/lib/yojson/yojson.cmxa /Users/sylvanm/.opam/cs3110-2021fa/lib/base/base_internalhash_types/base_internalhash_types.cmxa -I /Users/sylvanm/.opam/cs3110-2021fa/lib/base/base_internalhash_types /Users/sylvanm/.opam/cs3110-2021fa/lib/base/caml/caml.cmxa /Users/sylvanm/.opam/cs3110-2021fa/lib/sexplib0/sexplib0.cmxa /Users/sylvanm/.opam/cs3110-2021fa/lib/base/shadow_stdlib/shadow_stdlib.cmxa /Users/sylvanm/.opam/cs3110-2021fa/lib/base/base.cmxa -I /Users/sylvanm/.opam/cs3110-2021fa/lib/base /Users/sylvanm/.opam/cs3110-2021fa/lib/stdio/stdio.cmxa /Users/sylvanm/.opam/cs3110-2021fa/lib/zarith/zarith.cmxa -I /Users/sylvanm/.opam/cs3110-2021fa/lib/zarith src/sectool.cmxa test/.main.eobjs/native/dune__exe.cmx test/.main.eobjs/native/dune__exe__Testing_constants.cmx test/.main.eobjs/native/dune__exe__Main.cmx)
