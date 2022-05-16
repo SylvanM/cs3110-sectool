@@ -3,7 +3,7 @@ open ED25519
 (** Module for the actual algorithms of the Elliptic Curve Diffie-Helman key
 exchange *)
 
-val generate_private_key : int -> Z.t
+val generate_private_key : unit -> Z.t
 (** [generate_private_key n] is a random integer for use as a private key
 	with maximum value [n]. *)
 

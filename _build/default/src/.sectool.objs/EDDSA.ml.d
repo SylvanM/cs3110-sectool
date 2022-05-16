@@ -1,1 +1,1 @@
-src/EDDSA.ml: ED25519 Int ModArith Sha512 Z
+src/EDDSA.ml: ED25519 EncodingUtility ModArith Sha512 Z

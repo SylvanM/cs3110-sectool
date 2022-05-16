@@ -2,25 +2,42 @@ open OUnit2
 open Sectool
 open ED25519
 open Testing_constants
+open EncodingUtility
 open ECDH
+open EDDSA
 open Sectool.File_wizard
 
 (********************************************************************
    Here are some helper functions for your testing of set-like lists.
  ********************************************************************)
 
-(* Checks that scaling a point by n works the same as adding it to itself
-n times *)
+let packing_symmetry_test name list width =
+  name >:: fun _ ->
+    let len = List.length list in 
+    let unpacked = list |> pack width |> unpack width len in 
+    assert_equal list unpacked
 
-(**
-let multiply_add_test name f n p =
-  let rec repeated_add (n : Z.t) p1 =
-    if n = Z.zero then p1 else add_points f p1 (repeated_add (n - Z.one) p1)
-  in
-  name >:: fun _ -> assert_equal (repeated_add n p) (multiply_point f n p)
-*)
+let message_can_be_verified name message = 
+  name >:: fun _ ->
+    let priv_key = generate_private_key () in 
+    let pub_key = compute_public_key priv_key in 
+    let m = message |> encode_string in 
+    let signature = sign m priv_key in 
+    assert_equal true (verify m pub_key signature)
 
+let make_digest message priv_key =
+  let encoded_message = encode_string message in 
+  sign encoded_message priv_key
 
+let str_encoding_test name str =
+  name >:: fun _ ->
+    let decoded = str |> encode_string |> decode_string in 
+    assert_equal str decoded ~printer:(fun s -> s)
+
+let byte_encoding_test name str =
+  name >:: fun _ ->
+    let decoded = str |> str_to_bytes |> bytes_to_str in 
+    assert_equal str decoded ~printer:(fun s -> s)
 
 let same_secret_test name d1 d2 = 
   let p1 = compute_public_key d1 in 
@@ -28,11 +45,6 @@ let same_secret_test name d1 d2 =
   let s1 = compute_shared_secret d1 p2 in 
   let s2 = compute_shared_secret d2 p1 in 
   name >:: fun _ -> assert_equal s1 s2 ~printer:Z.to_string
-
-(* let ladder_same_test name k =
-  name >:: fun _ ->
-    assert_equal (slow_mul k base) (ladder_mul k base) 
-      ~printer:string_of_point *)
 
 let communativity_test name dA dB = 
   name >:: fun _ -> 
@@ -45,19 +57,20 @@ let associativity_test name a b =
       (a * (b * base)) ((Z.mul a b) * base)
       ~printer:string_of_point
 
-(* let slow_mul_commutes name dA dB = 
+let digest_encoding_symmetry_test name message =
   name >:: fun _ ->
-    assert_equal 
-    (slow_mul dA (slow_mul dB base) |> get_x_coord) 
-    (slow_mul dB (slow_mul dA base) |> get_x_coord) ~printer:Z.to_string *)
+    let priv_key = generate_private_key () in 
+    let digest = make_digest message priv_key in 
+    let decoded = digest |> digest_to_data |> data_to_digest in 
+    assert_equal digest decoded
 
-let rec communativity_tests count bit_size =
+let rec communativity_tests count =
   if count = 0 then [] else
-    let dA = generate_private_key bit_size in 
-    let dB = generate_private_key bit_size in 
+    let dA = generate_private_key () in 
+    let dB = generate_private_key () in 
     let test = communativity_test ("Commun Test " ^ string_of_int count)
       dA dB in 
-    test :: (communativity_tests (count - 1) bit_size)
+    test :: (communativity_tests (count - 1))
 
 let rec square_assoc_tests count =
   if count < 0 then [] else 
@@ -66,32 +79,16 @@ let rec square_assoc_tests count =
       (Z.of_int count) (Z.of_int count) in 
     test :: (square_assoc_tests (count - 1))
 
-let rec associativity_tests count bit_size =
+let rec associativity_tests count =
   if count = 0 then [] else
-    let dA = generate_private_key bit_size in 
-    let dB = generate_private_key bit_size in 
+    let dA = generate_private_key () in 
+    let dB = generate_private_key () in 
     let test = communativity_test ("Assoc Test " ^ string_of_int count)
       dA dB in 
-    test :: (communativity_tests (count - 1) bit_size)
+    test :: (associativity_tests (count - 1))
 
 
 
-(* let rec ladder_tests count = 
-  if count < 0 then [] else 
-    let test = ladder_same_test 
-      ("Ladder Func Test: " ^ string_of_int count)
-      (Z.of_int count) in 
-    test :: (ladder_tests (count - 1)) *)
-
-    
-
-
-(* let pub_key_gen_test name d_str expected_pub_str =
-  name >:: fun _ -> 
-    let d = Z.of_string_base 16 (d_str |> decode_ucoord)  in 
-    let expected_pub = Z.of_string_base 16 (expected_pub_str |> decode_ucoord) in
-    let computed_pub = compute_public_key d in 
-    assert_equal expected_pub computed_pub ~printer:Z.to_string *)
   
 (** TESTS  *)
 
@@ -103,16 +100,26 @@ let ecc_tests = [
   same_secret_test "Larger Key Test" ("8347201765604315761045784350143751034561" |> Z.of_string) ("4534825034158085927349874325" |> Z.of_string) ;
 
 ] 
-@ communativity_tests 100 400
-@ associativity_tests 100 100
+@ communativity_tests 100
+@ associativity_tests 100
 @ square_assoc_tests 555
 
-let aes_tests = [
+let eddsa_tests = [
+  digest_encoding_symmetry_test "Testing Digest Encoding Symmetry" "Sign me!" ;
 
+  message_can_be_verified "Can verify a simple message" "Verify me!" ;
+  message_can_be_verified "Can verify number sring" "8347201765604315761045784350143751034561" ;
+
+]
+
+let util_tests = [
+  str_encoding_test "Testing Long Number String Encoding" "8347201765604315761045784350143751034561" ;
+  byte_encoding_test "Testing Long String Byte Encoding" "8347201765604315761045784350143751034561" ;
+  packing_symmetry_test "List of ones packing test" [ Z.one ; Z.one ; Z.one ; Z.one ] 78 ;
 ]
 
 let suite =
   "test suite for A2"
-  >::: List.flatten [ ecc_tests; aes_tests; ]
+  >::: List.flatten [ ecc_tests; eddsa_tests; util_tests ]
 
 let _ = run_test_tt_main suite

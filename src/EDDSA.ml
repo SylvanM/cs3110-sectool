@@ -6,22 +6,9 @@ exception InvalidSignature
 
 type signature = (point * Z.t)
 
-let combine =
-  let rec tail_combine acc index = function 
-    | [] -> acc 
-    | v :: t -> 
-      let new_to_add = Z.shift_left v (Int.mul 256 index) in 
-      let new_acc = Z.add acc new_to_add in 
-      let new_index = Int.add index 1 in 
-      tail_combine new_acc new_index t
-    in 
-  tail_combine zero 0
-    
-let rec unpack data len = 
-  if len = 0 then [] else 
-  let this_chunk = data % (Z.of_int 256) in 
-  let new_data = Z.shift_right_trunc data 256 in 
-  this_chunk :: unpack new_data (Int.sub len 1)
+let combine = EncodingUtility.pack 256 
+
+let decombine = EncodingUtility.unpack 256
 
 let hash k = 
   k |> to_string |> Sha512.string |> Sha512.to_hex |> Z.of_string_base 16
@@ -55,7 +42,7 @@ let digest_to_data (big_r, s) =
   raw_point @ [s] |> combine
 
 let data_to_digest data : signature = 
-  match unpack data 3 with 
+  match decombine 3 data with 
   | [a ; b ; s] -> 
     let big_r = make_point (a, b) in 
     (big_r, s) 

@@ -157,8 +157,6 @@ module AffinePoint : PointRepresentation = struct
         y = y
       }
 
-  (** Adds a point to itself on a curve *)
-
   let inf = PointAtInfinty
 
   let add p q =
