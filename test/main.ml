@@ -29,10 +29,10 @@ let same_secret_test name d1 d2 =
   let s2 = compute_shared_secret d2 p1 in 
   name >:: fun _ -> assert_equal s1 s2 ~printer:Z.to_string
 
-let ladder_same_test name k =
+(* let ladder_same_test name k =
   name >:: fun _ ->
     assert_equal (slow_mul k base) (ladder_mul k base) 
-      ~printer:string_of_point
+      ~printer:string_of_point *)
 
 let communativity_test name dA dB = 
   name >:: fun _ -> 
@@ -45,11 +45,11 @@ let associativity_test name a b =
       (a * (b * base)) ((Z.mul a b) * base)
       ~printer:string_of_point
 
-let slow_mul_commutes name dA dB = 
+(* let slow_mul_commutes name dA dB = 
   name >:: fun _ ->
     assert_equal 
     (slow_mul dA (slow_mul dB base) |> get_x_coord) 
-    (slow_mul dB (slow_mul dA base) |> get_x_coord) ~printer:Z.to_string
+    (slow_mul dB (slow_mul dA base) |> get_x_coord) ~printer:Z.to_string *)
 
 let rec communativity_tests count bit_size =
   if count = 0 then [] else
@@ -76,12 +76,12 @@ let rec associativity_tests count bit_size =
 
 
 
-let rec ladder_tests count = 
+(* let rec ladder_tests count = 
   if count < 0 then [] else 
     let test = ladder_same_test 
       ("Ladder Func Test: " ^ string_of_int count)
       (Z.of_int count) in 
-    test :: (ladder_tests (count - 1))
+    test :: (ladder_tests (count - 1)) *)
 
     
 
@@ -99,23 +99,13 @@ let ecc_tests = [
 
   same_secret_test "Small Key Test" (4 |> Z.of_int) (7 |> Z.of_int) ;
 
-  (* same_secret_test "Basic Key test" (234 |> Z.of_int) (75463 |> Z.of_int) ; *)
-  (* same_secret_test "Larger Key Test" ("8347201765604315761045784350143751034561" |> Z.of_string) ("4534825034158085927349874325" |> Z.of_string) ; *)
-
-  (* pub_key_gen_test "Foo"
-    "9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60"
-    "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a" ; *)
-
-  slow_mul_commutes "1 commutes with 2" Z.one (Z.of_int 2) ;
-  slow_mul_commutes "2 commutes with 3" (Z.of_int 2) (Z.of_int 3) ;
-  slow_mul_commutes "3 commutes with 4" (Z.of_int 3) (Z.of_int 4) ;
-  slow_mul_commutes "4 commutes with 5" (Z.of_int 4) (Z.of_int 5) ;
+  same_secret_test "Basic Key test" (234 |> Z.of_int) (75463 |> Z.of_int) ;
+  same_secret_test "Larger Key Test" ("8347201765604315761045784350143751034561" |> Z.of_string) ("4534825034158085927349874325" |> Z.of_string) ;
 
 ] 
-(* @ ladder_tests 100 *)
-(* @ communativity_tests 10 4 *)
-(* @ associativity_tests 1 1 *)
-(* @ square_assoc_tests 5 *)
+@ communativity_tests 100 400
+@ associativity_tests 100 100
+@ square_assoc_tests 555
 
 let aes_tests = [
 

@@ -16,8 +16,8 @@ val string_of_point : point -> string
 
 (** Only temporarily visibile for testing *)
 
-val slow_mul : Z.t -> point -> point
+(* val slow_mul : Z.t -> point -> point *)
 
-val ladder_mul : Z.t -> point -> point
+(* val ladder_mul : Z.t -> point -> point *)
 
 val equals : point -> point -> bool
