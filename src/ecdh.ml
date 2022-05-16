@@ -10,9 +10,7 @@ let generate_private_key bit_size =
   construct_random_integer 0 bit_size Z.zero
 
 let compute_public_key (d : Z.t) =
-  d * base (* |> get_x_coord *)
+  d * base
 
 let compute_shared_secret d p =
-  (* let p_as_point = make_point (p, Z.one) in 
-  d * p_as_point |> get_x_coord *)
-  d * p
+  d * p |> get_x_coord 

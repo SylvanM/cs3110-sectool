@@ -27,7 +27,7 @@ type m_curve = {
 }
 
 let ed25519 : m_curve = {
-  modulus = (Z.pow (2 |> Z.of_int) (255)) - (19 |> Z.of_int) ; (* The size of the field *)
+  modulus = Z.sub (Z.pow (2 |> Z.of_int) (255)) (19 |> Z.of_int) ; (* The size of the field *)
   a = 486662 |> Z.of_int ; (* The constant a *)
   order = (Z.pow (2 |> Z.of_int) (252) ) + ( "27742317777372353535851937790883648493" |> Z.of_string) ;
   base_point_x = "15112221349535400772501151409588531511454012693041857206046113283949847762202" |> Z.of_string_base 10 ;
@@ -43,10 +43,16 @@ let base = make_point (ed25519.base_point_x, ed25519.base_point_z)
 (* This is the definition of in infix mod operator that will always produce a positive integer *)
 let rec ( % ) x y =
 	let m = x mod y in
-		if m < Z.zero then
+		if m < zero then
 			((x + y) % y)
 		else
 			m
+
+(* let rec ( % ) = Z.rem *)
+
+(** TEMPORARYYY *)
+
+
 
 let add m a b =
   ((a % m) + (b % m)) % m
@@ -58,30 +64,30 @@ let sub m a b =
 let mul m a b =
   ((a % m) * (b % m)) % m
 
-(* Computes the modular multiplicative inverse of a *)
+let pow m b p =
+  Z.powm b (p |> Z.of_int) m
+
 let mul_inv m a =
   Z.invert a m
 
 let div m a b =
   mul m a (mul_inv m b)
 
-let pow m b p =
-  Z.powm b (p |> Z.of_int) m
 
-let (+) a b =
-  add ed25519.modulus a b
+let ( + ) =
+  add ed25519.modulus
 
-let (-) a b =
-  sub ed25519.modulus a b
+let ( - ) =
+  sub ed25519.modulus 
 
-let ( * ) a b =
-  mul ed25519.modulus a b
+let ( * )  =
+  mul ed25519.modulus 
 
-let ( / ) a b =
-  div ed25519.modulus a b
+let ( / )  =
+  div ed25519.modulus 
 
-let ( ** ) b p =
-  pow ed25519.modulus b p
+let ( ** )  =
+  pow ed25519.modulus 
 
 
 
@@ -92,6 +98,9 @@ let get_x_coord (p : point) =
   match p with
   | PointAtInfinty -> Z.minus_one
   | Point p -> p.x / p.z
+
+let equals p1 p2 = 
+  get_x_coord p1 = get_x_coord p2
 
 let p_double p =
   match p with 
@@ -111,7 +120,7 @@ let p_double p =
       }
 
 let p_add pi pi1 =
-  if pi = pi1 then p_double pi else
+  if (equals pi pi1) then p_double pi else
   match pi with 
   | PointAtInfinty -> pi1 
   | Point pi -> 
@@ -152,11 +161,15 @@ let power_of_two p i =
     in 
   p_tail p i
 
-let slow_mul (k : Z.t) (p : point) =
+(* let slow_mul (k : Z.t) (p : point) =
   let rec mul_tail acc i =
     if i = zero then acc else 
       mul_tail (acc + p) (Z.sub i one) in 
-  mul_tail PointAtInfinty k
+  mul_tail PointAtInfinty k *)
+
+let rec slow_mul (k : Z.t) (p : point) =
+  if k = zero then PointAtInfinty else 
+    p + (slow_mul (Z.sub k one) p)
 
 let standard_mul (k : Z.t) (p : point) =
 
@@ -178,14 +191,14 @@ let standard_mul (k : Z.t) (p : point) =
   mul_tail PointAtInfinty zero k
 
 let ladder_mul k p =
-  (* let (pk, _) = ladder p k in pk *)
-  standard_mul k p
+  let (pk, _) = ladder p k in pk
+  (* standard_mul k p *)
 
-let p_scale = slow_mul
+let p_scale = ladder_mul
 
-let ( * ) = p_scale
+let ( * ) = slow_mul
 
 let string_of_point (p : point) =
   match p with
   | PointAtInfinty -> "Inf"
-  | Point p -> p.x |> Z.to_string
+  | p -> p |> get_x_coord |> Z.to_string
