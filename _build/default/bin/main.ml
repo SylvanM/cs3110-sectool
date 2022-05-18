@@ -89,16 +89,14 @@ let rec command input =
         | Private ->
             let list =
                 []
-                |> take_int "Please enter a bitsize:"
                 |> take_string "Please enter the name of the file to write to:"
             in
-            let size = List.hd list |> int_of_string in
-            let name = List.nth list 1 in
-            let result = Sectool.Ecdh.generate_private_key size in
+            let name = List.hd list in
+            let result = Sectool.Ecdh.generate_private_key () in
             let result_string = result |> Z.to_string in
             Sectool.File_wizard.write_private_key result name;
             print_endline (
-                "\n ----- \n \n Successfully stored secret: \n\n "
+                "\n ----- \n \n Successfully stored private key: \n\n "
                 ^ result_string ^ "\n\n in file [" ^ name ^ "]. \n \n -----");
             command input
         | Public ->
@@ -113,7 +111,7 @@ let rec command input =
             let result_string = Sectool.ED25519.string_of_point result in
             Sectool.File_wizard.write_public_key result name;
             print_endline (
-                "\n ----- \n \n Successfully stored secret: \n\n "
+                "\n ----- \n \n Successfully stored public key: \n\n "
                 ^ result_string ^ "\n\n in file [" ^ name ^ "]. \n \n -----");
             command input
         | Secret ->

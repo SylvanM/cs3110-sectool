@@ -3,7 +3,11 @@
 # Shared cache: disabled
 # Workspace root: /Users/heewonahn/Documents/GitHub/cs3110-sectool
 # Auto-detected concurrency: 8
+<<<<<<< Updated upstream
 $ /Users/heewonahn/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/r0/v3n9h_kn1zzfy112f53bk5qw0000gn/T/dune_dc1bc8_output
+=======
+$ /Users/heewonahn/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/r0/v3n9h_kn1zzfy112f53bk5qw0000gn/T/dune_7a571e_output
+>>>>>>> Stashed changes
 # Dune context:
 #  { name = "default"
 #  ; kind = "default"
