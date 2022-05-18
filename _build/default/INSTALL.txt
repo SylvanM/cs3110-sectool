@@ -1,0 +1,13 @@
+Install Instructions
+
+1. Check that you have the libraries [Zarith] and [Stdio] installed.
+    If absent, these libraries can be installed using
+    [opam install zarith] and [opam install stdio] respectively.
+
+2. To run the tool, run the command `make run` in the cs3110-sectool directory.
+
+Commands are:
+
+- private: generate a private key
+- public: compute a public key from a private key file 
+- secret: compute a shared secret from a private and public key

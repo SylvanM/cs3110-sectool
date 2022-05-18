@@ -85,6 +85,7 @@ Secret configuration:
 |  public input: %s
 |  name: %s
 |  result: %s
+
  "
       (opt_string conf.private_input)
       (opt_string conf.public_input)
