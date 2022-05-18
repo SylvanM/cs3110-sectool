@@ -5,7 +5,13 @@
  (lib
   (ED25519.ml
    ED25519.mli
+   EDDSA.ml
+   EDDSA.mli
+   EncodingUtility.ml
+   EncodingUtility.mli
    META
+   ModArith.ml
+   ModArith.mli
    authors.ml
    authors.mli
    command.ml
@@ -35,14 +41,26 @@
    sectool__ED25519.cmt
    sectool__ED25519.cmti
    sectool__ED25519.cmx
+   sectool__EDDSA.cmi
+   sectool__EDDSA.cmt
+   sectool__EDDSA.cmti
+   sectool__EDDSA.cmx
    sectool__Ecdh.cmi
    sectool__Ecdh.cmt
    sectool__Ecdh.cmti
    sectool__Ecdh.cmx
+   sectool__EncodingUtility.cmi
+   sectool__EncodingUtility.cmt
+   sectool__EncodingUtility.cmti
+   sectool__EncodingUtility.cmx
    sectool__File_wizard.cmi
    sectool__File_wizard.cmt
    sectool__File_wizard.cmti
-   sectool__File_wizard.cmx))
+   sectool__File_wizard.cmx
+   sectool__ModArith.cmi
+   sectool__ModArith.cmt
+   sectool__ModArith.cmti
+   sectool__ModArith.cmx))
  (libexec (sectool.cmxs))
  (bin (cli))
  (doc (LICENSE README.md)))
@@ -75,12 +93,12 @@
      (impl)
      (intf))
     ((name EDDSA) (obj_name sectool__EDDSA) (visibility public) (impl) (intf))
+    ((name Ecdh) (obj_name sectool__Ecdh) (visibility public) (impl) (intf))
     ((name EncodingUtility)
      (obj_name sectool__EncodingUtility)
      (visibility public)
      (impl)
      (intf))
-    ((name Ecdh) (obj_name sectool__Ecdh) (visibility public) (impl) (intf))
     ((name File_wizard)
      (obj_name sectool__File_wizard)
      (visibility public)

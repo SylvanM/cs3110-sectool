@@ -7,7 +7,6 @@ val generate_private_key : unit -> Z.t
 (** [generate_private_key n] is a random integer for use as a private key
 	with maximum value [n]. *)
 
-(* val compute_public_key : Z.t -> Z.t *)
 val compute_public_key : Z.t -> point
 (** [compute_public_key f d] computes the public key from a private key d *)
 
