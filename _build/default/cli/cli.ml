@@ -36,7 +36,7 @@ let opt_string opt =
 let run cmd_conf =
   match cmd_conf with
   | Private conf ->
-      let result = Sectool.Ecdh.generate_private_key conf.bitsize in
+      let result = Sectool.Ecdh.generate_private_key () in
       let result_string = Z.to_string result in
       let name = opt_string conf.name in
       Sectool.File_wizard.write_private_key result name;
@@ -44,12 +44,11 @@ let run cmd_conf =
       "\
 
 Private configuration:
-|  bitsize: %i
+|  bitsize: 256
 |  name: %s
 |  result: %s
 
 "
-      conf.bitsize
       name
       result_string
   | Public conf ->

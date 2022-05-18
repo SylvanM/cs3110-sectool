@@ -14,4 +14,4 @@ let compute_public_key (d : Z.t) =
   d * base
 
 let compute_shared_secret d p =
-  d * p |> get_x_coord 
+  d * p

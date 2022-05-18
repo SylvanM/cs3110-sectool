@@ -11,12 +11,12 @@ val read_private_key : string -> Z.t
     Raises: [FileDoesNotExist] if [f] does not point to a valid file in /data/.
     Raises: [Malformed] if [f] is not formatted appropriately with spaces. *)
 
-val read_public_key : string -> Z.t
+val read_public_key : string -> ED25519.point
   (** [read_public_key f] reads a file and returns a point which is the public
     key *)
 
 val write_private_key : Z.t -> string -> unit
 (** [write_private_key d f] writes the key [d] to a file [f]. *)
 
-val write_public_key : Z.t -> string -> unit
+val write_public_key : ED25519.point -> string -> unit
 (** [write_public_key p f] writes the point [p] to a file [f]. *)

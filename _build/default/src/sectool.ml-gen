@@ -14,10 +14,12 @@ module ED25519 = Sectool__ED25519
 module EDDSA = Sectool__EDDSA
 
 
-(** @canonical Sectool.EncodingUtility *)
-module EncodingUtility = Sectool__EncodingUtility
 (** @canonical Sectool.Ecdh *)
 module Ecdh = Sectool__Ecdh
+
+
+(** @canonical Sectool.EncodingUtility *)
+module EncodingUtility = Sectool__EncodingUtility
 
 
 (** @canonical Sectool.File_wizard *)

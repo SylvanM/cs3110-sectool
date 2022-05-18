@@ -28,15 +28,15 @@ let read_private_key (f : string) : Z.t =
     | h::t -> Z.of_string h
     | _ -> raise (Malformed "Incorrectly Formatted")
 
-let read_public_key (f : string) : Z.t =
+let read_public_key (f : string) : ED25519.point =
   let str_list = read_file f in
   let int_list = strs_to_z str_list in
     match int_list with
-    | x :: t -> x
-    | [] -> raise (Malformed "Empty File")
+    | x::y::t -> make_point (x, y)
+    | _::[] | [] -> raise (Malformed "Empty File")
 
 let write_private_key (d : Z.t) (f : string) =
   Stdio.Out_channel.write_lines (dir_prefix ^ f) [d |> Z.to_string]
 
-let write_public_key (p : Z.t) (f : string) =
-  Stdio.Out_channel.write_lines (dir_prefix ^ f) [Z.to_string p]
+let write_public_key (p : point) (f : string) =
+  Stdio.Out_channel.write_lines (dir_prefix ^ f) [string_of_point p]
