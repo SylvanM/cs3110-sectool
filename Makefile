@@ -16,7 +16,10 @@ clean:
 	dune clean
 
 doc:
-	dune build @docx
+	dune build @doc
+
+docs:
+	dune build @doc
 
 zip:
 	rm -f sectool.zip

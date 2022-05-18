@@ -1,11 +1,11 @@
-# dune exec test/main.exe
+# dune build @doc
 # OCAMLPARAM: unset
 # Workspace root: "/Users/sylvanm/Documents/School/Freshman Year/Spring/CS
 # 3110/Final Project/cs3110-sectool"
-$ /usr/bin/getconf _NPROCESSORS_ONLN > /var/folders/07/v6k_zhd55lvcvrqr6qz39lsw0000gn/T/dune054fc0.output 2> /dev/null
+$ /usr/bin/getconf _NPROCESSORS_ONLN > /var/folders/07/v6k_zhd55lvcvrqr6qz39lsw0000gn/T/dune48ee02.output 2> /dev/null
 # Auto-detected concurrency: 10
 # disable binary cache
-$ /Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/07/v6k_zhd55lvcvrqr6qz39lsw0000gn/T/dune9420f4.output
+$ /Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/07/v6k_zhd55lvcvrqr6qz39lsw0000gn/T/dune8e2b44.output
 # Dune context:
 #  { name = "default"
 #  ; kind = "default"
@@ -114,5 +114,27 @@ $ /Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/07/v6
 #      ; windows_unicode = false
 #      }
 #  }
-# Workspace root: "/Users/sylvanm/Documents/School/Freshman Year/Spring/CS
-# 3110/Final Project/cs3110-sectool"
+$ (cd _build/default/_doc/_odoc/pkg/SecTool && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc compile --pkg SecTool -o page-index.odoc ../../../_mlds/SecTool/index.mld)
+$ (cd _build/default && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc support-files -o _doc/_html)
+$ (cd _build/default/src/.sectool.objs/byte && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc compile -I . -I ../../../_doc/_odoc/pkg/SecTool --pkg SecTool -o sectool.odoc sectool.cmt)
+$ (cd _build/default/src/.sectool.objs/byte && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc compile -I . -I ../../../_doc/_odoc/pkg/SecTool --pkg SecTool -o sectool__Authors.odoc sectool__Authors.cmti)
+$ (cd _build/default/src/.sectool.objs/byte && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc compile -I . -I ../../../_doc/_odoc/pkg/SecTool --pkg SecTool -o sectool__Command.odoc sectool__Command.cmti)
+$ (cd _build/default/src/.sectool.objs/byte && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc compile -I . -I ../../../_doc/_odoc/pkg/SecTool --pkg SecTool -o sectool__ED25519.odoc sectool__ED25519.cmti)
+$ (cd _build/default/src/.sectool.objs/byte && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc compile -I . -I ../../../_doc/_odoc/pkg/SecTool --pkg SecTool -o sectool__File_wizard.odoc sectool__File_wizard.cmti)
+$ (cd _build/default/src/.sectool.objs/byte && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc compile -I . -I ../../../_doc/_odoc/pkg/SecTool --pkg SecTool -o sectool__EncodingUtility.odoc sectool__EncodingUtility.cmti)
+$ (cd _build/default/src/.sectool.objs/byte && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc compile -I . -I ../../../_doc/_odoc/pkg/SecTool --pkg SecTool -o sectool__ModArith.odoc sectool__ModArith.cmti)
+$ (cd _build/default/src/.sectool.objs/byte && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc compile -I . -I ../../../_doc/_odoc/pkg/SecTool --pkg SecTool -o sectool__EDDSA.odoc sectool__EDDSA.cmti)
+$ (cd _build/default/src/.sectool.objs/byte && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc compile -I . -I ../../../_doc/_odoc/pkg/SecTool --pkg SecTool -o sectool__ECDH.odoc sectool__ECDH.cmti)
+$ (cd _build/default/_doc/_html && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc html -I ../_odoc/pkg/SecTool -I ../../src/.sectool.objs/byte -o . ../../src/.sectool.objs/byte/sectool__Authors.odoc)
+$ (cd _build/default/_doc/_html && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc html -I ../_odoc/pkg/SecTool -I ../../src/.sectool.objs/byte -o . ../../src/.sectool.objs/byte/sectool__ED25519.odoc)
+$ (cd _build/default/_doc/_html && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc html -I ../_odoc/pkg/SecTool -I ../../src/.sectool.objs/byte -o . ../../src/.sectool.objs/byte/sectool__Command.odoc)
+$ (cd _build/default/_doc/_html && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc html -I ../_odoc/pkg/SecTool -I ../../src/.sectool.objs/byte -o . ../../src/.sectool.objs/byte/sectool__EDDSA.odoc)
+$ (cd _build/default/_doc/_html && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc html -I ../_odoc/pkg/SecTool -I ../../src/.sectool.objs/byte -o . ../../src/.sectool.objs/byte/sectool__EncodingUtility.odoc)
+$ (cd _build/default/_doc/_html && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc html -I ../_odoc/pkg/SecTool -I ../../src/.sectool.objs/byte -o . ../../src/.sectool.objs/byte/sectool__ModArith.odoc)
+$ (cd _build/default/_doc/_html && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc html -I ../_odoc/pkg/SecTool -I ../../src/.sectool.objs/byte -o . ../../src/.sectool.objs/byte/sectool__File_wizard.odoc)
+$ (cd _build/default/_doc/_html && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc html -I ../_odoc/pkg/SecTool -I ../../src/.sectool.objs/byte -o . ../_odoc/pkg/SecTool/page-index.odoc)
+$ (cd _build/default/_doc/_html && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc html -I ../_odoc/pkg/SecTool -I ../../src/.sectool.objs/byte -o . ../../src/.sectool.objs/byte/sectool__ECDH.odoc)
+$ (cd _build/default/_doc/_html && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc html -I ../_odoc/pkg/SecTool -I ../../src/.sectool.objs/byte -o . ../../src/.sectool.objs/byte/sectool.odoc)
+> File "../../src/.sectool.objs/byte/sectool.odoc":
+> Warning: Couldn't find the following modules:
+>   Z
