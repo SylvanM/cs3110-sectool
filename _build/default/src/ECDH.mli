@@ -13,6 +13,6 @@ val compute_public_key : Z.t -> point
 
 (* val compute_shared_secret : Z.t -> Z.t -> Z.t *)
 val compute_shared_secret : Z.t -> point -> Z.t
-(** [compute_shared_secret f d p] uses this party's private key and the other 
+(** [compute_shared_secret f d p] uses this party's private key and the other
 	party's pubic key p to generate shared secret *)
 

@@ -1,1 +1,1 @@
-src/ECDH.ml: ED25519 Int Random Z
+src/ecdh.ml: ED25519 Int Random Z

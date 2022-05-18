@@ -1,0 +1,6 @@
+(** @canonical Dune__exe.Cli *)
+module Cli = Dune__exe__Cli
+
+
+(** @canonical Dune__exe.Poly *)
+module Poly = Dune__exe__Poly

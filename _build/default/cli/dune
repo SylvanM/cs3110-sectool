@@ -1,0 +1,4 @@
+(executable
+(public_name cli)
+ (name cli)
+ (libraries SecTool zarith cmdliner ANSITerminal))

@@ -4,15 +4,10 @@ Install Instructions
     If absent, these libraries can be installed using
     [opam install zarith] and [opam install stdio] respectively.
 
-2. Since this sprint was focused on the underlying mathematics of Elliptic
-    Curve Cryptography rather than the command line interface, we will use
-    utop to demonstrate our work. First, run [make utop].
+2. To run the tool, run the command `make run` in the cs3110-sectool directory.
 
-3. Then, open the necessary modules in order to tidy up namespace usage:
+Commands are:
 
-    open Sectool;;
-    open Elliptic_curve;;
-    open Ecdh;;
-    open File_wizard;;
-
-4. You should now be able to access all the functionality of MS1.
+- private: generate a private key
+- public: compute a public key from a private key file 
+- secret: compute a shared secret from a private and public key

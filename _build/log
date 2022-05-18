@@ -1,56 +1,59 @@
-# dune build @doc
+# dune exec bin/main.exe
 # OCAMLPARAM: unset
-# Workspace root: "/Users/sylvanm/Documents/School/Freshman Year/Spring/CS
-# 3110/Final Project/cs3110-sectool"
-$ /usr/bin/getconf _NPROCESSORS_ONLN > /var/folders/07/v6k_zhd55lvcvrqr6qz39lsw0000gn/T/dune48ee02.output 2> /dev/null
-# Auto-detected concurrency: 10
-# disable binary cache
-$ /Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/07/v6k_zhd55lvcvrqr6qz39lsw0000gn/T/dune8e2b44.output
+# Shared cache: disabled
+# Workspace root: /Users/heewonahn/Documents/GitHub/cs3110-sectool
+# Auto-detected concurrency: 8
+<<<<<<< Updated upstream
+$ /Users/heewonahn/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/r0/v3n9h_kn1zzfy112f53bk5qw0000gn/T/dune_a23cc7_output
+=======
+$ /Users/heewonahn/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/r0/v3n9h_kn1zzfy112f53bk5qw0000gn/T/dune_5989fd_output
+>>>>>>> Stashed changes
 # Dune context:
 #  { name = "default"
 #  ; kind = "default"
-#  ; profile = Dyn
+#  ; profile = Dev
 #  ; merlin = true
 #  ; for_host = None
 #  ; fdo_target_exe = None
 #  ; build_dir = "default"
 #  ; toplevel_path =
-#      Some External "/Users/sylvanm/.opam/cs3110-2021fa/lib/toplevel"
-#  ; ocaml_bin = External "/Users/sylvanm/.opam/cs3110-2021fa/bin"
-#  ; ocaml = Ok External "/Users/sylvanm/.opam/cs3110-2021fa/bin/ocaml"
-#  ; ocamlc = External "/Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlc.opt"
+#      Some External "/Users/heewonahn/.opam/cs3110-2021fa/lib/toplevel"
+#  ; ocaml_bin = External "/Users/heewonahn/.opam/cs3110-2021fa/bin"
+#  ; ocaml = Ok External "/Users/heewonahn/.opam/cs3110-2021fa/bin/ocaml"
+#  ; ocamlc = External "/Users/heewonahn/.opam/cs3110-2021fa/bin/ocamlc.opt"
 #  ; ocamlopt =
-#      Ok External "/Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlopt.opt"
+#      Ok External "/Users/heewonahn/.opam/cs3110-2021fa/bin/ocamlopt.opt"
 #  ; ocamldep =
-#      Ok External "/Users/sylvanm/.opam/cs3110-2021fa/bin/ocamldep.opt"
+#      Ok External "/Users/heewonahn/.opam/cs3110-2021fa/bin/ocamldep.opt"
 #  ; ocamlmklib =
-#      Ok External "/Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlmklib.opt"
+#      Ok External "/Users/heewonahn/.opam/cs3110-2021fa/bin/ocamlmklib.opt"
 #  ; env =
 #      map
-#        { "DUNE_OCAML_HARDCODED" : "/Users/sylvanm/.opam/cs3110-2021fa/lib"
-#        ; "DUNE_OCAML_STDLIB" : "/Users/sylvanm/.opam/cs3110-2021fa/lib/ocaml"
+#        { "DUNE_OCAML_HARDCODED" : "/Users/heewonahn/.opam/cs3110-2021fa/lib"
+#        ; "DUNE_OCAML_STDLIB" :
+#            "/Users/heewonahn/.opam/cs3110-2021fa/lib/ocaml"
 #        ; "DUNE_SOURCEROOT" :
-#            "/Users/sylvanm/Documents/School/Freshman Year/Spring/CS 3110/Final Project/cs3110-sectool"
+#            "/Users/heewonahn/Documents/GitHub/cs3110-sectool"
 #        ; "INSIDE_DUNE" :
-#            "/Users/sylvanm/Documents/School/Freshman Year/Spring/CS 3110/Final Project/cs3110-sectool/_build/default"
+#            "/Users/heewonahn/Documents/GitHub/cs3110-sectool/_build/default"
 #        ; "OCAMLFIND_IGNORE_DUPS_IN" :
-#            "/Users/sylvanm/Documents/School/Freshman Year/Spring/CS 3110/Final Project/cs3110-sectool/_build/install/default/lib"
+#            "/Users/heewonahn/Documents/GitHub/cs3110-sectool/_build/install/default/lib"
 #        ; "OCAMLPATH" :
-#            "/Users/sylvanm/Documents/School/Freshman Year/Spring/CS 3110/Final Project/cs3110-sectool/_build/install/default/lib"
+#            "/Users/heewonahn/Documents/GitHub/cs3110-sectool/_build/install/default/lib"
 #        ; "OCAMLTOP_INCLUDE_PATH" :
-#            "/Users/sylvanm/Documents/School/Freshman Year/Spring/CS 3110/Final Project/cs3110-sectool/_build/install/default/lib/toplevel"
+#            "/Users/heewonahn/Documents/GitHub/cs3110-sectool/_build/install/default/lib/toplevel"
 #        ; "OCAML_COLOR" : "always"
 #        ; "OPAMCOLOR" : "always"
 #        }
-#  ; findlib_path = [ External "/Users/sylvanm/.opam/cs3110-2021fa/lib" ]
+#  ; findlib_path = [ External "/Users/heewonahn/.opam/cs3110-2021fa/lib" ]
 #  ; arch_sixtyfour = true
 #  ; natdynlink_supported = true
 #  ; supports_shared_libraries = true
 #  ; ocaml_config =
 #      { version = "4.12.0"
 #      ; standard_library_default =
-#          "/Users/sylvanm/.opam/cs3110-2021fa/lib/ocaml"
-#      ; standard_library = "/Users/sylvanm/.opam/cs3110-2021fa/lib/ocaml"
+#          "/Users/heewonahn/.opam/cs3110-2021fa/lib/ocaml"
+#      ; standard_library = "/Users/heewonahn/.opam/cs3110-2021fa/lib/ocaml"
 #      ; standard_runtime = "the_standard_runtime_variable_was_deleted"
 #      ; ccomp_type = "cc"
 #      ; c_compiler = "cc"
@@ -76,6 +79,7 @@ $ /Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/07/v6
 #          ; "-D_REENTRANT"
 #          ]
 #      ; native_c_libraries = [ "-lm" ]
+#      ; native_pack_linker = [ "ld"; "-r"; "-o" ]
 #      ; cc_profile = []
 #      ; architecture = "arm64"
 #      ; model = "default"
@@ -93,8 +97,8 @@ $ /Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/07/v6
 #      ; os_type = "Unix"
 #      ; default_executable_name = "a.out"
 #      ; systhread_supported = true
-#      ; host = "aarch64-apple-darwin21.2.0"
-#      ; target = "aarch64-apple-darwin21.2.0"
+#      ; host = "aarch64-apple-darwin20.5.0"
+#      ; target = "aarch64-apple-darwin20.5.0"
 #      ; profiling = false
 #      ; flambda = false
 #      ; spacetime = false
@@ -114,27 +118,10 @@ $ /Users/sylvanm/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/07/v6
 #      ; windows_unicode = false
 #      }
 #  }
-$ (cd _build/default/_doc/_odoc/pkg/SecTool && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc compile --pkg SecTool -o page-index.odoc ../../../_mlds/SecTool/index.mld)
-$ (cd _build/default && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc support-files -o _doc/_html)
-$ (cd _build/default/src/.sectool.objs/byte && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc compile -I . -I ../../../_doc/_odoc/pkg/SecTool --pkg SecTool -o sectool.odoc sectool.cmt)
-$ (cd _build/default/src/.sectool.objs/byte && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc compile -I . -I ../../../_doc/_odoc/pkg/SecTool --pkg SecTool -o sectool__Authors.odoc sectool__Authors.cmti)
-$ (cd _build/default/src/.sectool.objs/byte && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc compile -I . -I ../../../_doc/_odoc/pkg/SecTool --pkg SecTool -o sectool__Command.odoc sectool__Command.cmti)
-$ (cd _build/default/src/.sectool.objs/byte && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc compile -I . -I ../../../_doc/_odoc/pkg/SecTool --pkg SecTool -o sectool__ED25519.odoc sectool__ED25519.cmti)
-$ (cd _build/default/src/.sectool.objs/byte && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc compile -I . -I ../../../_doc/_odoc/pkg/SecTool --pkg SecTool -o sectool__File_wizard.odoc sectool__File_wizard.cmti)
-$ (cd _build/default/src/.sectool.objs/byte && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc compile -I . -I ../../../_doc/_odoc/pkg/SecTool --pkg SecTool -o sectool__EncodingUtility.odoc sectool__EncodingUtility.cmti)
-$ (cd _build/default/src/.sectool.objs/byte && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc compile -I . -I ../../../_doc/_odoc/pkg/SecTool --pkg SecTool -o sectool__ModArith.odoc sectool__ModArith.cmti)
-$ (cd _build/default/src/.sectool.objs/byte && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc compile -I . -I ../../../_doc/_odoc/pkg/SecTool --pkg SecTool -o sectool__EDDSA.odoc sectool__EDDSA.cmti)
-$ (cd _build/default/src/.sectool.objs/byte && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc compile -I . -I ../../../_doc/_odoc/pkg/SecTool --pkg SecTool -o sectool__ECDH.odoc sectool__ECDH.cmti)
-$ (cd _build/default/_doc/_html && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc html -I ../_odoc/pkg/SecTool -I ../../src/.sectool.objs/byte -o . ../../src/.sectool.objs/byte/sectool__Authors.odoc)
-$ (cd _build/default/_doc/_html && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc html -I ../_odoc/pkg/SecTool -I ../../src/.sectool.objs/byte -o . ../../src/.sectool.objs/byte/sectool__ED25519.odoc)
-$ (cd _build/default/_doc/_html && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc html -I ../_odoc/pkg/SecTool -I ../../src/.sectool.objs/byte -o . ../../src/.sectool.objs/byte/sectool__Command.odoc)
-$ (cd _build/default/_doc/_html && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc html -I ../_odoc/pkg/SecTool -I ../../src/.sectool.objs/byte -o . ../../src/.sectool.objs/byte/sectool__EDDSA.odoc)
-$ (cd _build/default/_doc/_html && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc html -I ../_odoc/pkg/SecTool -I ../../src/.sectool.objs/byte -o . ../../src/.sectool.objs/byte/sectool__EncodingUtility.odoc)
-$ (cd _build/default/_doc/_html && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc html -I ../_odoc/pkg/SecTool -I ../../src/.sectool.objs/byte -o . ../../src/.sectool.objs/byte/sectool__ModArith.odoc)
-$ (cd _build/default/_doc/_html && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc html -I ../_odoc/pkg/SecTool -I ../../src/.sectool.objs/byte -o . ../../src/.sectool.objs/byte/sectool__File_wizard.odoc)
-$ (cd _build/default/_doc/_html && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc html -I ../_odoc/pkg/SecTool -I ../../src/.sectool.objs/byte -o . ../_odoc/pkg/SecTool/page-index.odoc)
-$ (cd _build/default/_doc/_html && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc html -I ../_odoc/pkg/SecTool -I ../../src/.sectool.objs/byte -o . ../../src/.sectool.objs/byte/sectool__ECDH.odoc)
-$ (cd _build/default/_doc/_html && /Users/sylvanm/.opam/cs3110-2021fa/bin/odoc html -I ../_odoc/pkg/SecTool -I ../../src/.sectool.objs/byte -o . ../../src/.sectool.objs/byte/sectool.odoc)
-> File "../../src/.sectool.objs/byte/sectool.odoc":
-> Warning: Couldn't find the following modules:
->   Z
+<<<<<<< Updated upstream
+$ (cd _build/default && /Users/heewonahn/.opam/cs3110-2021fa/bin/ocamlc.opt -w +a-4-6-7-9-27-29-30-32..42-44-45-48-50-60-66-67 -warn-error -a+31 -g -bin-annot -I bin/.main.eobjs/byte -I /Users/heewonahn/.opam/cs3110-2021fa/lib/ANSITerminal -I /Users/heewonahn/.opam/cs3110-2021fa/lib/base -I /Users/heewonahn/.opam/cs3110-2021fa/lib/base/base_internalhash_types -I /Users/heewonahn/.opam/cs3110-2021fa/lib/base/caml -I /Users/heewonahn/.opam/cs3110-2021fa/lib/base/shadow_stdlib -I /Users/heewonahn/.opam/cs3110-2021fa/lib/biniou -I /Users/heewonahn/.opam/cs3110-2021fa/lib/easy-format -I /Users/heewonahn/.opam/cs3110-2021fa/lib/sexplib0 -I /Users/heewonahn/.opam/cs3110-2021fa/lib/stdio -I /Users/heewonahn/.opam/cs3110-2021fa/lib/yojson -I /Users/heewonahn/.opam/cs3110-2021fa/lib/zarith -I src/.sectool.objs/byte -no-alias-deps -opaque -o bin/.main.eobjs/byte/dune__exe__Main.cmo -c -impl bin/main.ml)
+$ (cd _build/default && /Users/heewonahn/.opam/cs3110-2021fa/bin/ocamlopt.opt -w +a-4-6-7-9-27-29-30-32..42-44-45-48-50-60-66-67 -warn-error -a+31 -g -I bin/.main.eobjs/byte -I bin/.main.eobjs/native -I /Users/heewonahn/.opam/cs3110-2021fa/lib/ANSITerminal -I /Users/heewonahn/.opam/cs3110-2021fa/lib/base -I /Users/heewonahn/.opam/cs3110-2021fa/lib/base/base_internalhash_types -I /Users/heewonahn/.opam/cs3110-2021fa/lib/base/caml -I /Users/heewonahn/.opam/cs3110-2021fa/lib/base/shadow_stdlib -I /Users/heewonahn/.opam/cs3110-2021fa/lib/biniou -I /Users/heewonahn/.opam/cs3110-2021fa/lib/easy-format -I /Users/heewonahn/.opam/cs3110-2021fa/lib/sexplib0 -I /Users/heewonahn/.opam/cs3110-2021fa/lib/stdio -I /Users/heewonahn/.opam/cs3110-2021fa/lib/yojson -I /Users/heewonahn/.opam/cs3110-2021fa/lib/zarith -I src/.sectool.objs/byte -I src/.sectool.objs/native -intf-suffix .ml -no-alias-deps -opaque -o bin/.main.eobjs/native/dune__exe__Main.cmx -c -impl bin/main.ml)
+$ (cd _build/default && /Users/heewonahn/.opam/cs3110-2021fa/bin/ocamlopt.opt -w +a-4-6-7-9-27-29-30-32..42-44-45-48-50-60-66-67 -warn-error -a+31 -g -o bin/main.exe /Users/heewonahn/.opam/cs3110-2021fa/lib/easy-format/easy_format.cmxa /Users/heewonahn/.opam/cs3110-2021fa/lib/biniou/biniou.cmxa /Users/heewonahn/.opam/cs3110-2021fa/lib/yojson/yojson.cmxa /Users/heewonahn/.opam/cs3110-2021fa/lib/base/base_internalhash_types/base_internalhash_types.cmxa -I /Users/heewonahn/.opam/cs3110-2021fa/lib/base/base_internalhash_types /Users/heewonahn/.opam/cs3110-2021fa/lib/base/caml/caml.cmxa /Users/heewonahn/.opam/cs3110-2021fa/lib/sexplib0/sexplib0.cmxa /Users/heewonahn/.opam/cs3110-2021fa/lib/base/shadow_stdlib/shadow_stdlib.cmxa /Users/heewonahn/.opam/cs3110-2021fa/lib/base/base.cmxa -I /Users/heewonahn/.opam/cs3110-2021fa/lib/base /Users/heewonahn/.opam/cs3110-2021fa/lib/stdio/stdio.cmxa /Users/heewonahn/.opam/cs3110-2021fa/lib/zarith/zarith.cmxa -I /Users/heewonahn/.opam/cs3110-2021fa/lib/zarith src/sectool.cmxa /Users/heewonahn/.opam/cs3110-2021fa/lib/ocaml/unix.cmxa -I /Users/heewonahn/.opam/cs3110-2021fa/lib/ocaml -I /Users/heewonahn/.opam/cs3110-2021fa/lib/ocaml /Users/heewonahn/.opam/cs3110-2021fa/lib/ANSITerminal/ANSITerminal.cmxa -I /Users/heewonahn/.opam/cs3110-2021fa/lib/ANSITerminal bin/.main.eobjs/native/dune__exe__Main.cmx)
+> ld: warning: directory not found for option '-L/opt/local/lib'
+=======
+>>>>>>> Stashed changes
