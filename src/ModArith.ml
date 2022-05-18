@@ -25,6 +25,8 @@ module type ModOps = sig
 
   val ( ** ) : Z.t -> int -> Z.t
 
+  val inv : Z.t -> Z.t
+
 end
 
 module Make (M : ModulusContainer) : ModOps = struct
@@ -63,5 +65,7 @@ module Make (M : ModulusContainer) : ModOps = struct
   
   let ( ** )  =
     pow M.modulus 
+
+  let inv = mul_inv M.modulus
 
 end

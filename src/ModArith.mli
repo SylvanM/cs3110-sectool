@@ -20,6 +20,8 @@ module type ModOps = sig
 
   val ( ** ) : Z.t -> int -> Z.t
 
+  val inv : Z.t -> Z.t
+
 end
 
 module Make : functor (M : ModulusContainer) -> ModOps

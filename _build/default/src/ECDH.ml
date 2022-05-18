@@ -1,6 +1,7 @@
 open ED25519
 
 let generate_private_key () =
+  Random.self_init () ;
   let rec construct_random_integer (i : int) (bits_left : int) (acc : Z.t) =
     if bits_left <= 0 then acc else
       construct_random_integer (Int.add i 1) (bits_left - 30)

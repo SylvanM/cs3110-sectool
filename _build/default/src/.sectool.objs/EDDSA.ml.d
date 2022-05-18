@@ -1,1 +1,1 @@
-src/EDDSA.ml: ED25519 EncodingUtility ModArith Sha512 Z
+src/EDDSA.ml: ECDH ED25519 EncodingUtility ModArith Sha256 Z

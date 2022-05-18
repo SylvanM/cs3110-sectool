@@ -18,3 +18,5 @@ val verify : Z.t -> ED25519.point -> signature -> bool
 val digest_to_data : signature -> Z.t 
 
 val data_to_digest : Z.t -> signature
+
+val string_of_digest : signature -> string

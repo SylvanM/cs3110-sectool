@@ -27,7 +27,8 @@ let message_can_be_verified name message =
 
 let make_digest message priv_key =
   let encoded_message = encode_string message in 
-  sign encoded_message priv_key
+  let signature = sign encoded_message priv_key in 
+  print_string (signature |> string_of_digest) ; signature
 
 let str_encoding_test name str =
   name >:: fun _ ->
@@ -62,7 +63,7 @@ let digest_encoding_symmetry_test name message =
     let priv_key = generate_private_key () in 
     let digest = make_digest message priv_key in 
     let decoded = digest |> digest_to_data |> data_to_digest in 
-    assert_equal digest decoded
+    assert_equal digest decoded ~printer:string_of_digest
 
 let rec communativity_tests count =
   if count = 0 then [] else
