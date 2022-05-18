@@ -1,21 +1,9 @@
-# dune build @install
+# dune build @doc
 # OCAMLPARAM: unset
 # Shared cache: disabled
 # Workspace root: /Users/heewonahn/Documents/GitHub/cs3110-sectool
 # Auto-detected concurrency: 8
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-$ /Users/heewonahn/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/r0/v3n9h_kn1zzfy112f53bk5qw0000gn/T/dune_dc1bc8_output
-=======
-$ /Users/heewonahn/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/r0/v3n9h_kn1zzfy112f53bk5qw0000gn/T/dune_7a571e_output
->>>>>>> Stashed changes
-=======
-$ /Users/heewonahn/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/r0/v3n9h_kn1zzfy112f53bk5qw0000gn/T/dune_7a571e_output
->>>>>>> Stashed changes
-=======
-$ /Users/heewonahn/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/r0/v3n9h_kn1zzfy112f53bk5qw0000gn/T/dune_7a571e_output
->>>>>>> Stashed changes
+$ /Users/heewonahn/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/r0/v3n9h_kn1zzfy112f53bk5qw0000gn/T/dune_a161d7_output
 # Dune context:
 #  { name = "default"
 #  ; kind = "default"
@@ -126,3 +114,21 @@ $ /Users/heewonahn/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/r0/
 #      ; windows_unicode = false
 #      }
 #  }
+$ (cd _build/default && /Users/heewonahn/.opam/cs3110-2021fa/bin/odoc support-files -o _doc/_html)
+$ (cd _build/default/_doc/_odoc/pkg/SecTool && /Users/heewonahn/.opam/cs3110-2021fa/bin/odoc compile --pkg SecTool -o page-index.odoc ../../../_mlds/SecTool/index.mld)
+$ (cd _build/default/src/.sectool.objs/byte && /Users/heewonahn/.opam/cs3110-2021fa/bin/odoc compile -I . -I ../../../_doc/_odoc/pkg/SecTool --pkg SecTool -o sectool.odoc sectool.cmt)
+$ (cd _build/default/src/.sectool.objs/byte && /Users/heewonahn/.opam/cs3110-2021fa/bin/odoc compile -I . -I ../../../_doc/_odoc/pkg/SecTool --pkg SecTool -o sectool__Authors.odoc sectool__Authors.cmti)
+$ (cd _build/default/src/.sectool.objs/byte && /Users/heewonahn/.opam/cs3110-2021fa/bin/odoc compile -I . -I ../../../_doc/_odoc/pkg/SecTool --pkg SecTool -o sectool__ED25519.odoc sectool__ED25519.cmti)
+$ (cd _build/default/src/.sectool.objs/byte && /Users/heewonahn/.opam/cs3110-2021fa/bin/odoc compile -I . -I ../../../_doc/_odoc/pkg/SecTool --pkg SecTool -o sectool__Command.odoc sectool__Command.cmti)
+$ (cd _build/default/src/.sectool.objs/byte && /Users/heewonahn/.opam/cs3110-2021fa/bin/odoc compile -I . -I ../../../_doc/_odoc/pkg/SecTool --pkg SecTool -o sectool__EncodingUtility.odoc sectool__EncodingUtility.cmti)
+$ (cd _build/default/src/.sectool.objs/byte && /Users/heewonahn/.opam/cs3110-2021fa/bin/odoc compile -I . -I ../../../_doc/_odoc/pkg/SecTool --pkg SecTool -o sectool__ModArith.odoc sectool__ModArith.cmti)
+$ (cd _build/default/src/.sectool.objs/byte && /Users/heewonahn/.opam/cs3110-2021fa/bin/odoc compile -I . -I ../../../_doc/_odoc/pkg/SecTool --pkg SecTool -o sectool__EDDSA.odoc sectool__EDDSA.cmti)
+$ (cd _build/default/src/.sectool.objs/byte && /Users/heewonahn/.opam/cs3110-2021fa/bin/odoc compile -I . -I ../../../_doc/_odoc/pkg/SecTool --pkg SecTool -o sectool__Ecdh.odoc sectool__Ecdh.cmti)
+$ (cd _build/default/src/.sectool.objs/byte && /Users/heewonahn/.opam/cs3110-2021fa/bin/odoc compile -I . -I ../../../_doc/_odoc/pkg/SecTool --pkg SecTool -o sectool__File_wizard.odoc sectool__File_wizard.cmti)
+$ (cd _build/default/_doc/_html && /Users/heewonahn/.opam/cs3110-2021fa/bin/odoc link -I ../_odoc/pkg/SecTool -I ../../src/.sectool.objs/byte -o ../_odocls/SecTool/page-index.odocl ../_odoc/pkg/SecTool/page-index.odoc)
+$ (cd _build/default/_doc/_html && /Users/heewonahn/.opam/cs3110-2021fa/bin/odoc link -I ../_odoc/pkg/SecTool -I ../../src/.sectool.objs/byte -o ../_odocls/SecTool/sectool.odocl ../../src/.sectool.objs/byte/sectool.odoc)
+> File "../../src/.sectool.objs/byte/sectool.odoc":
+> Warning: Couldn't find the following modules:
+>   Z
+$ (cd _build/default/_doc/_html && /Users/heewonahn/.opam/cs3110-2021fa/bin/odoc html-generate -o . ../_odocls/SecTool/page-index.odocl)
+$ (cd _build/default/_doc/_html && /Users/heewonahn/.opam/cs3110-2021fa/bin/odoc html-generate -o . ../_odocls/SecTool/sectool.odocl)
