@@ -1,0 +1,89 @@
+(lang dune 3.0)
+(name SecTool)
+(sections (lib .) (libexec .) (bin ../../bin) (doc ../../doc/SecTool))
+(files
+ (lib
+  (ED25519.ml
+   ED25519.mli
+   META
+   authors.ml
+   authors.mli
+   command.ml
+   command.mli
+   dune-package
+   ecdh.ml
+   ecdh.mli
+   file_wizard.ml
+   file_wizard.mli
+   opam
+   sectool.a
+   sectool.cma
+   sectool.cmi
+   sectool.cmt
+   sectool.cmx
+   sectool.cmxa
+   sectool.ml
+   sectool__Authors.cmi
+   sectool__Authors.cmt
+   sectool__Authors.cmti
+   sectool__Authors.cmx
+   sectool__Command.cmi
+   sectool__Command.cmt
+   sectool__Command.cmti
+   sectool__Command.cmx
+   sectool__ED25519.cmi
+   sectool__ED25519.cmt
+   sectool__ED25519.cmti
+   sectool__ED25519.cmx
+   sectool__Ecdh.cmi
+   sectool__Ecdh.cmt
+   sectool__Ecdh.cmti
+   sectool__Ecdh.cmx
+   sectool__File_wizard.cmi
+   sectool__File_wizard.cmt
+   sectool__File_wizard.cmti
+   sectool__File_wizard.cmx))
+ (libexec (sectool.cmxs))
+ (bin (cli))
+ (doc (LICENSE README.md)))
+(library
+ (name SecTool)
+ (kind normal)
+ (archives (byte sectool.cma) (native sectool.cmxa))
+ (plugins (byte sectool.cma) (native sectool.cmxs))
+ (native_archives sectool.a)
+ (requires yojson stdio zarith)
+ (main_module_name Sectool)
+ (modes byte native)
+ (modules
+  (wrapped
+   (main_module_name Sectool)
+   (modules
+    ((name Authors)
+     (obj_name sectool__Authors)
+     (visibility public)
+     (impl)
+     (intf))
+    ((name Command)
+     (obj_name sectool__Command)
+     (visibility public)
+     (impl)
+     (intf))
+    ((name ED25519)
+     (obj_name sectool__ED25519)
+     (visibility public)
+     (impl)
+     (intf))
+    ((name Ecdh) (obj_name sectool__Ecdh) (visibility public) (impl) (intf))
+    ((name File_wizard)
+     (obj_name sectool__File_wizard)
+     (visibility public)
+     (impl)
+     (intf)))
+   (alias_module
+    (name Sectool)
+    (obj_name sectool)
+    (visibility public)
+    (kind alias)
+    (impl))
+   (wrapped true))))

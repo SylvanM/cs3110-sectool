@@ -1,0 +1,6 @@
+(** @canonical Dune__exe.Main *)
+module Main = Dune__exe__Main
+
+
+(** @canonical Dune__exe.Testing_constants *)
+module Testing_constants = Dune__exe__Testing_constants

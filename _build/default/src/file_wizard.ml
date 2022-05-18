@@ -16,13 +16,13 @@ let strs_to_z (l : string list) : Z.t list =
 (** *)
 
 let read_file (f : string) : string list =
-  match Stdio.In_channel.read_lines (dir_prefix ^ f) with
+  match Stdio.In_channel.read_lines f with
   | exception e -> raise (FileDoesNotExist (f ^ " does not exist"))
   | [] -> raise (Malformed "Empty File")
   | h::t -> String.split_on_char ' ' h
 
 let read_private_key (f : string) : Z.t =
-  let list = Stdio.In_channel.read_lines (dir_prefix ^ f) in
+  let list = Stdio.In_channel.read_lines f in
     match list with
     | exception e -> raise (FileDoesNotExist (f ^ " does not exist"))
     | h::t -> Z.of_string h

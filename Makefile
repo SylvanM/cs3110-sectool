@@ -1,7 +1,8 @@
-.PHONY: test check
+.PHONY: build
 
 build:
-	dune build
+	dune build @install
+	test -e ./cli/bin || ln -s ./cli/bin
 
 utop:
 	OCAMLRUNPARAM=b dune utop src
