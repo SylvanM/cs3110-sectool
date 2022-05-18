@@ -1,1 +1,1 @@
-src/ED25519.ml: Int Z
+src/ED25519.ml: ModArith Z

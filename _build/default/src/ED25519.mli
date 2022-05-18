@@ -3,17 +3,23 @@
 (** A point in a finite field *)
 type point
 
-(** [p + q] adds p and pq in field ed25519. *)
-val ( + ) : point -> point -> point
+val get_x_coord : point -> Z.t
 
-(** [k * p] *)
-val ( * ) : Z.t -> point -> point
+val make_point : Z.t * Z.t -> point
+
+val raw_rep : point -> (Z.t * Z.t)
+(** The raw representation of a point *)
 
 val base : point
 
-val get_x_coord : point -> Z.t
+val ( + ) : point -> point -> point
+(** The group operation of point arithmetic *)
 
-val make_int_point : int * int -> point
-val make_point : Z.t * Z.t -> point
+val ( * ) : Z.t -> point -> point
+(** The group operation repeated on a point *)
 
 val string_of_point : point -> string
+
+val order : Z.t
+
+val equals : point -> point -> bool

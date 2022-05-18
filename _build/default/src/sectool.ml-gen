@@ -10,9 +10,19 @@ module Command = Sectool__Command
 module ED25519 = Sectool__ED25519
 
 
+(** @canonical Sectool.EDDSA *)
+module EDDSA = Sectool__EDDSA
+
+
+(** @canonical Sectool.EncodingUtility *)
+module EncodingUtility = Sectool__EncodingUtility
 (** @canonical Sectool.Ecdh *)
 module Ecdh = Sectool__Ecdh
 
 
 (** @canonical Sectool.File_wizard *)
 module File_wizard = Sectool__File_wizard
+
+
+(** @canonical Sectool.ModArith *)
+module ModArith = Sectool__ModArith
