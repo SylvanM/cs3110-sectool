@@ -1,9 +1,17 @@
+<<<<<<< Updated upstream
 # dune build @doc
+=======
+# dune build @install
+>>>>>>> Stashed changes
 # OCAMLPARAM: unset
 # Shared cache: disabled
 # Workspace root: /Users/heewonahn/Documents/GitHub/cs3110-sectool
 # Auto-detected concurrency: 8
+<<<<<<< Updated upstream
 $ /Users/heewonahn/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/r0/v3n9h_kn1zzfy112f53bk5qw0000gn/T/dune_a161d7_output
+=======
+$ /Users/heewonahn/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/r0/v3n9h_kn1zzfy112f53bk5qw0000gn/T/dune_7a571e_output
+>>>>>>> Stashed changes
 # Dune context:
 #  { name = "default"
 #  ; kind = "default"
@@ -114,6 +122,7 @@ $ /Users/heewonahn/.opam/cs3110-2021fa/bin/ocamlc.opt -config > /var/folders/r0/
 #      ; windows_unicode = false
 #      }
 #  }
+<<<<<<< Updated upstream
 $ (cd _build/default && /Users/heewonahn/.opam/cs3110-2021fa/bin/odoc support-files -o _doc/_html)
 $ (cd _build/default/_doc/_odoc/pkg/SecTool && /Users/heewonahn/.opam/cs3110-2021fa/bin/odoc compile --pkg SecTool -o page-index.odoc ../../../_mlds/SecTool/index.mld)
 $ (cd _build/default/src/.sectool.objs/byte && /Users/heewonahn/.opam/cs3110-2021fa/bin/odoc compile -I . -I ../../../_doc/_odoc/pkg/SecTool --pkg SecTool -o sectool.odoc sectool.cmt)
@@ -132,3 +141,5 @@ $ (cd _build/default/_doc/_html && /Users/heewonahn/.opam/cs3110-2021fa/bin/odoc
 >   Z
 $ (cd _build/default/_doc/_html && /Users/heewonahn/.opam/cs3110-2021fa/bin/odoc html-generate -o . ../_odocls/SecTool/page-index.odocl)
 $ (cd _build/default/_doc/_html && /Users/heewonahn/.opam/cs3110-2021fa/bin/odoc html-generate -o . ../_odocls/SecTool/sectool.odocl)
+=======
+>>>>>>> Stashed changes
