@@ -1,1 +1,1 @@
-test/main.ml: ECDH ED25519 EDDSA EncodingUtility List OUnit2 Sectool Testing_constants Z
+test/main.ml: ED25519 EDDSA Ecdh EncodingUtility List OUnit2 Sectool Testing_constants Z

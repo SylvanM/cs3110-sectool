@@ -1,4 +1,5 @@
 .PHONY: build
+.PHONY: all test clean
 
 build:
 	dune build @install
@@ -18,8 +19,10 @@ clean:
 
 doc:
 	dune build @doc
+	dune build @doc
 
 docs:
+	dune build @doc
 	dune build @doc
 
 zip:

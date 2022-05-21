@@ -1,13 +1,27 @@
 Install Instructions
 
-1. Check that you have the libraries [Zarith] and [Stdio] installed.
+1. Check that you have the libraries [Zarith], [Stdio], and [cmdliner] installed.
     If absent, these libraries can be installed using
-    [opam install zarith] and [opam install stdio] respectively.
+    [opam install (library name)].
 
-2. To run the tool, run the command `make run` in the cs3110-sectool directory.
+2. Run [make build].
 
-Commands are:
+To access the "game-like" interface:
 
-- private: generate a private key
-- public: compute a public key from a private key file 
-- secret: compute a shared secret from a private and public key
+    1. To run the tool, run the command `make run` in the cs3110-sectool directory.
+
+    2. Commands are:
+
+    - [private]: generate a private key
+    - [public]: compute a public key from a private key file
+    - [secret]: compute a shared secret from a private and public key
+
+To access the CLI.
+
+    1. The tool can be access through the path "_build/install/default/bin/cli [COMMANDS]"
+
+    2. Examples:
+
+    - Generate private key: [ ...$ _build/install/default/bin/cli private "filename" ]
+    - Generate public key: [ ...$ _build/install/default/bin/cli public --private "privatekey_path" "filename" ]
+    - Generate shared secret: [ ...$ _build/install/default/bin/cli secret --private "privatekey_path" --public "publickey_path" "filename" ]

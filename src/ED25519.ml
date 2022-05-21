@@ -8,7 +8,7 @@ type m_curve = {
   order : Z.t ;
   cofactor : Z.t ;
   base_point_x : Z.t ;
-  base_point_z : Z.t ; 
+  base_point_z : Z.t ;
   base_point_y : Z.t ;
 }
 
@@ -37,13 +37,13 @@ module type PointRepresentation = sig
   val double : t -> t
   (** Adds a point to itself on a curve *)
 
-  val inf : t 
+  val inf : t
   (** The point at infinity *)
 
-  val add : t -> t -> t 
+  val add : t -> t -> t
   (** Adds two points on Ed25519 *)
 
-  val base : t 
+  val base : t
   (** A representation of the base point *)
 
   val make : (Z.t * Z.t)-> t
@@ -52,7 +52,10 @@ module type PointRepresentation = sig
   val get_x_coord : t -> Z.t
   (** Returns the affine x coordinate of this point *)
 
-  val equals : t -> t -> bool 
+  val get_y_coord : t -> Z.t
+  (** Returns the affine y coordinate of this point *)
+
+  val equals : t -> t -> bool
   (** Returns true if the two points ought to be considered equal *)
 
   val raw_rep : t -> (Z.t * Z.t)
@@ -64,7 +67,7 @@ module type FiniteFieldOperations = sig
   type point
 
   val add : point -> point -> point
-  
+
   val mul : Z.t -> point -> point
 
   val base : point
@@ -74,6 +77,8 @@ module type FiniteFieldOperations = sig
   val equals : point -> point -> bool
 
   val get_x_coord : point -> Z.t
+
+  val get_y_coord : point -> Z.t
 
   val raw_rep : point -> (Z.t * Z.t)
 
@@ -85,7 +90,9 @@ module ED25519Operations (P : PointRepresentation) : FiniteFieldOperations = str
 
   let base = P.base
 
-  let get_x_coord = P.get_x_coord 
+  let get_x_coord = P.get_x_coord
+
+  let get_y_coord = P.get_y_coord
 
   let equals = P.equals
 
@@ -93,15 +100,15 @@ module ED25519Operations (P : PointRepresentation) : FiniteFieldOperations = str
 
   let add = P.add
 
-  let rec ladder (k : Z.t) (p : point) = 
-    if k = zero then 
+  let rec ladder (k : Z.t) (p : point) =
+    if k = zero then
       (P.inf, p)
-    else 
-      let i = Z.shift_right_trunc k 1 in 
-      let (pi, pi1) = ladder i p in 
+    else
+      let i = Z.shift_right_trunc k 1 in
+      let (pi, pi1) = ladder i p in
     if is_even k then
       (double pi, add pi pi1)
-    else 
+    else
       (add pi pi1, double pi1)
 
   let ladder_mul k p =
@@ -119,7 +126,7 @@ module AffinePoint : PointRepresentation = struct
 
   type t = Point of { x : Z.t ; y : Z.t } | PointAtInfinty
 
-  let raw_rep = function 
+  let raw_rep = function
     | PointAtInfinty -> (minus_one, minus_one)
     | Point { x = x ; y = y } -> (x, y)
 
@@ -179,23 +186,27 @@ module AffinePoint : PointRepresentation = struct
   let base = make (ed25519.base_point_x, ed25519.base_point_y)
   (** A representation of the base point *)
 
-  let get_x_coord = function 
+  let get_x_coord = function
     | PointAtInfinty -> minus_one
     | Point { x = x ; y = y } -> x
 
-  let equals (p : t) (q : t) = 
-    match (p, q) with 
-    | (PointAtInfinty, PointAtInfinty) -> true 
-    | (Point {x = x1 ; y = y1}, Point {x = x2 ; y = y2}) -> x1 = x2 
-    | _ -> false 
-  
+  let get_y_coord = function
+    | PointAtInfinty -> minus_one
+    | Point { x = x ; y = y } -> y
+
+  let equals (p : t) (q : t) =
+    match (p, q) with
+    | (PointAtInfinty, PointAtInfinty) -> true
+    | (Point {x = x1 ; y = y1}, Point {x = x2 ; y = y2}) -> x1 = x2
+    | _ -> false
+
 end
 
 module ProjectivePoint : PointRepresentation = struct
 
   type t = Point of { x : Z.t ; z : Z.t } | PointAtInfinty
 
-  let raw_rep = function 
+  let raw_rep = function
     | PointAtInfinty -> (minus_one, minus_one)
     | Point { x = x ; z = z } -> (x, z)
 
@@ -206,22 +217,26 @@ module ProjectivePoint : PointRepresentation = struct
     | PointAtInfinty -> Z.minus_one
     | Point p -> p.x / p.z
 
+  let get_y_coord p =
+    match p with
+    | PointAtInfinty -> Z.minus_one
+    | Point p -> Z.minus_one
 
   let equals p1 p2 =
     get_x_coord p1 = get_x_coord p2
 
-  let double p = 
-    match p with 
+  let double p =
+    match p with
     | PointAtInfinty -> PointAtInfinty
     | Point p ->
-      if p.z = zero then PointAtInfinty else 
-        let x_2i = ((p.x ** 2) - (p.z ** 2)) ** 2 in 
-        let z_2i = 
-          let t1 = (Z.of_int 4) * p.x * p.z in 
-          let t2 = p.x ** 2 in 
-          let t3 = ed25519.a * p.x * p.z in 
-          let t4 = p.z ** 2 in 
-          t1 * (t2 + t3 + t4) in 
+      if p.z = zero then PointAtInfinty else
+        let x_2i = ((p.x ** 2) - (p.z ** 2)) ** 2 in
+        let z_2i =
+          let t1 = (Z.of_int 4) * p.x * p.z in
+          let t2 = p.x ** 2 in
+          let t3 = ed25519.a * p.x * p.z in
+          let t4 = p.z ** 2 in
+          t1 * (t2 + t3 + t4) in
         Point {
           x = x_2i ;
           z = z_2i ;
@@ -229,20 +244,20 @@ module ProjectivePoint : PointRepresentation = struct
 
   let add pi pi1 =
     if (equals pi pi1) then double pi else
-    match pi with 
-    | PointAtInfinty -> pi1 
-    | Point pi -> 
-      match pi1 with 
-      | PointAtInfinty -> Point pi 
+    match pi with
+    | PointAtInfinty -> pi1
+    | Point pi ->
+      match pi1 with
+      | PointAtInfinty -> Point pi
       | Point pi1 ->
-        let x_2i1 = 
-          let t1 = pi.x * pi1.x in 
-          let t2 = pi.z * pi1.z in 
-          (t1 - t2) ** 2 in 
+        let x_2i1 =
+          let t1 = pi.x * pi1.x in
+          let t2 = pi.z * pi1.z in
+          (t1 - t2) ** 2 in
         let z_2i1 =
-          let t1 = pi.x * pi1.z in 
-          let t2 = pi1.x * pi.z in 
-          ed25519.base_point_x * ((t1 - t2) ** 2) in 
+          let t1 = pi.x * pi1.z in
+          let t2 = pi1.x * pi.z in
+          ed25519.base_point_x * ((t1 - t2) ** 2) in
         Point {
           x = x_2i1 ;
           z = z_2i1 ;
@@ -262,9 +277,11 @@ type point = M.point
 
 let get_x_coord = M.get_x_coord
 
+let get_y_coord = M.get_y_coord
+
 let make_point = M.make
 
-let string_of_point p = p |> M.get_x_coord |> Z.to_string
+let string_of_point p = (p |> M.get_x_coord |> Z.to_string) ^ " " ^ (p |> M.get_y_coord |> Z.to_string)
 
 let ( * ) = M.mul
 

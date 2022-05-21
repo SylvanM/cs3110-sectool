@@ -3,14 +3,37 @@ open Sectool
 open ED25519
 open Testing_constants
 open EncodingUtility
-open ECDH
+open Ecdh
 open EDDSA
 open Sectool.File_wizard
 open Ecdh
 
-(********************************************************************
-   Here are some helper functions for your testing of set-like lists.
- ********************************************************************)
+(**
+
+TEST PLAN
+
+We used OUnit for two main aspects of our code:
+
+1. testing the "client-facing" portions (blackbox)
+  - if two shared secrets are identical
+  - if a message can be verified with a private key
+  - ...
+
+2. Testing if our group has a valid binary operator (randomized)
+  - commutativity
+  - associatvitiy
+  - ...
+
+This testing approach demonstrates the correctness of the
+system because it encompasses all of the functionality that
+would be visible to the sender or receiver of an encrypted message,
+and since the other modules of our code are all amalgamated
+in the client-facing portions of the code.
+
+The binary operator property testing confirms that we've implemented our
+modular arithmetic in accordance with the tenets of group theory.
+
+*)
 
 let packing_symmetry_test name list width =
   name >:: fun _ ->
@@ -46,9 +69,9 @@ let same_secret_test name d1 d2 =
   let p2 = compute_public_key d2 in
   let s1 = compute_shared_secret d1 p2 in
   let s2 = compute_shared_secret d2 p1 in
-  name >:: fun _ -> assert_equal s1 s2 ~printer:Z.to_string
+  name >:: fun _ -> assert_equal s1 s2 ~printer: string_of_point
 
-let communativity_test name dA dB =
+let commutativity_test name dA dB =
   name >:: fun _ ->
     assert_equal (dA * (dB * base)) (dB * (dA * base))
       ~printer:string_of_point
@@ -66,13 +89,13 @@ let digest_encoding_symmetry_test name message =
     let decoded = digest |> digest_to_data |> data_to_digest in
     assert_equal digest decoded ~printer:string_of_digest
 
-let rec communativity_tests count =
+let rec commutativity_tests count =
   if count = 0 then [] else
     let dA = generate_private_key () in
     let dB = generate_private_key () in
-    let test = communativity_test ("Commun Test " ^ string_of_int count)
+    let test = commutativity_test ("Commun Test " ^ string_of_int count)
       dA dB in
-    test :: (communativity_tests (count - 1))
+    test :: (commutativity_tests (count - 1))
 
 let rec square_assoc_tests count =
   if count < 0 then [] else
@@ -85,7 +108,7 @@ let rec associativity_tests count =
   if count = 0 then [] else
     let dA = generate_private_key () in
     let dB = generate_private_key () in
-    let test = communativity_test ("Assoc Test " ^ string_of_int count)
+    let test = commutativity_test ("Assoc Test " ^ string_of_int count)
       dA dB in
     test :: (associativity_tests (count - 1))
 
@@ -102,7 +125,7 @@ let ecc_tests = [
   same_secret_test "Larger Key Test" ("8347201765604315761045784350143751034561" |> Z.of_string) ("4534825034158085927349874325" |> Z.of_string) ;
 
 ]
-@ communativity_tests 100
+@ commutativity_tests 100
 @ associativity_tests 100
 @ square_assoc_tests 555
 
@@ -111,7 +134,6 @@ let eddsa_tests = [
 
   message_can_be_verified "Can verify a simple message" "Verify me!" ;
   message_can_be_verified "Can verify number sring" "8347201765604315761045784350143751034561" ;
-
 ]
 
 let util_tests = [
